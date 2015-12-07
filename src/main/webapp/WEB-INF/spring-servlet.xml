@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/context/spring-mvc-3.0.xsd">
+
+       <mvc:annotation-driven/>
+       <context:component-scan base-package="cn.sse.bupt.controller"/>
+
+       <!--异常处理-->
+       <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+              <property name="defaultStatusCode" value="500"/>
+              <property name="statusCodes">
+                     <props>
+                            <prop key="error105">105</prop>
+                            <prop key="error108">108</prop>
+                            <prop key="error110">110</prop>
+                            <prop key="error400">400</prop>
+                            <prop key="error404">404</prop>
+                            <prop key="error405">405</prop>
+                            <prop key="error406">406</prop>
+                            <prop key="error415">415</prop>
+                            <prop key="error500">500</prop>
+                     </props>
+              </property>
+              <property name="exceptionMappings">
+                     <props>
+                            <prop key="org.springframework.web.bind.annotation.support.HandlerMethodInvocationException">error10</prop>
+                            <prop key="java.lang.IllegalArgumentException">error108</prop>
+                            <prop key="org.springframework.beans.TypeMismatchException">error110</prop>
+                            <prop key="org.springframework.web.bind.MissingServletRequestParameterException">error400</prop>
+                            <prop key="org.springframework.http.converter.HttpMessageNotReadableException">error400</prop>
+                            <prop key="org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException">
+                                   error404
+                            </prop>
+                            <prop key="org.springframework.web.HttpRequestMethodNotSupportedException">error405</prop>
+                            <prop key="org.springframework.web.HttpMediaTypeNotAcceptableException">error406</prop>
+                            <prop key="org.springframework.web.HttpMediaTypeNotSupportedException">error415</prop>
+                            <prop key="org.springframework.beans.ConversionNotSupportedException">error500</prop>
+                            <prop key="org.springframework.http.converter.HttpMessageNotWritableException">error500</prop>
+                            <prop key="java.lang.Throwable">error500</prop>
+                            <prop key="java.lang.Exception">error500</prop>
+                            <prop key="java.lang.IllegalStateException">error500</prop>
+                     </props>
+              </property>
+       </bean>
+
+
+</beans>
