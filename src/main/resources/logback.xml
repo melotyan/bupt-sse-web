@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false">
+    <property name="log.dir" value="D:/logs"/>
+    <property name="logFileName" value="bupt-sse-web"/>
+    <property name="normal-pattern" value="%d{yyyy-MM-dd.HH:mm:ss.SSS} [%thread] %-5level %logger{10}.%M:%L  %msg%n"/>
+    <property name="append" value="true"/>
+
+    <appender name="mainAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>${append}</Append>
+        <!--日志存放目录-->
+        <File>${log.dir}/${logFileName}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--非当天的日志进行压缩归档-->
+            <FileNamePattern>${log.dir}/${logFileName}.log.%d{yyyy-MM-dd}.gz</FileNamePattern>
+            <!--超过7天的日志，会被删除-->
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--日志打印的格式-->
+            <Pattern>${normal-pattern}</Pattern>
+        </encoder>
+    </appender>
+
+    <!--具体的日志配置-->
+    <root>
+        <level value="info"/>
+        <appender-ref ref="mainAppender"></appender-ref>
+    </root>
+</configuration>

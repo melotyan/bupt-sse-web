@@ -44,6 +44,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
-        <url-pattern>goverment</url-pattern>
+        <url-pattern>egoverment</url-pattern>
     </servlet-mapping>
 </web-app>
