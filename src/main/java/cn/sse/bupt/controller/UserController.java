@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,7 @@ import java.util.Date;
 @RequestMapping("UserService")
 public class UserController {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-    private final String HOME_URL = "http://melotyan/egoverment/";
+    private final String HOME_URL = "http://www.melotyan.com/egoverment/";
     @Autowired
     private UserService userService;
     @Autowired
@@ -34,19 +35,24 @@ public class UserController {
     @RequestMapping("login")
     public ResultModel login(@RequestParam("username") String username, @RequestParam("password") String password) {
         LOGGER.info("{} try to login", username);
-        if (!userService.hasRegistered(username))
-            return ResultModel.failed("用户名不存在");
-        if (userService.login(username, new Md5PasswordEncoder().encodePassword(password, username)))
-            return ResultModel.success();
+        UserModel userModel = userService.findUserByUsername(username);
 
-        return ResultModel.failed("密码错误");
+        if (userModel == null)
+            return ResultModel.failed("用户名不存在");
+        if (userModel.getAccountStatus() != AccountStatusEnum.ACTIVITATED.getValue())
+            return ResultModel.failed("当前账户未激活");
+        if (!userModel.getPassword().equals(new Md5PasswordEncoder().encodePassword(password, username)))
+            return ResultModel.failed("密码错误");
+
+        return ResultModel.success();
+
     }
 
     @RequestMapping("register")
     public ResultModel register(@RequestParam(value="username", required = true) String username, @RequestParam(value="password", required = true) String password, @RequestParam(value="nickname", defaultValue = "") String nickname,
                                @RequestParam(value="email", required=true) String email, @RequestParam(value = "phone", required = true) String phone, @RequestParam("address") String address) {
         if (userService.hasRegistered(username))
-        return ResultModel.failed("用户名已存在");
+            return ResultModel.failed("用户名已存在");
 
         UserModel userModel = new UserModel();
         userModel.setUsername(username);
@@ -60,13 +66,13 @@ public class UserController {
         userModel.setCreateTime(new Date());
         long uid = userService.register(userModel);
 
-        String activeUrl = HOME_URL + "UserService/activeAccount/uid/" + uid;
+        String activeUrl = HOME_URL + "UserService/activeAccount/" + uid;
         mailSenderUtil.sendEmail(email, activeUrl);
         return ResultModel.success();
     }
 
-    @RequestMapping("activeAccount")
-    public ModelAndView activeAccount(long uid) {
+    @RequestMapping("activeAccount/{uid}")
+    public ModelAndView activeAccount(@PathVariable Integer uid) {
         userService.activeAccount(uid);
         return new ModelAndView("index");
     }
