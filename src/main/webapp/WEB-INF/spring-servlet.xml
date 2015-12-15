@@ -10,59 +10,76 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-       <mvc:annotation-driven/>
-       <context:component-scan base-package="cn.sse.bupt.controller"/>
-       <context:component-scan base-package="cn.sse.bupt.util"/>
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="cn.sse.bupt.controller"/>
+    <context:component-scan base-package="cn.sse.bupt.util"/>
 
-       <context:property-placeholder location="classpath:mail_config/mail.properties"/>
-       <!--异常处理-->
-       <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-              <property name="defaultStatusCode" value="500"/>
-              <property name="statusCodes">
-                     <props>
-                            <prop key="error105">105</prop>
-                            <prop key="error108">108</prop>
-                            <prop key="error110">110</prop>
-                            <prop key="error400">400</prop>
-                            <prop key="error404">404</prop>
-                            <prop key="error405">405</prop>
-                            <prop key="error406">406</prop>
-                            <prop key="error415">415</prop>
-                            <prop key="error500">500</prop>
-                     </props>
-              </property>
-              <property name="exceptionMappings">
-                     <props>
-                            <prop key="org.springframework.web.bind.annotation.support.HandlerMethodInvocationException">error10</prop>
-                            <prop key="java.lang.IllegalArgumentException">error108</prop>
-                            <prop key="org.springframework.beans.TypeMismatchException">error110</prop>
-                            <prop key="org.springframework.web.bind.MissingServletRequestParameterException">error400</prop>
-                            <prop key="org.springframework.http.converter.HttpMessageNotReadableException">error400</prop>
-                            <prop key="org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException">
-                                   error404
-                            </prop>
-                            <prop key="org.springframework.web.HttpRequestMethodNotSupportedException">error405</prop>
-                            <prop key="org.springframework.web.HttpMediaTypeNotAcceptableException">error406</prop>
-                            <prop key="org.springframework.web.HttpMediaTypeNotSupportedException">error415</prop>
-                            <prop key="org.springframework.beans.ConversionNotSupportedException">error500</prop>
-                            <prop key="org.springframework.http.converter.HttpMessageNotWritableException">error500</prop>
-                            <prop key="java.lang.Throwable">error500</prop>
-                            <prop key="java.lang.Exception">error500</prop>
-                            <prop key="java.lang.IllegalStateException">error500</prop>
-                     </props>
-              </property>
-       </bean>
+    <context:property-placeholder location="classpath:mail_config/mail.properties"/>
+    <!--异常处理-->
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultStatusCode" value="500"/>
+        <property name="statusCodes">
+            <props>
+                <prop key="error105">105</prop>
+                <prop key="error108">108</prop>
+                <prop key="error110">110</prop>
+                <prop key="error400">400</prop>
+                <prop key="error404">404</prop>
+                <prop key="error405">405</prop>
+                <prop key="error406">406</prop>
+                <prop key="error415">415</prop>
+                <prop key="error500">500</prop>
+            </props>
+        </property>
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.springframework.web.bind.annotation.support.HandlerMethodInvocationException">error10
+                </prop>
+                <prop key="java.lang.IllegalArgumentException">error108</prop>
+                <prop key="org.springframework.beans.TypeMismatchException">error110</prop>
+                <prop key="org.springframework.web.bind.MissingServletRequestParameterException">error400</prop>
+                <prop key="org.springframework.http.converter.HttpMessageNotReadableException">error400</prop>
+                <prop key="org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException">
+                    error404
+                </prop>
+                <prop key="org.springframework.web.HttpRequestMethodNotSupportedException">error405</prop>
+                <prop key="org.springframework.web.HttpMediaTypeNotAcceptableException">error406</prop>
+                <prop key="org.springframework.web.HttpMediaTypeNotSupportedException">error415</prop>
+                <prop key="org.springframework.beans.ConversionNotSupportedException">error500</prop>
+                <prop key="org.springframework.http.converter.HttpMessageNotWritableException">error500</prop>
+                <prop key="java.lang.Throwable">error500</prop>
+                <prop key="java.lang.Exception">error500</prop>
+                <prop key="java.lang.IllegalStateException">error500</prop>
+            </props>
+        </property>
+    </bean>
 
-       <!--发送邮件-->
-       <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-              <property name="username"><value>${mail.smtp.username}</value></property>
-              <property name="password"><value>${mail.smtp.password}</value></property>
-              <property name="host"><value>${mail.smtp.host}</value></property>
-              <property name="javaMailProperties">
-                     <props>
-                            <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
-                            <prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
-                     </props>
-              </property>
-       </bean>
+    <!--拦截器-->
+    <mvc:interceptors>
+        <bean class="cn.sse.bupt.controller.interceptor.LoginInterceptor">
+            <property name="excludeUrl">
+                <list>
+                    <value>/egovernment/userService/login</value>
+                </list>
+            </property>
+        </bean>
+    </mvc:interceptors>
+    <!--发送邮件-->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="username">
+            <value>${mail.smtp.username}</value>
+        </property>
+        <property name="password">
+            <value>${mail.smtp.password}</value>
+        </property>
+        <property name="host">
+            <value>${mail.smtp.host}</value>
+        </property>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+                <prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
+            </props>
+        </property>
+    </bean>
 </beans>
