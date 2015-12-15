@@ -1,6 +1,6 @@
 package cn.sse.bupt.controller;
 
-import cn.sse.bupt.common.SessionConstant;
+import cn.sse.bupt.common.SessionConstants;
 import cn.sse.bupt.enums.AccountStatusEnum;
 import cn.sse.bupt.enums.UserTypeEnum;
 import cn.sse.bupt.model.ResultModel;
@@ -26,7 +26,7 @@ import java.util.Date;
  * Created by hao.yan on 2015/12/7.
  */
 @RestController
-@RequestMapping("UserService")
+@RequestMapping("userService")
 public class UserController {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     private final String HOME_URL = "http://www.melotyan.com/egoverment/";
@@ -58,9 +58,9 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView(redirectUrl);
         modelAndView.addObject("userModel", userModel);
         HttpSession session = request.getSession();
-        session.setAttribute(SessionConstant.USER_ID, userModel.getId());
-        session.setAttribute(SessionConstant.PASSWORD, password);
-        session.setAttribute(SessionConstant.USERNAME, username);
+        session.setAttribute(SessionConstants.USER_ID, userModel.getId());
+        session.setAttribute(SessionConstants.PASSWORD, password);
+        session.setAttribute(SessionConstants.USERNAME, username);
 
         LOGGER.info("login success:{}", gson.toJson(userModel));
         return modelAndView;
@@ -98,7 +98,7 @@ public class UserController {
     @RequestMapping("editPersonalInfo/{uid}")
     public ModelAndView editPersonalInfo(HttpServletRequest request, @PathVariable Integer uid, @RequestParam(value="nickname", defaultValue = "") String nickname,
                                          @RequestParam(value = "phone", required = true) String phone, @RequestParam("address") String address) {
-        if (request.getSession().getAttribute(SessionConstant.USER_ID) != uid) {
+        if (request.getSession().getAttribute(SessionConstants.USER_ID) != uid) {
             LOGGER.info("editPersonalInfo failed");
             new ModelAndView("user/login", "error", "没有权限");
         }
