@@ -57,7 +57,7 @@
     <!--拦截器-->
     <mvc:interceptors>
         <bean class="cn.sse.bupt.controller.interceptor.LoginInterceptor">
-            <property name="excludeUrl">
+            <property name="excludedUrl">
                 <list>
                     <value>/egovernment/userService/login</value>
                 </list>

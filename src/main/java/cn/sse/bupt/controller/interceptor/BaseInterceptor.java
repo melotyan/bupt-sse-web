@@ -16,7 +16,7 @@ import java.util.List;
  */
 public abstract class BaseInterceptor extends HandlerInterceptorAdapter {
     private final static Logger LOGGER = LoggerFactory.getLogger(BaseInterceptor.class);
-    private List<String> excludeUrl;
+    private List<String> excludedUrl;
     private PathMatcher pathMatcher = new AntPathMatcher();
 
     @Override
@@ -29,25 +29,25 @@ public abstract class BaseInterceptor extends HandlerInterceptorAdapter {
     protected abstract boolean doPreHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;
 
     private boolean isExcludeUrl(HttpServletRequest request) {
-        if (CollectionUtils.isEmpty(excludeUrl)) {
+        if (CollectionUtils.isEmpty(excludedUrl)) {
             LOGGER.debug("excludeUrl list is empty");
             return false;
         }
         String requestURI = request.getRequestURI();
-        for (String url : excludeUrl) {
+        for (String url : excludedUrl) {
             if (pathMatcher.match(url, requestURI)) {
-                LOGGER.debug("RequestURI:{} is match excludeUrl:{}", requestURI, excludeUrl);
+                LOGGER.debug("RequestURI:{} is match excludeUrl:{}", requestURI, excludedUrl);
                 return true;
             }
         }
         return false;
     }
 
-    public List<String> getExcludeUrl() {
-        return excludeUrl;
+    public List<String> getExcludedUrl() {
+        return excludedUrl;
     }
 
-    public void setExcludeUrl(List<String> excludeUrl) {
-        this.excludeUrl = excludeUrl;
+    public void setExcludedUrl(List<String> excludedUrl) {
+        this.excludedUrl = excludedUrl;
     }
 }
