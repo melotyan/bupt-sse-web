@@ -17,13 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import sun.management.counter.AbstractCounter;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.net.URLDecoder;
 import java.util.Date;
 
 /**
@@ -96,7 +92,7 @@ public class UserController {
     @RequestMapping("activeAccount/{uid}")
     public ModelAndView activeAccount(@PathVariable Integer uid) {
         userService.activeAccount(uid);
-        return new ModelAndView("index");
+        return new ModelAndView("/index");
     }
 
     @RequestMapping("editPersonalInfo/{uid}")
