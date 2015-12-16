@@ -33,23 +33,23 @@
         </property>
         <property name="exceptionMappings">
             <props>
-                <prop key="org.springframework.web.bind.annotation.support.HandlerMethodInvocationException">error10
+                <prop key="org.springframework.web.bind.annotation.support.HandlerMethodInvocationException">/jsp/error/error105.jsp
                 </prop>
-                <prop key="java.lang.IllegalArgumentException">error108</prop>
-                <prop key="org.springframework.beans.TypeMismatchException">error110</prop>
-                <prop key="org.springframework.web.bind.MissingServletRequestParameterException">error400</prop>
-                <prop key="org.springframework.http.converter.HttpMessageNotReadableException">error400</prop>
+                <prop key="java.lang.IllegalArgumentException">/jsp/error/108.jsp</prop>
+                <prop key="org.springframework.beans.TypeMismatchException">/jsp/error/110.jsp</prop>
+                <prop key="org.springframework.web.bind.MissingServletRequestParameterException">/jsp/error/400.jsp</prop>
+                <prop key="org.springframework.http.converter.HttpMessageNotReadableException">/jsp/error/400.jsp</prop>
                 <prop key="org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException">
                     error404
                 </prop>
-                <prop key="org.springframework.web.HttpRequestMethodNotSupportedException">error405</prop>
-                <prop key="org.springframework.web.HttpMediaTypeNotAcceptableException">error406</prop>
-                <prop key="org.springframework.web.HttpMediaTypeNotSupportedException">error415</prop>
-                <prop key="org.springframework.beans.ConversionNotSupportedException">error500</prop>
-                <prop key="org.springframework.http.converter.HttpMessageNotWritableException">error500</prop>
-                <prop key="java.lang.Throwable">error500</prop>
-                <prop key="java.lang.Exception">error500</prop>
-                <prop key="java.lang.IllegalStateException">error500</prop>
+                <prop key="org.springframework.web.HttpRequestMethodNotSupportedException">/jsp/error/405.jsp</prop>
+                <prop key="org.springframework.web.HttpMediaTypeNotAcceptableException">/jsp/error/406.jsp</prop>
+                <prop key="org.springframework.web.HttpMediaTypeNotSupportedException">/jsp/error/415.jsp</prop>
+                <prop key="org.springframework.beans.ConversionNotSupportedException">/jsp/error/500.jsp</prop>
+                <prop key="org.springframework.http.converter.HttpMessageNotWritableException">/jsp/error/500.jsp</prop>
+                <prop key="java.lang.Throwable">/jsp/error/500.jsp</prop>
+                <prop key="java.lang.Exception">/jsp/error/500.jsp</prop>
+                <prop key="java.lang.IllegalStateException">/jsp/error/500.jsp</prop>
             </props>
         </property>
     </bean>
@@ -60,6 +60,8 @@
             <property name="excludedUrl">
                 <list>
                     <value>/egovernment/userService/login</value>
+                    <value>/egovernment/userService/register</value>
+                    <value>/egovernment/userService/activeAccount/**</value>
                 </list>
             </property>
         </bean>

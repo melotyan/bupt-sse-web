@@ -26,7 +26,8 @@ public class LoginInterceptor extends BaseInterceptor {
         Integer userId = (Integer) request.getSession().getAttribute(SessionConstants.USER_ID);
         if (userId == null) {
             LOGGER.debug("has not login, direct to login page");
-            request.getRequestDispatcher("/WEB-INF/jsp/user/login.jsp").forward(request, response);
+            request.setAttribute(SessionConstants.LAST_URL, request.getRequestURL());
+            request.getRequestDispatcher("/jsp/user/login.jsp").forward(request, response);
             return false;
         }
         return true;

@@ -12,13 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
@@ -29,46 +27,47 @@ import java.util.Date;
 @RequestMapping("userService")
 public class UserController {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-    private final String HOME_URL = "http://www.melotyan.com/egoverment/";
+    private final String HOME_URL = "http://www.melotyan.com/egovernment/";
     private Gson gson = new Gson();
     @Autowired
     private UserService userService;
     @Autowired
     private MailSenderUtil mailSenderUtil;
 
-    @RequestMapping("login")
-    public ModelAndView login(HttpServletRequest request, @RequestParam(value="redirectUrl", defaultValue = "index") String redirectUrl,
+    @RequestMapping(value="login", method = RequestMethod.POST)
+    public ModelAndView login(HttpServletRequest request,
                               @RequestParam("username") String username, @RequestParam("password") String password) {
-        LOGGER.info("{} try to login, password:{}", username, password);
+        LOGGER.info("{} try to login", username);
         UserModel userModel = userService.findUserByUsername(username);
 
         if (userModel == null) {
             LOGGER.info("account {} not exists", username);
-            return new ModelAndView("user/login", "msg", "用户名不存在");
+            return new ModelAndView("/jsp/user/login.jsp", "msg", "用户名不存在");
         }
         if (userModel.getAccountStatus() != AccountStatusEnum.ACTIVITATED.getValue()) {
             LOGGER.info("account {} is not activated", username);
-            return new ModelAndView("user/login", "msg", "当前账户未激活");
+            return new ModelAndView("/jsp/user/login.jsp", "msg", "当前账户未激活");
         }
         if (!userModel.getPassword().equals(new Md5PasswordEncoder().encodePassword(password, username))) {
             LOGGER.info("account {} password wrong");
-            return new ModelAndView("user/login", "msg", "密码错误");
+            return new ModelAndView("/jsp/user/login.jsp", "msg", "密码错误");
         }
 
+        String redirectUrl = request.getRequestURL().toString();
         ModelAndView modelAndView = new ModelAndView(redirectUrl);
         modelAndView.addObject("userModel", userModel);
         HttpSession session = request.getSession();
         session.setAttribute(SessionConstants.USER_ID, userModel.getId());
         session.setAttribute(SessionConstants.PASSWORD, password);
         session.setAttribute(SessionConstants.USERNAME, username);
-
-        LOGGER.info("login success:{}", gson.toJson(userModel));
+        session.setAttribute(SessionConstants.ACCOUNT_STATUS, userModel.getAccountStatus());
+        LOGGER.info("user {} login success, redirect to page:{}", username, redirectUrl);
         return modelAndView;
     }
 
-    @RequestMapping("register")
-    public ResultModel register(@RequestParam(value="username", required = true) String username, @RequestParam(value="password", required = true) String password, @RequestParam(value="nickname", defaultValue = "") String nickname,
-                               @RequestParam(value="email", required=true) String email, @RequestParam(value = "phone", required = true) String phone, @RequestParam("address") String address) {
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public ResultModel register(HttpServletRequest request, @RequestParam(value="username", required = true) String username, @RequestParam(value="password", required = true) String password, @RequestParam(value="nickname", defaultValue = "") String nickname,
+                               @RequestParam(value="email", required=true) String email, @RequestParam(value = "phone", required = true) String phone, @RequestParam(value = "address", defaultValue = "") String address) {
         if (userService.hasRegistered(username))
             return ResultModel.failed("用户名已存在");
 
@@ -82,17 +81,32 @@ public class UserController {
         userModel.setUserType(UserTypeEnum.CUSTOMER.getValue());
         userModel.setAccountStatus(AccountStatusEnum.UNACTIVATED.getValue());
         userModel.setCreateTime(new Date());
-        long uid = userService.register(userModel);
+        userService.register(userModel);
 
-        String activeUrl = HOME_URL + "UserService/activeAccount/" + uid;
+        String sessionId = request.getRequestedSessionId();
+        request.getSession().setAttribute(SessionConstants.USER_ID, userModel.getId() + sessionId);
+        String activeUrl = HOME_URL + "userService/activeAccount/" + userModel.getId() + "/" + sessionId;
         mailSenderUtil.sendEmail(email, activeUrl);
+        LOGGER.info("send active email to userID:{}", userModel.getId());
         return ResultModel.success();
     }
 
-    @RequestMapping("activeAccount/{uid}")
-    public ModelAndView activeAccount(@PathVariable Integer uid) {
+    @RequestMapping("activeAccount/{uid}/{sessionId}")
+    public ModelAndView activeAccount(HttpServletRequest request, @PathVariable Integer uid, @PathVariable String sessionId) {
+        String requestId = (String)request.getSession().getAttribute(SessionConstants.USER_ID);
+        if (!requestId.equals(uid + sessionId)) {
+            LOGGER.info("account active failed, new sessionId:{}, old sessionId:{}", requestId, uid + sessionId);
+            return new ModelAndView("/index.jsp");
+        }
         userService.activeAccount(uid);
-        return new ModelAndView("/index");
+        UserModel userModel = userService.findUserById(uid);
+        HttpSession session = request.getSession();
+        session.setAttribute(SessionConstants.USER_ID, userModel.getId());
+        session.setAttribute(SessionConstants.PASSWORD, userModel.getPassword());
+        session.setAttribute(SessionConstants.USERNAME, userModel.getUsername());
+        session.setAttribute(SessionConstants.ACCOUNT_STATUS, userModel.getAccountStatus());
+        LOGGER.info("userId:{} active success", uid);
+        return new ModelAndView("/index.jsp");
     }
 
     @RequestMapping("editPersonalInfo/{uid}")

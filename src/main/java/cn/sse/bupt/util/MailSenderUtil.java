@@ -5,11 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMailMessage;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-
-import javax.mail.internet.MimeMessage;
 
 /**
  * Created by hao.yan on 2015/12/8.
@@ -23,8 +19,9 @@ public class MailSenderUtil {
     public void sendEmail(String targetEmail, String content) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo(targetEmail);
-        simpleMailMessage.setSubject("测试邮件");
-        simpleMailMessage.setText("测试");
+        simpleMailMessage.setFrom("egovernment_sse@126.com");
+        simpleMailMessage.setSubject("账户激活邮件");
+        simpleMailMessage.setText(content);
         javaMailSender.send(simpleMailMessage);
         LOGGER.info("send email to {}", targetEmail);
     }
