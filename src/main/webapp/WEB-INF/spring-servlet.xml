@@ -15,41 +15,41 @@
     <context:component-scan base-package="cn.sse.bupt.util"/>
 
     <context:property-placeholder location="classpath:mail_config/mail.properties"/>
+    <!--jsp视图解析器-->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="cache" value="false"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="order" value="0"/>
+    </bean>
+    <!--html视图解析器-->
+    <bean id="htmlViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="cache" value="true"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".html"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="order" value="1"/>
+    </bean>
+
     <!--异常处理-->
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="defaultStatusCode" value="500"/>
-        <property name="statusCodes">
-            <props>
-                <prop key="error105">105</prop>
-                <prop key="error108">108</prop>
-                <prop key="error110">110</prop>
-                <prop key="error400">400</prop>
-                <prop key="error404">404</prop>
-                <prop key="error405">405</prop>
-                <prop key="error406">406</prop>
-                <prop key="error415">415</prop>
-                <prop key="error500">500</prop>
-            </props>
-        </property>
+        <property name="defaultErrorView" value="common/500"/>
         <property name="exceptionMappings">
             <props>
-                <prop key="org.springframework.web.bind.annotation.support.HandlerMethodInvocationException">/jsp/error/error105.jsp
-                </prop>
-                <prop key="java.lang.IllegalArgumentException">/jsp/error/108.jsp</prop>
-                <prop key="org.springframework.beans.TypeMismatchException">/jsp/error/110.jsp</prop>
-                <prop key="org.springframework.web.bind.MissingServletRequestParameterException">/jsp/error/400.jsp</prop>
-                <prop key="org.springframework.http.converter.HttpMessageNotReadableException">/jsp/error/400.jsp</prop>
-                <prop key="org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException">
-                    error404
-                </prop>
-                <prop key="org.springframework.web.HttpRequestMethodNotSupportedException">/jsp/error/405.jsp</prop>
-                <prop key="org.springframework.web.HttpMediaTypeNotAcceptableException">/jsp/error/406.jsp</prop>
-                <prop key="org.springframework.web.HttpMediaTypeNotSupportedException">/jsp/error/415.jsp</prop>
-                <prop key="org.springframework.beans.ConversionNotSupportedException">/jsp/error/500.jsp</prop>
-                <prop key="org.springframework.http.converter.HttpMessageNotWritableException">/jsp/error/500.jsp</prop>
-                <prop key="java.lang.Throwable">/jsp/error/500.jsp</prop>
-                <prop key="java.lang.Exception">/jsp/error/500.jsp</prop>
-                <prop key="java.lang.IllegalStateException">/jsp/error/500.jsp</prop>
+                <prop key="org.springframework.validation.BindException">common/404</prop>
+                <prop key="org.springframework.web.HttpRequestMethodNotSupportedException">common/404</prop>
+                <prop key="org.springframework.web.bind.MissingServletRequestParameterException">common/404</prop>
+                <prop key="org.springframework.beans.TypeMismatchException">common/404</prop>
+            </props>
+        </property>
+        <property name="statusCodes">
+            <props>
+                <prop key="common/404">404</prop>
+                <prop key="common/500">500</prop>
             </props>
         </property>
     </bean>
