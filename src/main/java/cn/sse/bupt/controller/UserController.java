@@ -42,11 +42,11 @@ public class UserController {
 
         if (userModel == null) {
             LOGGER.info("account {} not exists", username);
-            return new ModelAndView("/jsp/user/login.jsp", "msg", "用户名不存在");
+            return new ModelAndView("user/login", "msg", "用户名不存在");
         }
         if (userModel.getAccountStatus() != AccountStatusEnum.ACTIVITATED.getValue()) {
             LOGGER.info("account {} is not activated", username);
-            return new ModelAndView("/jsp/user/login.jsp", "msg", "当前账户未激活");
+            return new ModelAndView("user/login", "msg", "当前账户未激活");
         }
         if (!userModel.getPassword().equals(new Md5PasswordEncoder().encodePassword(password, username))) {
             LOGGER.info("account {} password wrong");
@@ -93,10 +93,10 @@ public class UserController {
 
     @RequestMapping("activeAccount/{uid}/{sessionId}")
     public ModelAndView activeAccount(HttpServletRequest request, @PathVariable Integer uid, @PathVariable String sessionId) {
-        String requestId = (String)request.getSession().getAttribute(SessionConstants.USER_ID);
-        if (!requestId.equals(uid + sessionId)) {
+        String requestId = String.valueOf(request.getSession().getAttribute(SessionConstants.USER_ID));
+        if (request == null || !requestId.equals(uid + sessionId)) {
             LOGGER.info("account active failed, new sessionId:{}, old sessionId:{}", requestId, uid + sessionId);
-            return new ModelAndView("/index.jsp");
+            return new ModelAndView("index");
         }
         userService.activeAccount(uid);
         UserModel userModel = userService.findUserById(uid);
@@ -106,7 +106,7 @@ public class UserController {
         session.setAttribute(SessionConstants.USERNAME, userModel.getUsername());
         session.setAttribute(SessionConstants.ACCOUNT_STATUS, userModel.getAccountStatus());
         LOGGER.info("userId:{} active success", uid);
-        return new ModelAndView("/index.jsp");
+        return new ModelAndView("index");
     }
 
     @RequestMapping("editPersonalInfo/{uid}")
