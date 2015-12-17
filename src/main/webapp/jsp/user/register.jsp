@@ -22,6 +22,10 @@
         <td><input type="password" name="password"/></td>
       </tr>
       <tr>
+        <td>确认密码：</td>
+        <td><input type="password" name="repassword"/></td>
+      </tr>
+      <tr>
         <td>姓名：</td>
         <td><input type="text" name="nickname"/></td>
       </tr>
@@ -32,6 +36,10 @@
       <tr>
         <td>电话：</td>
         <td><input type="text" name="phone"/></td>
+      </tr>
+      <tr>
+        <td>住址：</td>
+        <td><input type="textarea" name="address"/></td>
       </tr>
       <tr>
         <td><input type="submit" name="注册"/></td>
