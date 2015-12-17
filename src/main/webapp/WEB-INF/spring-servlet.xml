@@ -17,9 +17,9 @@
     <context:property-placeholder location="classpath:mail_config/mail.properties"/>
     <!--jsp视图解析器-->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="viewClass" value="cn.sse.bupt.common.CustomerJspView"/>
         <property name="cache" value="false"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="prefix" value="/jsp/"/>
         <property name="suffix" value=".jsp"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="order" value="0"/>
@@ -28,14 +28,14 @@
     <bean id="htmlViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="cache" value="true"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="prefix" value="/jsp/"/>
         <property name="suffix" value=".html"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="order" value="1"/>
     </bean>
 
     <!--异常处理-->
-    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <bean id="exceptionResolver" class="cn.sse.bupt.common.CustomerMappingExceptionResolver">
         <property name="defaultStatusCode" value="500"/>
         <property name="defaultErrorView" value="common/500"/>
         <property name="exceptionMappings">
@@ -44,6 +44,7 @@
                 <prop key="org.springframework.web.HttpRequestMethodNotSupportedException">common/404</prop>
                 <prop key="org.springframework.web.bind.MissingServletRequestParameterException">common/404</prop>
                 <prop key="org.springframework.beans.TypeMismatchException">common/404</prop>
+                
             </props>
         </property>
         <property name="statusCodes">
@@ -51,6 +52,11 @@
                 <prop key="common/404">404</prop>
                 <prop key="common/500">500</prop>
             </props>
+        </property>
+        <property name="viewSet">
+            <set>
+                <value>common/500</value>
+            </set>
         </property>
     </bean>
 
