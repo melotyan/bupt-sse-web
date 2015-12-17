@@ -19,7 +19,7 @@
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="cn.sse.bupt.common.CustomerJspView"/>
         <property name="cache" value="false"/>
-        <property name="prefix" value="/jsp/"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="order" value="0"/>
@@ -28,13 +28,13 @@
     <bean id="htmlViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="cache" value="true"/>
-        <property name="prefix" value="/jsp/"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".html"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="order" value="1"/>
     </bean>
 
-    <!--异常处理-->
+    <!--异常处理器-->
     <bean id="exceptionResolver" class="cn.sse.bupt.common.CustomerMappingExceptionResolver">
         <property name="defaultStatusCode" value="500"/>
         <property name="defaultErrorView" value="common/500"/>
