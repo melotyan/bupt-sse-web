@@ -8,15 +8,17 @@ import cn.sse.bupt.model.UserModel;
 import cn.sse.bupt.service.UserService;
 import cn.sse.bupt.util.MailSenderUtil;
 import com.google.gson.Gson;
+import com.sun.javafx.sg.PGShape;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
@@ -34,6 +36,16 @@ public class UserController {
     @Autowired
     private MailSenderUtil mailSenderUtil;
 
+    @RequestMapping(value = "preLogin")
+    public ModelAndView preLogin() {
+        return new ModelAndView("user/login");
+    }
+
+    @RequestMapping(value = "preRegister")
+    public ModelAndView preRegister() {
+        return new ModelAndView("user/register");
+    }
+
     @RequestMapping(value="login", method = RequestMethod.POST)
     public ModelAndView login(HttpServletRequest request,
                               @RequestParam("username") String username, @RequestParam("password") String password) {
@@ -41,33 +53,31 @@ public class UserController {
         UserModel userModel = userService.findUserByUsername(username);
 
         if (userModel == null) {
-            LOGGER.info("account {} not exists", username);
+            LOGGER.warn("account {} not exists", username);
             return new ModelAndView("user/login", "msg", "用户名不存在");
         }
         if (userModel.getAccountStatus() != AccountStatusEnum.ACTIVITATED.getValue()) {
-            LOGGER.info("account {} is not activated", username);
+            LOGGER.warn("account {} is not activated", username);
             return new ModelAndView("user/login", "msg", "当前账户未激活");
         }
         if (!userModel.getPassword().equals(new Md5PasswordEncoder().encodePassword(password, username))) {
-            LOGGER.info("account {} password wrong");
-            return new ModelAndView("/jsp/user/login.jsp", "msg", "密码错误");
+            LOGGER.warn("account {} login with wrong password", username);
+            return new ModelAndView("user/login", "msg", "密码错误");
         }
 
         String redirectUrl = request.getRequestURL().toString();
-        ModelAndView modelAndView = new ModelAndView(redirectUrl);
+        ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("userModel", userModel);
         HttpSession session = request.getSession();
+        session.setAttribute(SessionConstants.USER, userModel);
         session.setAttribute(SessionConstants.USER_ID, userModel.getId());
-        session.setAttribute(SessionConstants.PASSWORD, password);
-        session.setAttribute(SessionConstants.USERNAME, username);
-        session.setAttribute(SessionConstants.ACCOUNT_STATUS, userModel.getAccountStatus());
         LOGGER.info("user {} login success, redirect to page:{}", username, redirectUrl);
         return modelAndView;
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public ResultModel register(HttpServletRequest request, @RequestParam(value="username", required = true) String username, @RequestParam(value="password", required = true) String password, @RequestParam(value="nickname", defaultValue = "") String nickname,
-                               @RequestParam(value="email", required=true) String email, @RequestParam(value = "phone", required = true) String phone, @RequestParam(value = "address", defaultValue = "") String address) {
+                               @RequestParam(value="email", required=true) String email, @RequestParam(value = "phone", defaultValue = "") String phone, @RequestParam(value = "address", defaultValue = "") String address) {
         if (userService.hasRegistered(username))
             return ResultModel.failed("用户名已存在");
 
@@ -83,6 +93,7 @@ public class UserController {
         userModel.setCreateTime(new Date());
         userService.register(userModel);
 
+        LOGGER.info("userId {} encode password", userModel.getId());
         String sessionId = request.getRequestedSessionId();
         request.getSession().setAttribute(SessionConstants.USER_ID, userModel.getId() + sessionId);
         String activeUrl = HOME_URL + "userService/activeAccount/" + userModel.getId() + "/" + sessionId;
@@ -95,37 +106,40 @@ public class UserController {
     public ModelAndView activeAccount(HttpServletRequest request, @PathVariable Integer uid, @PathVariable String sessionId) {
         String requestId = String.valueOf(request.getSession().getAttribute(SessionConstants.USER_ID));
         if (request == null || !requestId.equals(uid + sessionId)) {
-            LOGGER.info("account active failed, new sessionId:{}, old sessionId:{}", requestId, uid + sessionId);
+            LOGGER.warn("account active failed, new sessionId:{}, old sessionId:{}", requestId, uid + sessionId);
             return new ModelAndView("index");
         }
         userService.activeAccount(uid);
         UserModel userModel = userService.findUserById(uid);
         HttpSession session = request.getSession();
+        session.setAttribute(SessionConstants.USER, userModel);
         session.setAttribute(SessionConstants.USER_ID, userModel.getId());
-        session.setAttribute(SessionConstants.PASSWORD, userModel.getPassword());
-        session.setAttribute(SessionConstants.USERNAME, userModel.getUsername());
-        session.setAttribute(SessionConstants.ACCOUNT_STATUS, userModel.getAccountStatus());
+//        session.setAttribute(SessionConstants.PASSWORD, userModel.getPassword());
+//        session.setAttribute(SessionConstants.USERNAME, userModel.getUsername());
+//        session.setAttribute(SessionConstants.ACCOUNT_STATUS, userModel.getAccountStatus());
         LOGGER.info("userId:{} active success", uid);
         return new ModelAndView("index");
     }
 
-    @RequestMapping("editPersonalInfo/{uid}")
-    public ModelAndView editPersonalInfo(HttpServletRequest request, @PathVariable Integer uid, @RequestParam(value="nickname", defaultValue = "") String nickname,
-                                         @RequestParam(value = "phone", required = true) String phone, @RequestParam("address") String address) {
-        if (request.getSession().getAttribute(SessionConstants.USER_ID) != uid) {
-            LOGGER.info("editPersonalInfo failed");
-            new ModelAndView("user/login", "error", "没有权限");
-        }
+    @RequestMapping(value = "getPersonalInfo")
+    public ModelAndView getPersonalInfo() {
+        return new ModelAndView("user/user_detail");
+    }
+
+    @RequestMapping(value = "editPersonalInfo", method = RequestMethod.POST)
+    public ResultModel editPersonalInfo(@RequestParam("uid") Integer uid, @RequestParam("nickname") String nickname,
+                                        @RequestParam("phone") String phone, @RequestParam("address") String address) {
         UserModel userModel = userService.findUserById(uid);
         if (userModel == null) {
-            LOGGER.info("no such userModel with id:{}", uid);
-            return new ModelAndView("user/login", "error", "没有对应的用户");
+            LOGGER.warn("user is null, with userID:{}", uid);
+            return ResultModel.failed("用户不存在");
         }
         userModel.setNickname(nickname);
-        userModel.setAddress(address);
         userModel.setPhone(phone);
+        userModel.setAddress(address);
         userService.updateUserInfo(userModel);
-        return new ModelAndView("user/personalInfo");
+        LOGGER.info("user {} personal info updated success", uid);
+        return ResultModel.success();
     }
 
 
