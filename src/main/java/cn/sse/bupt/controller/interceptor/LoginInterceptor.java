@@ -23,10 +23,12 @@ public class LoginInterceptor extends BaseInterceptor {
 
     @Override
     public boolean doPreHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Integer userId = (Integer) request.getSession().getAttribute(SessionConstants.USER_ID);
-        if (userId == null) {
+        UserModel userModel = (UserModel) request.getSession().getAttribute(SessionConstants.USER);
+        if (userModel == null) {
             LOGGER.debug("has not login, direct to login page");
-            request.setAttribute(SessionConstants.LAST_URL, request.getRequestURL());
+            String lastUrl = String.valueOf(request.getRequestURL());
+            LOGGER.debug("after login, redirect to {}", lastUrl);
+            request.getSession().setAttribute(SessionConstants.LAST_URL, lastUrl);
             request.getRequestDispatcher("/egovernment/userService/preLogin").forward(request, response);
             return false;
         }
