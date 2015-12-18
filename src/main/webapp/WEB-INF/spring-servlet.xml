@@ -67,6 +67,8 @@
                 <list>
                     <value>/egovernment/userService/login</value>
                     <value>/egovernment/userService/register</value>
+                    <value>/egovernment/userService/preLogin</value>
+                    <value>/egovernment/userService/preRegister</value>
                     <value>/egovernment/userService/activeAccount/**</value>
                 </list>
             </property>
