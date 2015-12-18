@@ -7,7 +7,6 @@ import cn.sse.bupt.model.ResultModel;
 import cn.sse.bupt.model.UserModel;
 import cn.sse.bupt.service.UserService;
 import cn.sse.bupt.util.MailSenderUtil;
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
@@ -27,8 +25,9 @@ import java.util.Date;
 @RequestMapping("userService")
 public class UserController {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-    private final String HOME_URL = "http://www.melotyan.com/egovernment/";
-    private Gson gson = new Gson();
+    private final String HOME_URL = "http://www.melotyan.com";
+    private final String REDIRECT = "redirect:";
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -68,10 +67,10 @@ public class UserController {
         session.setAttribute(SessionConstants.USER, userModel);
         if (redirectURL != null) {
             LOGGER.info("user {} login success, redirect to page:{}", username, redirectURL);
-            return new ModelAndView("redirect:" + redirectURL);
+            return new ModelAndView(REDIRECT + redirectURL);
         }
         LOGGER.info("user {} login success, redirect to index");
-        return new ModelAndView("redirect:/");
+        return new ModelAndView(REDIRECT + "/");
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
@@ -95,7 +94,7 @@ public class UserController {
         LOGGER.info("userId {} encode password", userModel.getId());
         String sessionId = request.getRequestedSessionId();
         request.getSession().setAttribute(SessionConstants.USER_ID, userModel.getId() + sessionId);
-        String activeUrl = HOME_URL + "userService/activeAccount/" + userModel.getId() + "/" + sessionId;
+        String activeUrl = HOME_URL + "/egovernment/userService/activeAccount/" + userModel.getId() + "/" + sessionId;
         mailSenderUtil.sendEmail(email, activeUrl);
         LOGGER.info("send active email to userID:{}", userModel.getId());
         return ResultModel.success();
@@ -112,10 +111,6 @@ public class UserController {
         UserModel userModel = userService.findUserById(uid);
         HttpSession session = request.getSession();
         session.setAttribute(SessionConstants.USER, userModel);
-        session.setAttribute(SessionConstants.USER_ID, userModel.getId());
-//        session.setAttribute(SessionConstants.PASSWORD, userModel.getPassword());
-//        session.setAttribute(SessionConstants.USERNAME, userModel.getUsername());
-//        session.setAttribute(SessionConstants.ACCOUNT_STATUS, userModel.getAccountStatus());
         LOGGER.info("userId:{} active success", uid);
         return new ModelAndView("index");
     }
