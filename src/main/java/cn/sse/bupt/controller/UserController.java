@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @RequestMapping(value="login", method = RequestMethod.POST)
-    public ModelAndView login(HttpServletRequest request, HttpServletResponse response,
+    public ModelAndView login(HttpServletRequest request,
                               @RequestParam("username") String username, @RequestParam("password") String password) {
         LOGGER.info("{} try to login", username);
         UserModel userModel = userService.findUserByUsername(username);
@@ -67,16 +67,11 @@ public class UserController {
         Object redirectURL = session.getAttribute(SessionConstants.LAST_URL);
         session.setAttribute(SessionConstants.USER, userModel);
         if (redirectURL != null) {
-            try {
-                response.sendRedirect(String.valueOf(redirectURL));
-                LOGGER.info("user {} login success, redirect to page:{}", username, redirectURL);
-            } catch (Exception e) {
-                LOGGER.error(e.toString());
-            }
-            return null;
+            LOGGER.info("user {} login success, redirect to page:{}", username, redirectURL);
+            return new ModelAndView("redirect:" + redirectURL);
         }
         LOGGER.info("user {} login success, redirect to index");
-        return new ModelAndView("index");
+        return new ModelAndView("redirect:/");
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
