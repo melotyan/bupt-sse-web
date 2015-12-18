@@ -8,17 +8,15 @@ import cn.sse.bupt.model.UserModel;
 import cn.sse.bupt.service.UserService;
 import cn.sse.bupt.util.MailSenderUtil;
 import com.google.gson.Gson;
-import com.sun.javafx.sg.PGShape;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
@@ -47,7 +45,7 @@ public class UserController {
     }
 
     @RequestMapping(value="login", method = RequestMethod.POST)
-    public ModelAndView login(HttpServletRequest request,
+    public ModelAndView login(HttpServletRequest request, HttpServletResponse response,
                               @RequestParam("username") String username, @RequestParam("password") String password) {
         LOGGER.info("{} try to login", username);
         UserModel userModel = userService.findUserByUsername(username);
@@ -65,14 +63,20 @@ public class UserController {
             return new ModelAndView("user/login", "msg", "密码错误");
         }
 
-        String redirectUrl = request.getRequestURL().toString();
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("userModel", userModel);
         HttpSession session = request.getSession();
+        Object redirectURL = session.getAttribute(SessionConstants.LAST_URL);
         session.setAttribute(SessionConstants.USER, userModel);
-        session.setAttribute(SessionConstants.USER_ID, userModel.getId());
-        LOGGER.info("user {} login success, redirect to page:{}", username, redirectUrl);
-        return modelAndView;
+        if (redirectURL != null) {
+            try {
+                response.sendRedirect(String.valueOf(redirectURL));
+                LOGGER.info("user {} login success, redirect to page:{}", username, redirectURL);
+            } catch (Exception e) {
+                LOGGER.error(e.toString());
+            }
+            return null;
+        }
+        LOGGER.info("user {} login success, redirect to index");
+        return new ModelAndView("index");
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
