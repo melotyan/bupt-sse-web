@@ -27,7 +27,7 @@ public class LoginInterceptor extends BaseInterceptor {
         if (userId == null) {
             LOGGER.debug("has not login, direct to login page");
             request.setAttribute(SessionConstants.LAST_URL, request.getRequestURL());
-            request.getRequestDispatcher("/jsp/user/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/egovernment/userService/preLogin").forward(request, response);
             return false;
         }
         return true;
