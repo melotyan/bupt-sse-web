@@ -6,15 +6,20 @@ import cn.sse.bupt.enums.UserTypeEnum;
 import cn.sse.bupt.model.ResultModel;
 import cn.sse.bupt.model.UserModel;
 import cn.sse.bupt.service.UserService;
+import cn.sse.bupt.util.CookieUtil;
 import cn.sse.bupt.util.MailSenderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
@@ -23,10 +28,12 @@ import java.util.Date;
  */
 @RestController
 @RequestMapping("userService")
-public class UserServiceController {
+public class UserServiceController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserServiceController.class);
     private final String HOME_URL = "http://www.melotyan.com";
-    private final String REDIRECT = "redirect:";
+    private final int DEFAULT_EXPIRE = 24 * 3600;
+    private final int LONG_EXPIRE = Integer.MAX_VALUE;
+    private final static String REDIRECT = "redirect:";
 
     @Autowired
     private UserService userService;
@@ -44,11 +51,12 @@ public class UserServiceController {
     }
 
     @RequestMapping(value="login", method = RequestMethod.POST)
-    public ModelAndView login(HttpServletRequest request,
-                              @RequestParam("username") String username, @RequestParam("password") String password) {
+    public ModelAndView login(HttpServletRequest request, HttpServletResponse response,
+                              @RequestParam("username") String username, @RequestParam("password") String password,
+                              @RequestParam(value = "rememberMe", defaultValue = "0") int rememberMe) {
         LOGGER.info("{} try to login", username);
+        LOGGER.info("http header refer:{}", request.getHeader("Referer"));
         UserModel userModel = userService.findUserByUsername(username);
-
         if (userModel == null) {
             LOGGER.warn("account {} not exists", username);
             return new ModelAndView("user/login", "msg", "用户名不存在");
@@ -57,11 +65,12 @@ public class UserServiceController {
             LOGGER.warn("account {} is not activated", username);
             return new ModelAndView("user/login", "msg", "当前账户未激活");
         }
-        if (!userModel.getPassword().equals(new Md5PasswordEncoder().encodePassword(password, username))) {
+        String encodePassword = new Md5PasswordEncoder().encodePassword(password, username);
+        if (!userModel.getPassword().equals(encodePassword)) {
             LOGGER.warn("account {} login with wrong password", username);
             return new ModelAndView("user/login", "msg", "密码错误");
         }
-
+        CookieUtil.writeLoginCookie(response, username, encodePassword, rememberMe == 0 ? DEFAULT_EXPIRE : LONG_EXPIRE);
         HttpSession session = request.getSession();
         Object redirectURL = session.getAttribute(SessionConstants.LAST_URL);
         session.setAttribute(SessionConstants.USER, userModel);
@@ -121,24 +130,22 @@ public class UserServiceController {
     }
 
     @RequestMapping(value = "editPersonalInfo", method = RequestMethod.POST)
-    public ResultModel editPersonalInfo(@RequestParam("uid") Integer uid, @RequestParam("nickname") String nickname,
+    public ResultModel editPersonalInfo(@RequestParam("nickname") String nickname,
                                         @RequestParam("phone") String phone, @RequestParam("address") String address) {
-        UserModel userModel = userService.findUserById(uid);
-        if (userModel == null) {
-            LOGGER.warn("user is null, with userID:{}", uid);
-            return ResultModel.failed("用户不存在");
-        }
+        UserModel userModel = getLoginUser();
         userModel.setNickname(nickname);
         userModel.setPhone(phone);
         userModel.setAddress(address);
         userService.updateUserInfo(userModel);
-        LOGGER.info("user {} personal info updated success", uid);
+        LOGGER.info("user {} personal info updated success", userModel.getId());
         return ResultModel.success();
     }
 
     @RequestMapping("logout")
-    public void logout(HttpServletRequest request) {
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+        CookieUtil.deleteLoginCookie(request, response);
         request.getSession().removeAttribute(SessionConstants.USER);
+        return preLogin();
     }
 
 
