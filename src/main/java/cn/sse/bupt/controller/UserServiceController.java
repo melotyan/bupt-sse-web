@@ -23,8 +23,8 @@ import java.util.Date;
  */
 @RestController
 @RequestMapping("userService")
-public class UserController {
-    private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+public class UserServiceController {
+    private final static Logger LOGGER = LoggerFactory.getLogger(UserServiceController.class);
     private final String HOME_URL = "http://www.melotyan.com";
     private final String REDIRECT = "redirect:";
 
