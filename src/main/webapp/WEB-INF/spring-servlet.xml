@@ -70,9 +70,21 @@
                     <value>/egovernment/userService/preLogin</value>
                     <value>/egovernment/userService/preRegister</value>
                     <value>/egovernment/userService/activeAccount/**</value>
+                    <value>/egovernment/userService/logout</value>
                 </list>
             </property>
         </bean>
+        <mvc:interceptor>
+            <mvc:mapping path="/egovernment/noticeService/**"/>
+            <mvc:mapping path="/egovernment/fileUploadService/**"/>
+            <bean class="cn.sse.bupt.controller.interceptor.BusinessInterceptor">
+                <property name="excludedUrl">
+                    <list>
+                        <value>/egovernment/fileUploadService/</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
     </mvc:interceptors>
     <!--发送邮件-->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
