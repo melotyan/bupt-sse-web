@@ -136,6 +136,11 @@ public class UserController {
         return ResultModel.success();
     }
 
+    @RequestMapping("logout")
+    public void logout(HttpServletRequest request) {
+        request.getSession().removeAttribute(SessionConstants.USER);
+    }
+
 
 
 }
