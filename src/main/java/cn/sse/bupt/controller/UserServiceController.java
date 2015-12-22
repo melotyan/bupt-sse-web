@@ -31,7 +31,7 @@ import java.util.Date;
 public class UserServiceController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserServiceController.class);
     private final String HOME_URL = "http://www.melotyan.com";
-    private final int DEFAULT_EXPIRE = 24 * 3600;
+    private final int DEFAULT_EXPIRE = 15 * 60;
     private final int LONG_EXPIRE = Integer.MAX_VALUE;
     private final static String REDIRECT = "redirect:";
 
@@ -55,7 +55,6 @@ public class UserServiceController extends BaseController {
                               @RequestParam("username") String username, @RequestParam("password") String password,
                               @RequestParam(value = "rememberMe", defaultValue = "0") int rememberMe) {
         LOGGER.info("{} try to login", username);
-        LOGGER.info("http header refer:{}", request.getHeader("Referer"));
         UserModel userModel = userService.findUserByUsername(username);
         if (userModel == null) {
             LOGGER.warn("account {} not exists", username);
@@ -70,15 +69,17 @@ public class UserServiceController extends BaseController {
             LOGGER.warn("account {} login with wrong password", username);
             return new ModelAndView("user/login", "msg", "密码错误");
         }
+
         CookieUtil.writeLoginCookie(response, username, encodePassword, rememberMe == 0 ? DEFAULT_EXPIRE : LONG_EXPIRE);
         HttpSession session = request.getSession();
         Object redirectURL = session.getAttribute(SessionConstants.LAST_URL);
         session.setAttribute(SessionConstants.USER, userModel);
         if (redirectURL != null) {
-            LOGGER.info("user {} login success, redirect to page:{}", username, redirectURL);
+            LOGGER.info("user {} login success, remove last_url session, redirect to page:{}", username, redirectURL);
+            session.removeAttribute(SessionConstants.LAST_URL);
             return new ModelAndView(REDIRECT + redirectURL);
         }
-        LOGGER.info("user {} login success, redirect to index");
+        LOGGER.info("user {} login success, redirect to index", username);
         return new ModelAndView(REDIRECT + "/");
     }
 
@@ -145,9 +146,9 @@ public class UserServiceController extends BaseController {
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
         CookieUtil.deleteLoginCookie(request, response);
         request.getSession().removeAttribute(SessionConstants.USER);
-        return preLogin();
+        LOGGER.info("logout success, redirect to login page");
+        return new ModelAndView(REDIRECT + "/egovernment/userService/preLogin");
     }
-
 
 
 }
