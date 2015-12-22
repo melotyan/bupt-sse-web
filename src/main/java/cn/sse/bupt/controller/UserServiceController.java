@@ -115,14 +115,14 @@ public class UserServiceController extends BaseController {
         String requestId = String.valueOf(request.getSession().getAttribute(SessionConstants.USER_ID));
         if (request == null || !requestId.equals(uid + sessionId)) {
             LOGGER.warn("account active failed, new sessionId:{}, old sessionId:{}", requestId, uid + sessionId);
-            return new ModelAndView("index");
+            return new ModelAndView(REDIRECT + "/");
         }
         userService.activeAccount(uid);
         UserModel userModel = userService.findUserById(uid);
         HttpSession session = request.getSession();
         session.setAttribute(SessionConstants.USER, userModel);
         LOGGER.info("userId:{} active success", uid);
-        return new ModelAndView("index");
+        return new ModelAndView(REDIRECT + "/");
     }
 
     @RequestMapping(value = "getPersonalInfo")
