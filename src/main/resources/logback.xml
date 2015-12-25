@@ -22,6 +22,11 @@
     </appender>
 
     <!--具体的日志配置-->
+    <logger name="cn.sse.bupt.controller.interceptor.LoginInterceptor">
+        <level value="debug"/>
+        <appender-ref ref="mainAppender"></appender-ref>
+    </logger>
+
     <root>
         <level value="info"/>
         <appender-ref ref="mainAppender"></appender-ref>

@@ -13,8 +13,9 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="cn.sse.bupt.controller"/>
     <context:component-scan base-package="cn.sse.bupt.util"/>
+    <context:component-scan base-package="cn.sse.bupt.service"/>
 
-    <context:property-placeholder location="classpath:mail_config/mail.properties"/>
+    <context:property-placeholder location="classpath:mail.properties"/>
     <!--jsp视图解析器-->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="cn.sse.bupt.common.CustomerJspView"/>
