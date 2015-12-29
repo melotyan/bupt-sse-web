@@ -11,7 +11,7 @@
     <title>用户信息</title>
 </head>
 <body>
-<form action="/egovernment/userService/editPersonal" method="post">
+<form action="/userService/editPersonal" method="post">
     <table>
         <tr>
             <td>用户名：</td>

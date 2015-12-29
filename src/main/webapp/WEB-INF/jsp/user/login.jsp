@@ -11,7 +11,7 @@
     <title>登陆</title>
 </head>
 <body>
-  <form action="/egovernment/userService/login" method="post">
+  <form action="/userService/login" method="post">
   <table class="login-table">
       <tr>
         <td>用户名：</td>

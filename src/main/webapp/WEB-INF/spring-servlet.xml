@@ -66,22 +66,23 @@
         <bean class="cn.sse.bupt.controller.interceptor.LoginInterceptor">
             <property name="excludedUrl">
                 <list>
-                    <value>/egovernment/userService/login</value>
-                    <value>/egovernment/userService/register</value>
-                    <value>/egovernment/userService/preLogin</value>
-                    <value>/egovernment/userService/preRegister</value>
-                    <value>/egovernment/userService/activeAccount/**</value>
-                    <value>/egovernment/userService/logout</value>
+                    <value>/</value>
+                    <value>/userService/login</value>
+                    <value>/userService/register</value>
+                    <value>/userService/preLogin</value>
+                    <value>/userService/preRegister</value>
+                    <value>/userService/activeAccount/**</value>
+                    <value>/userService/logout</value>
                 </list>
             </property>
         </bean>
         <mvc:interceptor>
-            <mvc:mapping path="/egovernment/noticeService/**"/>
-            <mvc:mapping path="/egovernment/fileUploadService/**"/>
+            <mvc:mapping path="/noticeService/**"/>
+            <mvc:mapping path="/fileUploadService/**"/>
             <bean class="cn.sse.bupt.controller.interceptor.BusinessInterceptor">
                 <property name="excludedUrl">
                     <list>
-                        <value>/egovernment/fileUploadService/</value>
+                        <value>/fileUploadService/</value>
                     </list>
                 </property>
             </bean>

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginInterceptor extends BaseInterceptor {
     private final static Logger LOGGER = LoggerFactory.getLogger(LoginInterceptor.class);
-    private final String LOGIN_URL = "/egovernment/userService/preLogin";
+    private final String LOGIN_URL = "/userService/preLogin";
 
     @Override
     public boolean doPreHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

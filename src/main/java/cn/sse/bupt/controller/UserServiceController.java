@@ -104,7 +104,7 @@ public class UserServiceController extends BaseController {
         LOGGER.info("userId {} encode password", userModel.getId());
         String sessionId = request.getRequestedSessionId();
         request.getSession().setAttribute(SessionConstants.USER_ID, userModel.getId() + sessionId);
-        String activeUrl = HOME_URL + "/egovernment/userService/activeAccount/" + userModel.getId() + "/" + sessionId;
+        String activeUrl = HOME_URL + "/userService/activeAccount/" + userModel.getId() + "/" + sessionId;
         mailSenderUtil.sendEmail(email, activeUrl);
         LOGGER.info("send active email to userID:{}", userModel.getId());
         return ResultModel.success();
@@ -147,7 +147,7 @@ public class UserServiceController extends BaseController {
         CookieUtil.deleteLoginCookie(request, response);
         request.getSession().removeAttribute(SessionConstants.USER);
         LOGGER.info("logout success, redirect to login page");
-        return new ModelAndView(REDIRECT + "/egovernment/userService/preLogin");
+        return new ModelAndView(REDIRECT + "/userService/preLogin");
     }
 
 

@@ -11,7 +11,7 @@
     <title>注册</title>
 </head>
 <body>
-  <form action="/egovernment/userService/register" method="post">
+  <form action="/userService/register" method="post">
     <table>
       <tr>
         <td>用户名：</td>
