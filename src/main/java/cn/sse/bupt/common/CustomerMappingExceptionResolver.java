@@ -15,6 +15,7 @@ import java.util.Set;
  */
 public class CustomerMappingExceptionResolver extends SimpleMappingExceptionResolver {
     private final static Logger LOGGER = LoggerFactory.getLogger(CustomerMappingExceptionResolver.class);
+    //需要打印异常日志的页面
     private Set<String> viewSet = new HashSet<String>();
 
     @Override

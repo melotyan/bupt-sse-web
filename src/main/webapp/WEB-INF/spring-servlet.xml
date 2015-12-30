@@ -16,23 +16,15 @@
     <context:component-scan base-package="cn.sse.bupt.service"/>
 
     <context:property-placeholder location="classpath:mail.properties"/>
+    <mvc:resources mapping="/resources/pages/**" location="/resources/pages/"/>
     <!--jsp视图解析器-->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="cn.sse.bupt.common.CustomerJspView"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="cache" value="false"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="order" value="0"/>
-    </bean>
-    <!--html视图解析器-->
-    <bean id="htmlViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="cache" value="true"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".html"/>
-        <property name="contentType" value="text/html;charset=UTF-8"/>
-        <property name="order" value="1"/>
     </bean>
 
     <!--异常处理器-->
@@ -67,6 +59,7 @@
             <property name="excludedUrl">
                 <list>
                     <value>/</value>
+                    <value>/WEB-INF/jsp/common/**</value>
                     <value>/userService/login</value>
                     <value>/userService/register</value>
                     <value>/userService/preLogin</value>
