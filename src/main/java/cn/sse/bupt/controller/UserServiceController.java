@@ -105,8 +105,13 @@ public class UserServiceController extends BaseController {
         String sessionId = request.getRequestedSessionId();
         request.getSession().setAttribute(SessionConstants.USER_ID, userModel.getId() + sessionId);
         String activeUrl = HOME_URL + "/userService/activeAccount/" + userModel.getId() + "/" + sessionId;
-        mailSenderUtil.sendEmail(email, activeUrl);
-        LOGGER.info("send active email to userID:{}", userModel.getId());
+        try {
+            mailSenderUtil.sendEmail(email, activeUrl);
+            LOGGER.info("send active email to userID:{}", userModel.getId());
+        } catch (org.springframework.mail.MailSendException e) {
+            LOGGER.error(e.toString());
+            return ResultModel.failed("邮箱地址有误");
+        }
         return ResultModel.success();
     }
 
