@@ -11,12 +11,15 @@
        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
     <mvc:annotation-driven/>
+    <mvc:resources mapping="/resources/pages/**" location="/resources/pages/"/>
+    <mvc:resources mapping="/resources/css/**" location="/resources/css/"/>
+    <mvc:resources mapping="/resources/js/**" location="/resources/js/"/>
+
     <context:component-scan base-package="cn.sse.bupt.controller"/>
     <context:component-scan base-package="cn.sse.bupt.util"/>
     <context:component-scan base-package="cn.sse.bupt.service"/>
 
     <context:property-placeholder location="classpath:mail.properties"/>
-    <mvc:resources mapping="/resources/pages/**" location="/resources/pages/"/>
     <!--jsp视图解析器-->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -59,7 +62,7 @@
             <property name="excludedUrl">
                 <list>
                     <value>/</value>
-                    <value>/WEB-INF/jsp/common/**</value>
+                    <value>/resources/**</value>
                     <value>/userService/login</value>
                     <value>/userService/register</value>
                     <value>/userService/preLogin</value>
