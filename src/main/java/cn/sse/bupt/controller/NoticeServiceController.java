@@ -36,13 +36,14 @@ public class NoticeServiceController extends BaseController {
     }
 
     @RequestMapping("publishNotice")
-    public ResultModel publishNotice(@RequestParam("title") String title, @RequestParam("content") String content) {
+    public ResultModel publishNotice(@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("fileUrls") String fileUrls) {
         UserModel userModel = getLoginUser();
         NoticeModel noticeModel = new NoticeModel();
         noticeModel.setTitle(title);
         noticeModel.setContent(content);
         noticeModel.setUid(userModel.getId());
         noticeModel.setUpdateUid(userModel.getId());
+        noticeModel.setFileUrls(fileUrls);
         noticeModel.setCreateTime(new Date());
         noticeModel.setNoticeStatus(NoticeStatusEnum.NORMAL.getValue());
         noticeService.publishNotice(noticeModel);

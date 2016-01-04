@@ -11,6 +11,8 @@
     <title></title>
 </head>
 <body>
+    <form action="fileUploadService/uploadFile" method="post">
 
+    </form>
 </body>
 </html>
