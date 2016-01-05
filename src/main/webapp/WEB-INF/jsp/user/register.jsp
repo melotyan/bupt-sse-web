@@ -9,6 +9,8 @@
 <html>
 <head>
     <title>注册</title>
+    <script type="text/javascript" src="/resources/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/resources/js/user.js"></script>
 </head>
 <body>
   <form action="/userService/register" method="post">
@@ -26,20 +28,13 @@
         <td><input type="password" name="repassword"/></td>
       </tr>
       <tr>
-        <td>姓名：</td>
-        <td><input type="text" name="nickname"/></td>
-      </tr>
-      <tr>
         <td>邮箱：</td>
         <td><input type="text" name="email"/></td>
       </tr>
       <tr>
-        <td>电话：</td>
-        <td><input type="text" name="phone"/></td>
-      </tr>
-      <tr>
-        <td>住址：</td>
-        <td><input type="textarea" name="address"/></td>
+        <td>验证码</td>
+        <td><input type="text" name="captcha"/></td>
+        <td><a href="#" onclick="changeImg()"><img id="imgObj" alt="验证码" src="/captcha.jpg"/> </a></td>
       </tr>
       <tr>
         <td><input type="submit" name="注册"/></td>

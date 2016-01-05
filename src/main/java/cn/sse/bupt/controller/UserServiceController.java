@@ -13,10 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,22 +86,26 @@ public class UserServiceController extends BaseController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public ResultModel register(HttpServletRequest request, @RequestParam(value="username", required = true) String username, @RequestParam(value="password", required = true) String password, @RequestParam(value="nickname", defaultValue = "") String nickname,
-                               @RequestParam(value="email", required=true) String email, @RequestParam(value = "phone", defaultValue = "") String phone, @RequestParam(value = "address", defaultValue = "") String address) {
+    public ResultModel register(HttpServletRequest request, @RequestParam(value="username", required = true) String username, @RequestParam(value="password", required = true) String password,
+                               @RequestParam(value = "repassword", required = true) String repassword, @RequestParam(value="email", required=true) String email, @RequestParam(value = "captcha", required = true) String captcha) {
+
+        if (!captcha.equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY)))
+            return ResultModel.failed("验证码错误");
+        if (!password.equals(repassword))
+            return ResultModel.failed("两次密码不一致");
         if (userService.hasRegistered(username))
             return ResultModel.failed("用户名已存在");
 
         UserModel userModel = new UserModel();
         userModel.setUsername(username);
         userModel.setPassword(new Md5PasswordEncoder().encodePassword(password, username));
-        userModel.setNickname(nickname);
+        userModel.setNickname(username);
         userModel.setEmail(email);
-        userModel.setPhone(phone);
-        userModel.setAddress(address);
+        userModel.setPhone("");
+        userModel.setAddress("");
         userModel.setUserType(UserTypeEnum.CUSTOMER.getValue());
         userModel.setAccountStatus(AccountStatusEnum.UNACTIVATED.getValue());
         userModel.setCreateTime(new Date());
-        userService.register(userModel);
 
         LOGGER.info("userId {} encode password", userModel.getId());
         String sessionId = request.getRequestedSessionId();
@@ -112,12 +113,13 @@ public class UserServiceController extends BaseController {
         String activeUrl = HOME_URL + "/userService/activeAccount/" + userModel.getId() + "/" + sessionId;
         try {
             mailSenderUtil.sendEmail(email, activeUrl);
+            userService.register(userModel);
             LOGGER.info("send active email to userID:{}", userModel.getId());
         } catch (org.springframework.mail.MailSendException e) {
             LOGGER.error(e.toString());
             return ResultModel.failed("邮箱地址有误");
         }
-        return ResultModel.success();
+        return ResultModel.success("请去邮箱确认");
     }
 
     @RequestMapping("activeAccount/{uid}/{sessionId}")
