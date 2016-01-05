@@ -53,11 +53,15 @@ public class UserServiceController extends BaseController {
     @RequestMapping(value="login", method = RequestMethod.POST)
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response,
                               @RequestParam("username") String username, @RequestParam("password") String password,
-                              @RequestParam(value = "rememberMe", defaultValue = "0") int rememberMe) {
+                              @RequestParam(value = "rememberMe", defaultValue = "0") int rememberMe, @RequestParam("captcha") String captcha) {
         LOGGER.info("{} try to login", username);
         UserModel userModel = userService.findUserByUsername(username);
+        if (!captcha.equals(request.getSession().getAttribute(SessionConstants.CAPTCHA))) {
+            LOGGER.info("captcha is wrong");
+            return new ModelAndView("user/login", "msg", "验证码错误");
+        }
         if (userModel == null) {
-            LOGGER.warn("account {} not exists", username);
+            LOGGER.info("account {} not exists", username);
             return new ModelAndView("user/login", "msg", "用户名不存在");
         }
         if (userModel.getAccountStatus() != AccountStatusEnum.ACTIVITATED.getValue()) {
