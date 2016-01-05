@@ -8,6 +8,7 @@ import cn.sse.bupt.model.UserModel;
 import cn.sse.bupt.service.UserService;
 import cn.sse.bupt.util.CookieUtil;
 import cn.sse.bupt.util.MailSenderUtil;
+import com.google.code.kaptcha.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class UserServiceController extends BaseController {
                               @RequestParam(value = "rememberMe", defaultValue = "0") int rememberMe, @RequestParam("captcha") String captcha) {
         LOGGER.info("{} try to login", username);
         UserModel userModel = userService.findUserByUsername(username);
-        if (!captcha.equals(request.getSession().getAttribute(SessionConstants.CAPTCHA))) {
+        if (!captcha.equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))) {
             LOGGER.info("captcha is wrong");
             return new ModelAndView("user/login", "msg", "验证码错误");
         }

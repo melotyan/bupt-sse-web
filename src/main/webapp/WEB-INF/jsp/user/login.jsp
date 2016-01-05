@@ -27,7 +27,7 @@
       <tr>
           <td>验证码: </td>
           <td><input type="text" name="captcha"/></td>
-          <td><a href="#" onclick="changeImg()"><img id="imgObj" alt="验证码" src="captcha.jsp" /></a></td>
+          <td><a href="#" onclick="changeImg()"><img id="imgObj" alt="验证码" src="/captcha.jpg" /></a></td>
       </tr>
       <tr>
         <td><input type="submit" value="登陆"/></td>

@@ -63,6 +63,7 @@
             <property name="excludedUrl">
                 <list>
                     <value>/</value>
+                    <value>/captcha.jpg</value>
                     <value>/resources/**</value>
                     <value>/userService/login</value>
                     <value>/userService/register</value>
@@ -106,5 +107,27 @@
     <!--上传文件-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="10000000"/>
+    </bean>
+
+    <!--验证码生成器-->
+    <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg>
+                    <props>
+                        <prop key="kaptcha.border">yes</prop>
+                        <prop key="kaptcha.border.color">105,179,90</prop>
+                        <prop key="kaptcha.textproducer.font.color">blue</prop>
+                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>
+                        <prop key="kaptcha.image.width">100</prop>
+                        <prop key="kaptcha.image.height">35</prop>
+                        <prop key="kaptcha.textproducer.font.size">30</prop>
+                        <prop key="kaptcha.session.key">code</prop>
+                        <prop key="kaptcha.textproducer.char.length">4</prop>
+                        <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
     </bean>
 </beans>
