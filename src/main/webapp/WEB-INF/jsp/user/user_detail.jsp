@@ -11,7 +11,7 @@
     <title>用户信息</title>
 </head>
 <body>
-<form action="/userService/editPersonal" method="post">
+<form action="/userService/editPersonalInfo" method="post">
     <table>
         <tr>
             <td>用户名：</td>
@@ -23,7 +23,7 @@
         </tr>
         <tr>
             <td>邮箱：</td>
-            <td><input type="text" name="email" value="${sessionScope.user.email}"/></td>
+            <td>${sessionScope.user.email}</td>
         </tr>
         <tr>
             <td>手机：</td>
@@ -36,7 +36,6 @@
         <tr>
             <td><input type="submit" value="修改"/></td>
         </tr>
-        <input type="hidden" name="uid" value="${sessionScope.user.id}"/>
     </table>
 </form>
 </body>

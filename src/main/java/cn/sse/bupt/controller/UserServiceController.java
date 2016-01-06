@@ -66,7 +66,7 @@ public class UserServiceController extends BaseController {
             LOGGER.warn("account {} is not activated", username);
             return new ModelAndView("user/login", "msg", "当前账户未激活");
         }
-        String encodePassword = new Md5PasswordEncoder().encodePassword(password, username);
+        String encodePassword = encode(password, username);
         if (!userModel.getPassword().equals(encodePassword)) {
             LOGGER.warn("account {} login with wrong password", username);
             return new ModelAndView("user/login", "msg", "密码错误");
@@ -98,7 +98,7 @@ public class UserServiceController extends BaseController {
 
         UserModel userModel = new UserModel();
         userModel.setUsername(username);
-        userModel.setPassword(new Md5PasswordEncoder().encodePassword(password, username));
+        userModel.setPassword(encode(password, username));
         userModel.setNickname(username);
         userModel.setEmail(email);
         userModel.setPhone("");
@@ -150,7 +150,7 @@ public class UserServiceController extends BaseController {
         userModel.setPhone(phone);
         userModel.setAddress(address);
         userService.updateUserInfo(userModel);
-        LOGGER.info("user {} personal info updated success", userModel.getId());
+        LOGGER.info("user {} personal info updated success", userModel.getUsername());
         return ResultModel.success();
     }
 
@@ -162,5 +162,31 @@ public class UserServiceController extends BaseController {
         return new ModelAndView(REDIRECT + "/userService/preLogin");
     }
 
+    @RequestMapping("preChangePassword")
+    public ModelAndView preChangePassword() {
+        return new ModelAndView("user/password");
+    }
+
+    @RequestMapping(value = "changePassword", method = RequestMethod.POST)
+    public ResultModel changePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("repassword") String repassword, @RequestParam("newPassword") String newPassword) {
+        if (!oldPassword.equals(repassword)) {
+            return ResultModel.failed("两次密码不一致");
+        }
+        UserModel userModel = getLoginUser();
+        String encodePassword = encode(oldPassword, userModel.getUsername());
+        if (!encodePassword.equals(userModel.getPassword())) {
+            LOGGER.info("wrong password");
+            return ResultModel.failed("旧密码错误");
+        }
+        userModel.setPassword(encode(newPassword, userModel.getUsername()));
+        userService.updateUserInfo(userModel);
+        LOGGER.info("user:{} success change password", userModel.getUsername());
+        return ResultModel.success();
+
+    }
+
+    private String encode(String password, String salt) {
+        return new Md5PasswordEncoder().encodePassword(password, salt);
+    }
 
 }

@@ -70,7 +70,6 @@
                     <value>/userService/preLogin</value>
                     <value>/userService/preRegister</value>
                     <value>/userService/activeAccount/**</value>
-                    <value>/userService/logout</value>
                 </list>
             </property>
         </bean>

@@ -7,10 +7,16 @@
 <body>
  welcome to egovernment
 
-
+ <p/>
  <a href="/userService/preLogin">登陆页面</a>
  <p/>
  <a href="/userService/preRegister">注册页面</a>
+ <p/>
+ <a href="/userService/preChangePassword">改密码</a>
+ <p/>
+ <a href="/userService/getPersonalInfo">查看个人信息</a>
+ <p/>
+ <a href="/userService/logout">登出</a>
  <p/>
 </body>
 </html>
