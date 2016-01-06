@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>登陆</title>
-    <script type="text/javascript" src="/resources/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="/resources/js/user.js"></script>
 </head>
 
