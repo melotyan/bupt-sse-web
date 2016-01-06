@@ -28,7 +28,7 @@ import java.util.Date;
 @RequestMapping("userService")
 public class UserServiceController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserServiceController.class);
-    private final String HOME_URL = "http://www.melotyan.com";
+    private final String HOME_URL = "http://egovernment.melotyan.com";
     private final int DEFAULT_EXPIRE = 15 * 60;
     private final int LONG_EXPIRE = Integer.MAX_VALUE;
     private final static String REDIRECT = "redirect:";
