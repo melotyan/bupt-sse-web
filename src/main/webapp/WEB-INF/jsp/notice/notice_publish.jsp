@@ -9,34 +9,11 @@
 <html>
 <head>
     <title>发布公告</title>
-  <script type="text/javascript">
-    i = 1;
-    j = 1;
-    $(document).ready(function(){
-
-      $("#btn_add1").click(function(){
-        document.getElementById("newUpload1").innerHTML+='<div id="div_'+i+'"><input  name="file" type="file"  /><input type="button" value="删除"  onclick="del_1('+i+')"/></div>';
-        i = i + 1;
-      });
-
-      $("#btn_add2").click(function(){
-        document.getElementById("newUpload2").innerHTML+='<div id="div_'+j+'"><input  name="file_'+j+'" type="file"  /><input type="button" value="删除"  onclick="del_2('+j+')"/></div>';
-        j = j + 1;
-      });
-    });
-
-    function del_1(o){
-      document.getElementById("newUpload1").removeChild(document.getElementById("div_"+o));
-    }
-
-    function del_2(o){
-      document.getElementById("newUpload2").removeChild(document.getElementById("div_"+o));
-    }
-
-  </script>
+  <script type="text/javascript" src="/resources/js/jquery/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="/resources/js/notice.js"></script>
 </head>
 <body>
-    <form id="notice_publish" action="/noticeService/publishNotice" method="post">
+    <form id="notice_publish" action="/noticeService/publishNotice" method="post" enctype="multipart/form-data">
       <div>
         <div>标题</div>
         <input class="title" type="text" name="title"/>
@@ -45,9 +22,11 @@
         <div>内容</div>
         <textarea class="notice_content" name="content"></textarea>
       </div>
-      <div class="upload">
-        <%--<div class="upl"--%>
+      <div id="upload">
+        <%--<input type="file" name="files"/>--%>
       </div>
+      <input type="button" id="btn_add" value="添加附件" >
+      <input type="submit" value="上传" >
     </form>
 </body>
 </html>

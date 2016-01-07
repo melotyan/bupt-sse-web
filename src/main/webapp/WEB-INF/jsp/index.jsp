@@ -18,5 +18,6 @@
  <p/>
  <a href="/userService/logout">登出</a>
  <p/>
+ <a href="/noticeService/prePublishNotice">发布公告</a>
 </body>
 </html>
