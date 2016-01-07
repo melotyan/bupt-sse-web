@@ -79,7 +79,8 @@
             <bean class="cn.sse.bupt.controller.interceptor.BusinessInterceptor">
                 <property name="excludedUrl">
                     <list>
-                        <value>/fileUploadService/</value>
+                        <value>/noticeService/listAllNotices/**</value>
+                        <value>/noticeService/viewNotice/**</value>
                     </list>
                 </property>
             </bean>

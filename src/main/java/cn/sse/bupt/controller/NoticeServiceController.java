@@ -1,31 +1,29 @@
 package cn.sse.bupt.controller;
 
 
-import cn.sse.bupt.common.SessionConstants;
 import cn.sse.bupt.enums.NoticeStatusEnum;
+import cn.sse.bupt.enums.UserTypeEnum;
 import cn.sse.bupt.model.NoticeModel;
 import cn.sse.bupt.model.ResultModel;
 import cn.sse.bupt.model.UserModel;
 import cn.sse.bupt.service.NoticeService;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by hao.yan on 2015/12/21.
@@ -34,7 +32,9 @@ import java.util.Random;
 @RequestMapping("noticeService")
 public class NoticeServiceController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(NoticeServiceController.class);
-    private final  String FILE_PATH = "D:/file/";
+    private final String FILE_PATH = "D:/file/";
+    private final int PAGE_SIZE = 50;
+    private Gson gson = new Gson();
 
     @Autowired
     private NoticeService noticeService;
@@ -81,11 +81,59 @@ public class NoticeServiceController extends BaseController {
             fileMap.put(FILE_PATH + localFile.getName(), filename);
             LOGGER.info("upload file success, filename:{}, file path:{}", filename, FILE_PATH + localFile.getName());
         }
-        String fileUrls = new Gson().toJson(fileMap);
+        String fileUrls = gson.toJson(fileMap);
+        StringBuilder sb = new StringBuilder();
+        for (String value : fileMap.values()) {
+            sb.append(value).append("\r\n");
+        }
         LOGGER.info("file urls is {}", fileUrls);
         return fileUrls;
+
     }
 
+    @RequestMapping("viewNotice/{id}")
+    public ModelAndView viewNotice(@PathVariable Integer id) {
+        NoticeModel noticeModel = noticeService.findNoticeById(id);
+        ModelAndView mav = new ModelAndView("notice/detail", "noticeModel", noticeModel);
+        mav.addObject("fileMap", gson.fromJson(noticeModel.getFileUrls(), Map.class));
+        return mav;
+    }
+
+    @RequestMapping("listAllNotices/{page}")
+    public ModelAndView listNotices(@PathVariable Integer page) {
+        int offset = (page - 1) * PAGE_SIZE;
+        List<NoticeModel> noticeModels = noticeService.listNotice(offset, PAGE_SIZE);
+        return new ModelAndView("notice/notice_list", "notices", noticeModels);
+    }
+
+    @RequestMapping("deleteNotice/{id}")
+    public ResultModel deleteNotice(@PathVariable Integer id) {
+        NoticeModel noticeModel = noticeService.findNoticeById(id);
+        if (noticeModel == null) {
+            return ResultModel.failed("不存在相关的公告");
+        }
+        UserModel userModel = getLoginUser();
+        if (userModel.getUserType() != UserTypeEnum.EXAMINER.getValue() && noticeModel.getUid() != userModel.getId()) {
+            return ResultModel.failed("没有相关权限");
+        }
+        noticeService.deleteNotice(id);
+        LOGGER.info("success delete notice {}", id);
+        return ResultModel.success();
+    }
+
+    @RequestMapping("updateNotice")
+    public ResultModel updateNotice(@RequestParam("id") Integer id, @RequestParam("title") String title, @RequestParam("content") String content) {
+        NoticeModel noticeModel = noticeService.findNoticeById(id);
+        if (noticeModel == null) {
+            return ResultModel.failed("不存在相关的公告");
+        }
+        UserModel userModel = getLoginUser();
+        if (userModel.getUserType() != UserTypeEnum.EXAMINER.getValue() && noticeModel.getUid() != userModel.getId()) {
+            return ResultModel.failed("没有相关权限");
+        }
+        noticeService.updateNotice(id, userModel.getId(), title, content);
+        return ResultModel.success();
+    }
 
 
 }
