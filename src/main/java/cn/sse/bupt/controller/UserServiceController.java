@@ -107,10 +107,9 @@ public class UserServiceController extends BaseController {
         userModel.setAccountStatus(AccountStatusEnum.UNACTIVATED.getValue());
         userModel.setCreateTime(new Date());
 
-        LOGGER.info("userId {} encode password", userModel.getId());
         String sessionId = request.getRequestedSessionId();
-        request.getSession().setAttribute(SessionConstants.USER_ID, userModel.getId() + sessionId);
-        String activeUrl = HOME_URL + "/userService/activeAccount/" + userModel.getId() + "/" + sessionId;
+        request.getSession().setAttribute(SessionConstants.ACTIVE_URL, userModel.getUsername() + sessionId);
+        String activeUrl = HOME_URL + "/userService/activeAccount/" + userModel.getUsername() + "/" + sessionId;
         try {
             mailSenderUtil.sendEmail(email, activeUrl);
             userService.register(userModel);
@@ -122,18 +121,18 @@ public class UserServiceController extends BaseController {
         return ResultModel.success("请去邮箱确认");
     }
 
-    @RequestMapping("activeAccount/{uid}/{sessionId}")
-    public ModelAndView activeAccount(HttpServletRequest request, @PathVariable Integer uid, @PathVariable String sessionId) {
-        String requestId = String.valueOf(request.getSession().getAttribute(SessionConstants.USER_ID));
-        if (request == null || !requestId.equals(uid + sessionId)) {
-            LOGGER.warn("account active failed, new sessionId:{}, old sessionId:{}", requestId, uid + sessionId);
+    @RequestMapping("activeAccount/{username}/{sessionId}")
+    public ModelAndView activeAccount(HttpServletRequest request, @PathVariable String username, @PathVariable String sessionId) {
+        String requestId = String.valueOf(request.getSession().getAttribute(SessionConstants.ACTIVE_URL));
+        if (request == null || !requestId.equals(username + sessionId)) {
+            LOGGER.warn("user {} active failed, new sessionId:{}, old sessionId:{}", username, requestId, username + sessionId);
             return new ModelAndView(REDIRECT + "/");
         }
-        userService.activeAccount(uid);
-        UserModel userModel = userService.findUserById(uid);
+        UserModel userModel = userService.findUserByUsername(username);
+        userService.activeAccount(userModel.getId());
         HttpSession session = request.getSession();
         session.setAttribute(SessionConstants.USER, userModel);
-        LOGGER.info("userId:{} active success", uid);
+        LOGGER.info("user {} active success", username);
         return new ModelAndView(REDIRECT + "/");
     }
 
