@@ -1,27 +1,28 @@
 package cn.sse.bupt.controller;
 
 import cn.sse.bupt.model.FileModel;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 
 /**
  * Created by hao.yan on 2015/12/21.
  */
 @RestController
-@RequestMapping("fileUploadService")
-public class FileUploadServiceController {
-    private final static Logger LOGGER = LoggerFactory.getLogger(FileUploadServiceController.class);
+@RequestMapping("fileService")
+public class FileServiceController {
+    private final static Logger LOGGER = LoggerFactory.getLogger(FileServiceController.class);
     private final  String FILE_PATH = "D:/file/";
 
     @RequestMapping("preUploadFile")
@@ -51,5 +52,15 @@ public class FileUploadServiceController {
         fileModel.setTitle(filename);
         fileModel.setUrl(FILE_PATH + localFile.getName());
         return fileModel;
+    }
+
+    @RequestMapping(value = "download", method = RequestMethod.POST)
+    public ResponseEntity download(@RequestParam("filename") String filename, @RequestParam("path") String path) throws Exception {
+        File file = new File(path);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentDispositionFormData("attachment", filename);
+        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
+                httpHeaders, HttpStatus.CREATED);
     }
 }
