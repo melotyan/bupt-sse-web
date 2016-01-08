@@ -70,17 +70,17 @@
                     <value>/userService/preLogin</value>
                     <value>/userService/preRegister</value>
                     <value>/userService/activeAccount/**</value>
+                    <value>/fileService/download</value>
                 </list>
             </property>
         </bean>
         <mvc:interceptor>
             <mvc:mapping path="/noticeService/**"/>
-            <mvc:mapping path="/fileUploadService/**"/>
             <bean class="cn.sse.bupt.controller.interceptor.BusinessInterceptor">
                 <property name="excludedUrl">
                     <list>
                         <value>/noticeService/listAllNotices/**</value>
-                        <value>/noticeService/viewNotice/**</value>
+                        <value>/noticeService/viewNoticeDetail/**</value>
                     </list>
                 </property>
             </bean>

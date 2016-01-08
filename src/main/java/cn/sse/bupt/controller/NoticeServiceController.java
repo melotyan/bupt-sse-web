@@ -8,6 +8,7 @@ import cn.sse.bupt.model.ResultModel;
 import cn.sse.bupt.model.UserModel;
 import cn.sse.bupt.service.NoticeService;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,11 +92,12 @@ public class NoticeServiceController extends BaseController {
 
     }
 
-    @RequestMapping("viewNotice/{id}")
+    @RequestMapping("viewNoticeDetail/{id}")
     public ModelAndView viewNotice(@PathVariable Integer id) {
         NoticeModel noticeModel = noticeService.findNoticeById(id);
         ModelAndView mav = new ModelAndView("notice/detail", "noticeModel", noticeModel);
-        mav.addObject("fileMap", gson.fromJson(noticeModel.getFileUrls(), Map.class));
+        mav.addObject("fileMap", gson.fromJson(noticeModel.getFileUrls(), new TypeToken<Map<String, String>>(){}.getType()));
+        LOGGER.info("view notice detail success, notice id:{}", id);
         return mav;
     }
 

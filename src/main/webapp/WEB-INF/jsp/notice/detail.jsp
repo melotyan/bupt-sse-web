@@ -10,9 +10,11 @@
 <html>
 <head>
     <title>公告详情</title>
+    <script type="text/javascript" src="/resources/js/jquery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/resources/js/notice.js"></script>
 </head>
 <body>
-
+dfdfg
   <div>
     标题: ${noticeModel.title}
   </div>
@@ -21,8 +23,13 @@
   </div>
   <div>
     附件：
-    <c:forEach items="${fileMap.keys()}" var="file">
-      <p/><a href="">${file}</a>
+    <c:forEach items="${fileMap.keySet()}" var="key">
+      <p/>
+      <form action="/fileService/download" method="post">
+        <input name="filename" value="${fileMap.get(key)}" type="hidden"/>
+        <input name="path" value="${key}" type="hidden"/>
+        <a href="#" onclick="this.parentNode.submit()">${fileMap.get(key)}</a>
+      </form>
     </c:forEach>
   </div>
 </body>
