@@ -14,10 +14,16 @@
     <script type="text/javascript" src="/resources/js/notice.js"></script>
 </head>
 <body>
-dfdfg
   <div>
     标题: ${noticeModel.title}
   </div>
+
+  <c:if test="${sessionScope.user != null && sessionScope.user.id == noticeModel.uid}">
+    <div>
+      <a href="/noticeService/deleteNotice/${noticeModel.id}">删除</a>
+      <a href="/noticeService/preUpdateNotice/${noticeModel.id}">编辑</a>
+    </div>
+  </c:if>
   <div>
     内容：${noticeModel.content}
   </div>

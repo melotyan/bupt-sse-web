@@ -103,9 +103,11 @@ public class NoticeServiceController extends BaseController {
 
     @RequestMapping("listAllNotices/{page}")
     public ModelAndView listNotices(@PathVariable Integer page) {
+        if (page == null || page <= 0)
+            page = 1;
         int offset = (page - 1) * PAGE_SIZE;
         List<NoticeModel> noticeModels = noticeService.listNotice(offset, PAGE_SIZE);
-        return new ModelAndView("notice/notice_list", "notices", noticeModels);
+        return new ModelAndView("notice/list", "notices", noticeModels);
     }
 
     @RequestMapping("deleteNotice/{id}")
@@ -135,6 +137,17 @@ public class NoticeServiceController extends BaseController {
         }
         noticeService.updateNotice(id, userModel.getId(), title, content);
         return ResultModel.success();
+    }
+
+    @RequestMapping("preUpdateNotice/{id}")
+    public ModelAndView preUpdateNotice(@RequestParam("id") Integer id) {
+        NoticeModel noticeModel = noticeService.findNoticeById(id);
+        if (noticeModel == null)
+            return new ModelAndView("notice/notice_publish");
+        ModelAndView mav = new ModelAndView("notice/edit", "notice", noticeModel);
+        Map<String, String> map = gson.fromJson(noticeModel.getFileUrls(), new TypeToken<Map<String, String>>(){}.getType());
+        mav.addObject("fileMap", map);
+        return mav;
     }
 
 

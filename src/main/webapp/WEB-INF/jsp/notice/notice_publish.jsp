@@ -16,11 +16,11 @@
     <form id="notice_publish" action="/noticeService/publishNotice" method="post" enctype="multipart/form-data">
       <div>
         <div>标题</div>
-        <input class="title" type="text" name="title"/>
+        <input class="title" type="text" name="title" value="${notice.title}"/>
       </div>
       <div>
         <div>内容</div>
-        <textarea class="notice_content" name="content"></textarea>
+        <textarea class="notice_content" name="content" value="${notice.content}"></textarea>
       </div>
       <div id="upload">
         <%--<input type="file" name="files"/>--%>
