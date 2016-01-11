@@ -71,6 +71,8 @@
                     <value>/userService/preRegister</value>
                     <value>/userService/activeAccount/**</value>
                     <value>/fileService/download</value>
+                    <value>/noticeService/listAllNotices/**</value>
+                    <value>/noticeService/viewNoticeDetail/**</value>
                 </list>
             </property>
         </bean>
