@@ -55,12 +55,17 @@ public class FileServiceController {
     }
 
     @RequestMapping(value = "download", method = RequestMethod.POST)
-    public ResponseEntity download(@RequestParam("filename") String filename, @RequestParam("path") String path) throws Exception {
+    public ResponseEntity<byte[]> download(@RequestParam("filename") String filename, @RequestParam("path") String path)  {
         File file = new File(path);
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentDispositionFormData("attachment", filename);
-        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
-                httpHeaders, HttpStatus.CREATED);
+        try {
+            httpHeaders.setContentDispositionFormData("attachment", new String(filename.getBytes("UTF-8"), "iso-8859-1"));
+            httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
+                    httpHeaders, HttpStatus.CREATED);
+        } catch (Exception e) {
+            LOGGER.error("{}", e);
+        }
+        return null;
     }
 }
