@@ -140,7 +140,7 @@ public class NoticeServiceController extends BaseController {
     }
 
     @RequestMapping("preUpdateNotice/{id}")
-    public ModelAndView preUpdateNotice(@RequestParam("id") Integer id) {
+    public ModelAndView preUpdateNotice(@PathVariable Integer id) {
         NoticeModel noticeModel = noticeService.findNoticeById(id);
         if (noticeModel == null)
             return new ModelAndView("notice/notice_publish");
