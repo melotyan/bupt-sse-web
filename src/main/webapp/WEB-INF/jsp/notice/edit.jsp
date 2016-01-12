@@ -19,7 +19,7 @@
     </div>
     <div>
       <div>内容</div>
-      <textarea class="notice_content" name="content" value="${notice.content}"></textarea>
+      <textarea class="notice_content" name="content">${notice.content}</textarea>
     </div>
     <div id="upload">
       <%--<input type="file" name="files"/>--%>
