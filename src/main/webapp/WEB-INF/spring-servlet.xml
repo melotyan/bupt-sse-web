@@ -73,6 +73,8 @@
                     <value>/fileService/download</value>
                     <value>/noticeService/listAllNotices/**</value>
                     <value>/noticeService/viewNoticeDetail/**</value>
+                    <value>/suggestionService/viewSuggestion/**</value>
+                    <value>/suggestionService/listSuggestions/**</value>
                 </list>
             </property>
         </bean>
