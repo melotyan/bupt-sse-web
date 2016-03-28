@@ -10,7 +10,7 @@ public class SessionConstants {
     public final static String PASSWORD = "password";
     public final static String LAST_URL = "lastUrl";
     public final static String ACCOUNT_STATUS = "accountStatus";
-    public final static String DOMAIN = "melotyan.com";
+    public final static String DOMAIN = "egovernment.melotyan.com";
     public final static String CAPTCHA = "captcha";
     public final static String ACTIVE_URL = "activeUrl";
 }
