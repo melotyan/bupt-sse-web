@@ -1,3 +1,36 @@
-a {
-    font-size:12px;
+.head-title {
+    margin-top: 35px;
+    font-family: serif, sans-serif, "Microsoft Yahei";
+    font-size: 5em;
+    font-style: italic;
+    font-weight: 900;
+    color: white;
+}
+
+.index-float {
+    float: left;
+    border: 1px solid blue;
+    width: 100px;
+    height: 100px;
+}
+
+.login-header {
+    float: right;
+    margin-top: -10px;
+    margin-right: -80px;
+}
+
+.link {
+    text-decoration: none;
+    font-size: 20px;
+    font-color: white;
+}
+.link:hover {
+    text-decoration: underline;
+}
+.link:visited {
+    color: darkgray;
+}
+.link:link {
+    color: white;
 }
