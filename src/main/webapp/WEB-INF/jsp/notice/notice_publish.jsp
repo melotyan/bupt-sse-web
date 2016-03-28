@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>发布公告</title>
-  <script type="text/javascript" src="/resources/js/jquery/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="/resources/js/jquery/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="/resources/js/notice.js"></script>
 </head>
 <body>
