@@ -9,31 +9,36 @@
 <html>
 <head>
     <title>登陆</title>
-    <script type="text/javascript" src="/resources/js/jquery/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="/resources/js/user.js"></script>
+    <link rel="stylesheet" href="/resources/css/content.css" type="text/css"/>
 </head>
 
 <body>
-  <form action="/userService/login" method="post">
-  <table class="login-table">
-      <tr>
-        <td>用户名：</td>
-        <td><input type="text" name="username"/></td>
-      </tr>
-      <tr>
-        <td>密码: </td>
-        <td><input type="password" name="password"/></td>
-      </tr>
-      <tr>
-          <td>验证码: </td>
-          <td><input type="text" name="captcha"/></td>
-          <td><a href="#" onclick="changeImg()"><img id="imgObj" alt="验证码" src="/captcha.jpg" /></a></td>
-      </tr>
-      <tr>
-        <td><input type="submit" value="登陆"/></td>
-      </tr>
-  </table>
-  </form>
-
+  <%@include file="../header.jsp"%>
+  <div class="login-div">
+      <form action="/userService/login" method="post">
+      <table class="login-table">
+          <tr>
+            <td>用户名:</td>
+            <td><input type="text" name="username"/></td>
+          </tr>
+          <tr>
+            <td>密码:</td>
+            <td><input type="password" name="password"/></td>
+          </tr>
+          <tr>
+              <td>验证码:</td>
+              <td><input type="text" name="captcha"/>
+              <a class="captcha" href="#" onclick="changeImg()"><img id="imgObj" alt="验证码" src="/captcha.jpg" /></a></td>
+          </tr>
+          <tr class="login-register">
+            <td><input type="submit" value="登陆"/></td>
+              <td><a href="/userService/preRegister">注册</a></td>
+          </tr>
+      </table>
+      </form>
+  </div>
+  <%@include file="../footer.jsp"%>
 </body>
+<script type="text/javascript" src="/resources/js/jquery/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="/resources/js/user.js"></script>
 </html>

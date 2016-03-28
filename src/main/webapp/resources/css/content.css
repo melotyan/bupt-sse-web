@@ -1,0 +1,29 @@
+.login-div {
+    width: 700px;
+    height: 400px;
+    margin-top: 200px;
+    margin-left: 350px;
+}
+
+.login-table {
+    font-weight: 900;
+    text-align: right;
+    font-family: "microsoft yahei", serif, sans-serif;
+    font-size: 20px;
+}
+
+.login-table td {
+    text-align: right;
+}
+
+.login-table tr {
+    height: 20px;
+}
+
+.captcha {
+    float: right;
+}
+
+.login-register {
+    border-collapse:collapse;
+}
