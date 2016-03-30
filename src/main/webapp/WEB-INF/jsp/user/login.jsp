@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/resources/css/content.css" type="text/css"/>
 </head>
 
-<body>
+<body class="sticky-header-on tablet-sticky-header">
   <%@include file="../header.jsp"%>
   <div class="login-div">
       <form action="/userService/login" method="post">
@@ -39,6 +39,5 @@
   </div>
   <%@include file="../footer.jsp"%>
 </body>
-<script type="text/javascript" src="/resources/js/jquery/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="/resources/js/user.js"></script>
 </html>
