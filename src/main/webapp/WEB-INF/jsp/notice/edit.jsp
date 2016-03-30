@@ -11,6 +11,7 @@
     <title>编辑</title>
 </head>
 <body>
+  <%@include file=""%>
   <form action="/noticeService/updateNotice" method="post">
     <input type="hidden" name="id" value="${notice.id}"/>
     <div>

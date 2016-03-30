@@ -12,9 +12,13 @@
     <title>公告列表</title>
 </head>
 <body>
-  <c:forEach items="${notices}" var="notice">
-    <p/>
-    <div><a href="/noticeService/viewNoticeDetail/${notice.id}" >${notice.title}</a></div>
-  </c:forEach>
+  <%@include file="../header.jsp"%>
+  <div>
+    <c:forEach items="${notices}" var="notice">
+      <p/>
+      <div><a href="/noticeService/viewNoticeDetail/${notice.id}" >${notice.title}</a></div>
+    </c:forEach>
+  </div>
+  <%@include file="../footer.jsp"%>
 </body>
 </html>

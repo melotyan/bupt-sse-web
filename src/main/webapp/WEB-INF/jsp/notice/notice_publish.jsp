@@ -13,6 +13,7 @@
   <script type="text/javascript" src="/resources/js/notice.js"></script>
 </head>
 <body>
+  <%@include file="../header.jsp"%>
     <form id="notice_publish" action="/noticeService/publishNotice" method="post" enctype="multipart/form-data">
       <div>
         <div>标题</div>
@@ -28,5 +29,6 @@
       <input type="button" id="btn_add" value="添加附件" >
       <input type="submit" value="上传" >
     </form>
+  <%@include file="../footer.jsp"%>
 </body>
 </html>
