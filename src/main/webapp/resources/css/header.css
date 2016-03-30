@@ -25,12 +25,12 @@
     font-size: 20px;
     font-color: white;
 }
-.link:hover {
-    text-decoration: underline;
+.link:link {
+    color: white;
 }
 .link:visited {
     color: darkgray;
 }
-.link:link {
-    color: white;
+.link:hover {
+    text-decoration: underline;
 }

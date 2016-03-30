@@ -1,8 +1,9 @@
 .login-div {
-    width: 700px;
-    height: 400px;
-    margin-top: 200px;
-    margin-left: 350px;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    resize: both;
+    overflow: auto;
 }
 
 .login-table {
@@ -26,4 +27,22 @@
 
 .login-register {
     border-collapse:collapse;
+}
+
+.register-table {
+    font-weight: normal;
+    table-layout:fixed;
+    text-align: right;
+    font-family: "microsoft yahei", serif, sans-serif;
+}
+.register-table td {
+    text-align: right;
+    max-width: 10px;
+}
+.main-content {
+    position: relative;
+    top: 200px;
+}
+input:focus {
+	background-color: gray;
 }

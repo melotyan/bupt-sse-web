@@ -36,8 +36,6 @@
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
-
-
         </init-param>
         <init-param>
             <param-name>forceEncoding</param-name>
