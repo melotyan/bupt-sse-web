@@ -11,7 +11,8 @@
 <head>
     <title>公告列表</title>
 </head>
-<body>
+<body class="sticky-header-on tablet-sticky-header">
+
   <%@include file="../header.jsp"%>
   <div>
     <c:forEach items="${notices}" var="notice">

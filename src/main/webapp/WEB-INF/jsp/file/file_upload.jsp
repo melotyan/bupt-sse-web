@@ -10,7 +10,7 @@
 <head>
     <title>上传文件</title>
 </head>
-<body>
+<body class="sticky-header-on tablet-sticky-header">
     <form action="/fileUploadService/uploadFile" method="post" enctype="multipart/form-data">
         <input type="file" name="file"/>
         <input type="submit" value="上传"/>

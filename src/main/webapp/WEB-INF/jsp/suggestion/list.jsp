@@ -11,10 +11,14 @@
 <head>
     <title>建议列表</title>
 </head>
-<body>
+<body class="sticky-header-on tablet-sticky-header">
+  <%@include file="../header.jsp"%>
+  <div>
   <c:forEach items="${list}" var="suggestion">
     <a href="viewSuggestion/${suggestion.id}">${suggestion.title}</a>      ${suggestion.createDate}
     <p/>
   </c:forEach>
+  </div>
+  <%@include file="../footer.jsp"%>
 </body>
 </html>

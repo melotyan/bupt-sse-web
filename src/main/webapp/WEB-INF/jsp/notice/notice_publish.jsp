@@ -12,7 +12,8 @@
   <script type="text/javascript" src="/resources/js/jquery/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="/resources/js/notice.js"></script>
 </head>
-<body>
+<body class="sticky-header-on tablet-sticky-header">
+
   <%@include file="../header.jsp"%>
     <form id="notice_publish" action="/noticeService/publishNotice" method="post" enctype="multipart/form-data">
       <div>

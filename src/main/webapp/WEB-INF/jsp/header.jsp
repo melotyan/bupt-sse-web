@@ -116,9 +116,10 @@
           <li>
             <span>意见反馈</span>
             <ul>
-              <li><a href="blog-v1.html">领导信箱</a></li>
-              <li><a href="blog-v2.html">违纪举报</a></li>
-              <li><a href="blog-fullwidth.html">提建议</a></li>
+              <li><a href="/suggestionService/listSuggestions/1">群众的心声</a></li>
+              <li><a href="blog-v1.html">给领导写信</a></li>
+              <li><a href="blog-v2.html">举报违法违纪行为</a></li>
+              <li><a href="blog-fullwidth.html">提出政府工作建议</a></li>
               <li><span>提出政府工作建议</span>
                 <ul>
                   <li><a href="blog-single-sidebar.html">With sidebar</a></li>
@@ -143,4 +144,4 @@
 
 <script type="text/javascript" src="/resources/js/jquery/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="/resources/js/jquery/modernizr.js"></script>
-<script type="text/javascript" src="/resources/js/jquery/script.js"></script>
+<script type="text/javascript" src="/resources/js/script.js"></script>

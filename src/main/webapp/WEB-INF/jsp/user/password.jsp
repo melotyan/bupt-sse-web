@@ -11,7 +11,8 @@
     <title>更改密码</title>
     <link rel="stylesheet" href="/resources/css/content.css" type="text/css"/>
 </head>
-<body>
+<body class="sticky-header-on tablet-sticky-header">
+
 <%@include file="../header.jsp" %>
 <div class="main-content">
     <form action="/userService/changePassword" method="post">

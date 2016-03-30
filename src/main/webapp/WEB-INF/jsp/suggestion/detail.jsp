@@ -10,9 +10,13 @@
 <head>
     <title>意见详情</title>
 </head>
-<body>
+<body class="sticky-header-on tablet-sticky-header">
+  <%@include file="../header.jsp" %>
+  <div>
   标题：${suggestion.title}
   <p/>
   内容: ${suggestion.content}
+  </div>
+  <%@include file="../footer.jsp"%>
 </body>
 </html>

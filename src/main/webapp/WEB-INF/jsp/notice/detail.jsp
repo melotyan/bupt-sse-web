@@ -12,7 +12,7 @@
     <title>公告详情</title>
     <link rel="stylesheet" href="/resources/css/content.css" type="text/css"/>
 </head>
-<body>
+<body class="sticky-header-on tablet-sticky-header">
 
 <div class="main-contain">
     <%@include file="../header.jsp"%>
