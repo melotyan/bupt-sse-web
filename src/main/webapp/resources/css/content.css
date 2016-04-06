@@ -1,48 +1,91 @@
 .login-div {
-    margin-top: auto;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+    width: 600px;
+    border: 1px solid lightgray;
     resize: both;
     overflow: auto;
+}
+.captcha-tr td:last-child input, img {
+    display: inline;
+    width: 30%;
+}
+
+.imgObj {
+    display: inline;
+    float: right;
 }
 
 .login-table {
     font-weight: 900;
     text-align: right;
     font-family: "microsoft yahei", serif, sans-serif;
-    font-size: 20px;
 }
-
-.login-table td {
+.login-table tr td:first-child {
     text-align: right;
 }
-
-.login-table tr {
-    height: 20px;
+.login-table tr:last-child input{
+    padding: 5px 20px;
+    margin: 0 80px;
+    background-color: #e2eaf2;
+    border: none;
 }
-
-.captcha {
-    float: right;
-}
-
-.login-register {
-    border-collapse:collapse;
-}
-
 .register-table {
-    font-weight: normal;
-    table-layout:fixed;
-    text-align: right;
     font-family: "microsoft yahei", serif, sans-serif;
 }
-.register-table td {
+.register-table tr td:first-child {
     text-align: right;
-    max-width: 10px;
+    width: 160px;
+    font-weight: 900;
 }
-.main-content {
-    position: relative;
-    top: 200px;
+.register-table tr:last-child input{
+    padding: 5px 20px;
+    margin: 0 100px;
+}
+.list-div {
+    text-align: left;
+    font-family: serif, sans-serif;
+    font-size: 25px;
+    width: 1000px;
+    border: 1px solid darkgray;
+    margin: 0 auto;
+
+}
+.list-detail {
+    border-color: lightgray;
+    border-collapse: collapse;
+    padding: 0;
+    margin: 0;
+}
+.content-div {
+    width: 1000px;
+    border: 1px solid darkgray;
+    margin: 0 auto;
+}
+.content-title {
+    text-align: center;
+    font-size: 20px;
+    height: 45px;
+    padding: 0;
+    margin: 0;
+    background-color: dodgerblue;
+}
+.content-title h2 {
+    display: inline;
+    line-height: 180%;
+}
+.content-title span {
+    float: right;
+    line-height: 200%;
+}
+.content > textarea{
+    height: 500px;
 }
 input:focus {
-	background-color: gray;
+    background-color: gray;
+}
+input:hover {
+    background: yellowgreen;
+}
+input:active {
+    background: #ffff00;
 }
