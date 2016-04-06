@@ -38,14 +38,14 @@
         <td>邮箱：</td>
         <td><input type="text" name="email"/></td>
       </tr>
-      <tr>
+      <tr class="captcha-tr">
         <td>验证码: </td>
         <td><input type="text" name="captcha"/>
-        <a href="#" onclick="changeImg()"><img id="imgObj" alt="验证码" src="/captcha.jpg"/> </a></td>
+        <img class="imgObj" alt="验证码" src="/captcha.jpg"/></td>
       </tr>
       <tr>
-        <td><input type="submit" name="注册"/></td>
-        <td><input type="reset" name="重置"/></td>
+        <td colspan="2"><input type="submit" name="注册"/>
+        <input type="reset" name="重置"/></td>
       </tr>
     </table>
   </form>

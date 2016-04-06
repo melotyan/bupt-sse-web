@@ -5,6 +5,7 @@
   Time: 16:33
   To change this template use File | Settings | File Templates.
 --%>
+<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -25,14 +26,15 @@
             <td>密码:</td>
             <td><input type="password" name="password"/></td>
           </tr>
-          <tr>
+          <tr class="captcha-tr">
               <td>验证码:</td>
-              <td><input type="text" name="captcha"/>
-              <a class="captcha" href="#" onclick="changeImg()"><img id="imgObj" alt="验证码" src="/captcha.jpg" /></a></td>
+              <td><input class="captcha-text" type="text" name="captcha"/>
+              <img class="imgObj" alt="验证码" src="/captcha.jpg" /></td>
           </tr>
-          <tr class="login-register">
-            <td><input type="submit" value="登陆"/></td>
-              <td><a href="/userService/preRegister">注册</a></td>
+          <tr>
+            <td colspan="2"><input type="submit" value="登陆"/>
+                <input type="button" value="注册" id="register-button"/>
+            </td>
           </tr>
       </table>
       </form>
