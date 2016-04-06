@@ -50,7 +50,7 @@
             <a href="/"><i class="icons icon-home"></i></a>
           <!-- Pages -->
           <li>
-            <span>Pages</span>
+            <span>政府新闻</span>
               <ul>
                 <li><a href="/noticeService/listAllNotices/1">查看新闻</a></li>
                 <c:if test="${not empty sessionScope.user && sessionScope.user.userType != 3}">
@@ -104,9 +104,13 @@
                 </ul>
             </ul>
           <li>
-            <a href="get-involved.html">便民信息</a>
+            <span>意见征集</span>
+            <ul>
+              <li><a href="">参与投票</a></li>
+              <li><a href="">发起投票</a></li>
+            </ul>
           </li>
-          <li class="current-menu-item">
+          <li>
             <span>办事指南</span>
             <ul>
               <li><a href="features-typography.html">竞标申请流程</a></li>
