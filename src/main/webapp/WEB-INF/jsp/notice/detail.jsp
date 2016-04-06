@@ -13,27 +13,23 @@
     <link rel="stylesheet" href="/resources/css/content.css" type="text/css"/>
 </head>
 <body class="sticky-header-on tablet-sticky-header">
-
-<div class="main-contain">
     <%@include file="../header.jsp"%>
-    <div>
-        标题: ${noticeModel.title}
+    <div class="content-div">
+    <div class="content-title">
+        <h2>标题: ${noticeModel.title}</h2>
+        <c:if test="${sessionScope.user != null && sessionScope.user.id == noticeModel.uid}">
+            <span>
+                <a href="/noticeService/deleteNotice/${noticeModel.id}">删除</a>
+                <a href="/noticeService/preUpdateNotice/${noticeModel.id}">编辑</a>
+            </span>
+        </c:if>
     </div>
-
-    <c:if test="${sessionScope.user != null && sessionScope.user.id == noticeModel.uid}">
-        <div>
-            <a href="/noticeService/deleteNotice/${noticeModel.id}">删除</a>
-            <a href="/noticeService/preUpdateNotice/${noticeModel.id}">编辑</a>
-        </div>
-    </c:if>
-    <div>
-        内容：${noticeModel.content}
+    <div class="content">
+        <span>内容：${noticeModel.content}</span>
     </div>
-    <div>
-        附件：
+    <div class="content-file">
         <c:forEach items="${fileMap.keySet()}" var="key">
-            <p/>
-
+            附件
             <form action="/fileService/download" method="post">
                 <input name="filename" value="${fileMap.get(key)}" type="hidden"/>
                 <input name="path" value="${key}" type="hidden"/>
@@ -43,6 +39,6 @@
     </div>
 </div>
 <%@include file="../footer.jsp"%>
-</body>
 <script type="text/javascript" src="/resources/js/notice.js"></script>
+</body>
 </html>

@@ -5,31 +5,36 @@
   Time: 11:55
   To change this template use File | Settings | File Templates.
 --%>
+<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>发布公告</title>
-  <script type="text/javascript" src="/resources/js/jquery/jquery-1.11.0.min.js"></script>
-  <script type="text/javascript" src="/resources/js/notice.js"></script>
+  <link href="/resources/css/content.css" rel="stylesheet" type="text/css"/>
 </head>
 <body class="sticky-header-on tablet-sticky-header">
 
   <%@include file="../header.jsp"%>
-    <form id="notice_publish" action="/noticeService/publishNotice" method="post" enctype="multipart/form-data">
-      <div>
-        <div>标题</div>
-        <input class="title" type="text" name="title" value="${notice.title}"/>
-      </div>
-      <div>
-        <div>内容</div>
-        <textarea class="notice_content" name="content" value="${notice.content}"></textarea>
-      </div>
-      <div id="upload">
-        <%--<input type="file" name="files"/>--%>
-      </div>
-      <input type="button" id="btn_add" value="添加附件" >
-      <input type="submit" value="上传" >
-    </form>
+    <div class="content-div">
+        <form id="notice_publish" action="/noticeService/publishNotice" method="post" enctype="multipart/form-data">
+          <div class="content-title">
+            <h2>新闻标题</h2>
+          </div>
+          <input class="title" type="text" name="title" value="${notice.title}"/>
+          <div class="content-title">
+            <h2>新闻内容</h2>
+          </div>
+          <div class="content">
+            <textarea class="notice_content" name="content" value="${notice.content}"></textarea>
+          </div>
+          <div id="upload">
+            <%--<input type="file" name="files"/>--%>
+          </div>
+          <input type="button" id="btn_add" value="添加附件" >
+          <input type="submit" value="发布" >
+        </form>
+    </div>
   <%@include file="../footer.jsp"%>
+  <script type="text/javascript" src="/resources/js/notice.js"></script>
 </body>
 </html>
