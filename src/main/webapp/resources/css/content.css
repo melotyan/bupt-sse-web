@@ -3,7 +3,7 @@
     width: 600px;
     border: 0;
     resize: both;
-    min-height: 350px;
+    min-height: 400px;
     overflow: auto;
 }
 .captcha-tr td:last-child input, img {
@@ -92,4 +92,8 @@
 }
 .content > textarea{
     height: 500px;
+}
+
+#change-info, #change-pw {
+    margin: 0 200px 0 200px;
 }

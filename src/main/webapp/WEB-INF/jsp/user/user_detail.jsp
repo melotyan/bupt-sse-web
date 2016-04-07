@@ -13,7 +13,7 @@
 </head>
 <body class="sticky-header-on tablet-sticky-header">
 <%@include file="../header.jsp" %>
-<div class="main-content">
+<div class="login-div">
     <form action="/userService/editPersonalInfo" method="post">
         <table class="register-table">
             <tr>
@@ -37,11 +37,11 @@
                 <td><input type="text" name="address" value="${sessionScope.user.address}"/></td>
             </tr>
             <tr>
-                <td><input type="submit" value="修改"/></td>
+                <td colspan="2"><input id="change-info" type="submit" value="修改"/></td>
             </tr>
         </table>
     </form>
 </div>
-<%--<%@include file="../footer.jsp" %>--%>
+<%@include file="../footer.jsp" %>
 </body>
 </html>

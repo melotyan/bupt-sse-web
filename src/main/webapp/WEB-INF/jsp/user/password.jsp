@@ -14,7 +14,7 @@
 <body class="sticky-header-on tablet-sticky-header">
 
 <%@include file="../header.jsp" %>
-<div class="main-content">
+<div class="login-div">
     <form action="/userService/changePassword" method="post">
         <table class="register-table">
             <tr>
@@ -30,11 +30,11 @@
                 <td><input type="password" name="newPassword"/></td>
             </tr>
             <tr>
-                <td><input type="submit" value="提交"/></td>
+                <td colspan="2"><input id="change-pw" type="submit" value="提交"/></td>
             </tr>
         </table>
     </form>
 </div>
-<%--<%@include file="../footer.jsp" %>--%>
+<%@include file="../footer.jsp" %>
 </body>
 </html>
