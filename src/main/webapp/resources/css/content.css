@@ -1,8 +1,9 @@
 .login-div {
     margin: 0 auto;
     width: 600px;
-    border: 1px solid lightgray;
+    border: 0;
     resize: both;
+    min-height: 350px;
     overflow: auto;
 }
 .captcha-tr td:last-child input, img {
@@ -19,7 +20,9 @@
     font-weight: 900;
     text-align: right;
     font-family: "microsoft yahei", serif, sans-serif;
+    background: url(/resources/img/body-background.jpg) repeat;
 }
+
 .login-table tr td:first-child {
     text-align: right;
 }
@@ -28,9 +31,12 @@
     margin: 0 80px;
     background-color: #e2eaf2;
     border: none;
+
 }
+
 .register-table {
     font-family: "microsoft yahei", serif, sans-serif;
+    background: url(/resources/img/body-background.jpg) repeat;
 }
 .register-table tr td:first-child {
     text-align: right;
@@ -41,14 +47,14 @@
     padding: 5px 20px;
     margin: 0 100px;
 }
+
 .list-div {
     text-align: left;
     font-family: serif, sans-serif;
     font-size: 25px;
     width: 1000px;
-    border: 1px solid darkgray;
     margin: 0 auto;
-
+    min-height: 400px;
 }
 .list-detail {
     border-color: lightgray;
@@ -56,10 +62,14 @@
     padding: 0;
     margin: 0;
 }
+.list-detail:hover {
+    background-color: yellow;
+}
 .content-div {
     width: 1000px;
     border: 1px solid darkgray;
     margin: 0 auto;
+    min-height: 400px;
 }
 .content-title {
     text-align: center;
@@ -77,15 +87,9 @@
     float: right;
     line-height: 200%;
 }
+.content {
+    min-height: 400px;
+}
 .content > textarea{
     height: 500px;
-}
-input:focus {
-    background-color: gray;
-}
-input:hover {
-    background: yellowgreen;
-}
-input:active {
-    background: #ffff00;
 }
