@@ -16,27 +16,31 @@
     <%@include file="../header.jsp"%>
     <div class="content-div">
     <div class="content-title">
-        <h2>标题: ${noticeModel.title}</h2>
+        <h2>新闻标题</h2>
         <c:if test="${sessionScope.user != null && sessionScope.user.id == noticeModel.uid}">
             <span>
-                <a href="/noticeService/deleteNotice/${noticeModel.id}">删除</a>
-                <a href="/noticeService/preUpdateNotice/${noticeModel.id}">编辑</a>
+                <strong><a href="/noticeService/deleteNotice/${noticeModel.id}">删除</a></strong>
+                <strong><a href="/noticeService/preUpdateNotice/${noticeModel.id}">编辑</a></strong>
             </span>
         </c:if>
     </div>
+    <p>${noticeModel.title}</p>
+    <div class="content-title"><h2>新闻内容</h2></div>
     <div class="content">
-        <span>内容：${noticeModel.content}</span>
+        <span>${noticeModel.content}</span>
     </div>
-    <div class="content-file">
-        <c:forEach items="${fileMap.keySet()}" var="key">
-            附件
-            <form action="/fileService/download" method="post">
-                <input name="filename" value="${fileMap.get(key)}" type="hidden"/>
-                <input name="path" value="${key}" type="hidden"/>
-                <a href="#" onclick="this.parentNode.submit()">${fileMap.get(key)}</a>
-            </form>
-        </c:forEach>
-    </div>
+    <c:if test="${fileMap.keySet() != null}">
+        <div class="content-title"><h2>附件</h2></div>
+        <div class="content-file">
+            <c:forEach items="${fileMap.keySet()}" var="key">
+                <form action="/fileService/download" method="post">
+                    <input name="filename" value="${fileMap.get(key)}" type="hidden"/>
+                    <input name="path" value="${key}" type="hidden"/>
+                    <a href="#" onclick="this.parentNode.submit()">${fileMap.get(key)}</a>
+                </form>
+            </c:forEach>
+        </div>
+    </c:if>
 </div>
 <%@include file="../footer.jsp"%>
 <script type="text/javascript" src="/resources/js/notice.js"></script>

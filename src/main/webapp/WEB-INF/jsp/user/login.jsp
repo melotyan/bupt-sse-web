@@ -33,7 +33,7 @@
           </tr>
           <tr>
             <td colspan="2"><input type="submit" value="登陆"/>
-                <input type="button" value="注册" id="register-button"/>
+                <a href="/userService/preRegister"><input type="button" value="注册" id="register-button"/></a>
             </td>
           </tr>
       </table>
