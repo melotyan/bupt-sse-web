@@ -35,15 +35,13 @@ $("#btn-notice").click(function() {
     $.ajax({
         url: "/fileService/uploadFiles",
         type: "POST",
-        dataType: "text",
+        dataType: "json",
         contentType: false,
         processData: false,
-        async: false,
         cache: false,
         data: formData,
         success: function(strVal) {
-            $("#file-urls").val(strVal);
-            console.log(strVal);
+            $("#file-urls").val(JSON.stringify(strVal));
             publish();
         },
         error: function(err) {
