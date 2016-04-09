@@ -53,17 +53,6 @@ function publish() {
     })
 }
 
-function fileDownload() {
-    $.ajax({
-        type: "POST",
-        url: "/fileService/download",
-        dataType: "json",
-        data: $("#file-download-form").serialize(),
-        success: function(data) {
-        }
-    });
-}
-
 function delNotice(url) {
     $.get(url,
     function(data) {
@@ -90,7 +79,7 @@ $("#btn-edit-notice").click(function(){
             }
         }
     })
-    })
+})
 
 
 

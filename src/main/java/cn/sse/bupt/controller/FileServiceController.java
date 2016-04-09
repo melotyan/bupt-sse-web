@@ -30,7 +30,7 @@ import java.util.Map;
 @RequestMapping("fileService")
 public class FileServiceController {
     private final static Logger LOGGER = LoggerFactory.getLogger(FileServiceController.class);
-    private final  String FILE_PATH = "D:/file/";
+    private final  String FILE_PATH = "/resources/file/";
     private Gson gson = new Gson();
 
     @Autowired

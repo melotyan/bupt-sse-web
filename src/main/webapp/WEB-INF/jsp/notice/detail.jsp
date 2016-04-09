@@ -33,15 +33,12 @@
         <div class="content-title"><h2>附件</h2></div>
         <div class="content-file">
             <c:forEach items="${fileMap.keySet()}" var="key">
-                <form id="file-download-form">
-                    <input name="filename" value="${fileMap.get(key)}" type="hidden"/>
-                    <input name="path" value="${key}" type="hidden"/>
-                    <a href="#" onclick="fileDownload()">${fileMap.get(key)}</a>
-                </form>
+                <a href="/resources/css/content.css" download="abc.css">${fileMap.get(key)}</a>
             </c:forEach>
         </div>
     </c:if>
 </div>
+    <div><iframe style="display:none" id="iiframe" name="submitFrame"></iframe></div>
 <%@include file="../footer.jsp"%>
 <script type="text/javascript" src="/resources/js/notice.js"></script>
 </body>
