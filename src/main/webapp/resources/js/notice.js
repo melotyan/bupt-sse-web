@@ -14,20 +14,6 @@ function del(o){
     $("#div_" + o).remove();
 }
 
-//$(".list-detail:even").css("background", "#FBF5D9");
-//$(".list-detail:odd").css("background", "#F2F6F9");
-//$(".list-detail:even").hover(function() {
-//    $('.list-detail').css('background', 'yellow');
-//}, function() {
-//    $(".list-detail:even").css("background", "#FBF5D9");
-//});
-//$(".list-detail:odd").hover(function() {
-//    $('.list-detail:odd').css('background', 'yellow');
-//}, function() {
-//    $(".list-detail:odd").css("background", "#F2F6F9");
-//})
-
-
 $("#btn-notice").click(function() {
     $(".del-btn").remove();
     $("#btn_add").remove();
@@ -66,6 +52,45 @@ function publish() {
         }
     })
 }
+
+function fileDownload() {
+    $.ajax({
+        type: "POST",
+        url: "/fileService/download",
+        dataType: "json",
+        data: $("#file-download-form").serialize(),
+        success: function(data) {
+        }
+    });
+}
+
+function delNotice(url) {
+    $.get(url,
+    function(data) {
+        if (data.result == "SUCCESS") {
+            alert("删除成功");
+            location.href="/noticeService/listAllNotices/1";
+        }else
+            alert(data.map.msg);
+        }
+    )
+}
+
+$("#btn-edit-notice").click(function(){
+    $.ajax({
+        url: "/noticeService/updateNotice",
+        type: "post",
+        data: $("#eidt-notice-form").serialize(),
+        success: function(data) {
+            if (data.result == "SUCCESS") {
+                alert("修改成功");
+                location.href="/noticeService/listAllNotices/1";
+            } else {
+                alert(data.map.msg);
+            }
+        }
+    })
+    })
 
 
 

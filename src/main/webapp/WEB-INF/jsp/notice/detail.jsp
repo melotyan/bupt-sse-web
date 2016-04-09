@@ -17,9 +17,9 @@
     <div class="content-div">
     <div class="content-title">
         <h2>新闻标题</h2>
-        <c:if test="${sessionScope.user != null && sessionScope.user.id == noticeModel.uid}">
+        <c:if test="${sessionScope.user != null && sessionScope.user.userType != 3}">
             <span>
-                <strong><a href="/noticeService/deleteNotice/${noticeModel.id}">删除</a></strong>
+                <strong><a href="#" onclick="delNotice('/noticeService/deleteNotice/${noticeModel.id}')">删除</a></strong>
                 <strong><a href="/noticeService/preUpdateNotice/${noticeModel.id}">编辑</a></strong>
             </span>
         </c:if>
@@ -33,10 +33,10 @@
         <div class="content-title"><h2>附件</h2></div>
         <div class="content-file">
             <c:forEach items="${fileMap.keySet()}" var="key">
-                <form action="/fileService/download" method="post">
+                <form id="file-download-form">
                     <input name="filename" value="${fileMap.get(key)}" type="hidden"/>
                     <input name="path" value="${key}" type="hidden"/>
-                    <a href="#" onclick="this.parentNode.submit()">${fileMap.get(key)}</a>
+                    <a href="#" onclick="fileDownload()">${fileMap.get(key)}</a>
                 </form>
             </c:forEach>
         </div>

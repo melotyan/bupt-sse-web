@@ -90,7 +90,7 @@
     <div class="content">
       <div class="text">喵~，这个页面跟程序猿私奔了~</div>
       <div class="buttonwrap">
-        <a class="button guest" id="guest" title="" href="http://egovernment.melotyan.com/"><b>去首页看看</b></a>
+        <a class="button guest" id="guest" title="" href="/"><b>去首页看看</b></a>
         <a class="button report" id="report" title="" href="egovernment_sse@126.com"><b>报告管理员</b></a>
       </div>
     </div>

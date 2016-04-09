@@ -104,7 +104,7 @@
 #change-info, #change-pw {
     margin: 0 200px 0 200px;
 }
-#btn-notice {
+#btn-notice,  #btn-edit-notice{
     margin: 0 450px 0;
     font-weight: 900;
     font-size: 20px;
@@ -115,6 +115,6 @@
     text-shadow: 1px 1px 1px rgba(255,255,255, .22);
     border-radius: 20px;
 }
-#but-notice:hover {
-    background-color: #ffff00;
-}
+/*#btn-edit-notice {*/
+    /**/
+/*}*/
