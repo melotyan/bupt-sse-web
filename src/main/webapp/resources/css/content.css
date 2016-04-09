@@ -62,14 +62,20 @@
     padding: 0;
     margin: 0;
 }
+.list-detail:nth-child(even){
+    background-color:#FBF5D9;
+}
+.list-detail:nth-child(odd) {
+    background-color:#F2F6F9;
+}
 .list-detail:hover {
-    background-color: yellow;
+    background-color: lightskyblue;
 }
 .content-div {
     width: 1000px;
-    border: 1px solid darkgray;
     margin: 0 auto;
     min-height: 400px;
+    background: url(/resources/img/body-background.jpg) repeat;
 }
 .content-title {
     text-align: center;
@@ -89,6 +95,7 @@
 }
 .content {
     min-height: 400px;
+    background: url(/resources/img/body-background.jpg) repeat;
 }
 .content > textarea{
     height: 500px;
@@ -96,4 +103,18 @@
 
 #change-info, #change-pw {
     margin: 0 200px 0 200px;
+}
+#btn-notice {
+    margin: 0 450px 0;
+    font-weight: 900;
+    font-size: 20px;
+    width: 100px;
+    background-color: dodgerblue;
+    border: 0;
+    height: 30px;
+    text-shadow: 1px 1px 1px rgba(255,255,255, .22);
+    border-radius: 20px;
+}
+#but-notice:hover {
+    background-color: #ffff00;
 }

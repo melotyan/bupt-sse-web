@@ -16,23 +16,29 @@
 
   <%@include file="../header.jsp"%>
     <div class="content-div">
-        <form id="notice_publish" action="/noticeService/publishNotice" method="post" enctype="multipart/form-data">
+        <form id="notice_publish">
           <div class="content-title">
             <h2>新闻标题</h2>
           </div>
-          <input class="title" type="text" name="title" value="${notice.title}"/>
+          <input type="text" name="title"/>
           <div class="content-title">
             <h2>新闻内容</h2>
           </div>
           <div class="content">
-            <textarea class="notice_content" name="content" value="${notice.content}"></textarea>
+            <textarea name="content"></textarea>
           </div>
-          <div id="upload">
-            <%--<input type="file" name="files"/>--%>
+          <input type="hidden" name="files" id="file-urls"/>
+          <div class="content-title">
+            <h2>添加附件</h2>
           </div>
-          <input type="button" id="btn_add" value="添加附件" >
-          <input type="submit" value="发布" >
         </form>
+        <div class="content-file">
+          <form id="upload-form" enctype="multipart/form-data">
+            <input type="hidden" name="type" value="1"/>
+          </form>
+          <input type="button" id="btn_add" value="添加附件"/>
+        </div>
+        <input type="button" id="btn-notice" value="发  布" >
     </div>
   <%@include file="../footer.jsp"%>
   <script type="text/javascript" src="/resources/js/notice.js"></script>

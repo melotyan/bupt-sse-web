@@ -60,9 +60,11 @@
           <li>
             <span>招商引资</span>
             <ul>
-              <li><a href="event-calendar.html">招标信息</a></li>
+              <li><a href="/inutatccmOfTenderService/listTenderInfo/1">招标信息</a></li>
               <li><a href="event-post-v1.html">竞标</a></li>
-              <li><a href="event-post-v2.html">发布招标信息</a></li>
+              <c:if test="${not empty sessionScope.user && sessionScope.user.userType != 3}">
+                <li><a href="/inutatccmOfTenderService/preCreateTenderInfo">发布招标信息</a></li>
+              </c:if>
             </ul>
           <li>
             <span>文件下载</span>
