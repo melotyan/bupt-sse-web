@@ -9,14 +9,16 @@
 <html>
 <head>
     <title>招标项目列表</title>
+    <link href="/resources/css/content.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <%@include file="../header.jsp"%>
 <div class="list-div">
   <c:forEach items="${list}" var="tender">
-    <span><a href="/inutatccmOfTenderService/viewTenderDetail/${tender.id}">${tender.title}</a></span>
+    <div class="list-detail"><a href="/inutatccmOfTenderService/viewTenderDetail/${tender.id}">${tender.title}</a></div>
   </c:forEach>
 </div>
 <%@include file="../footer.jsp"%>
+<script src="/resources/js/tender.js" type="text/javascript"></script>
 </body>
 </html>

@@ -50,11 +50,11 @@
             <a href="/"><i class="icons icon-home"></i></a>
           <!-- Pages -->
           <li>
-            <span>政府新闻</span>
+            <span>通知公告</span>
               <ul>
-                <li><a href="/noticeService/listAllNotices/1">查看新闻</a></li>
+                <li><a href="/noticeService/listAllNotices/1">查看公告</a></li>
                 <c:if test="${not empty sessionScope.user && sessionScope.user.userType != 3}">
-                  <li><a href="/noticeService/prePublishNotice">发布新闻</a></li>
+                  <li><a href="/noticeService/prePublishNotice">发布公告</a></li>
                 </c:if>
               </ul>
           <li>
