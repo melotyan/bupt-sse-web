@@ -16,7 +16,7 @@
     <%@include file="../header.jsp"%>
     <div class="content-div">
     <div class="content-title">
-        <h2>新闻标题</h2>
+        <h2>公告标题</h2>
         <c:if test="${sessionScope.user != null && sessionScope.user.userType != 3}">
             <span>
                 <strong><a href="#" onclick="delNotice('/noticeService/deleteNotice/${noticeModel.id}')">删除</a></strong>
@@ -25,7 +25,7 @@
         </c:if>
     </div>
     <p>${noticeModel.title}</p>
-    <div class="content-title"><h2>新闻内容</h2></div>
+    <div class="content-title"><h2>公告内容</h2></div>
     <div class="content">
         <span>${noticeModel.content}</span>
     </div>
@@ -33,12 +33,11 @@
         <div class="content-title"><h2>附件</h2></div>
         <div class="content-file">
             <c:forEach items="${fileMap.keySet()}" var="key">
-                <a href="/resources/css/content.css" download="abc.css">${fileMap.get(key)}</a>
+                <p><a href="${key}" download="${fileMap.get(key)}">${fileMap.get(key)}</a></p>
             </c:forEach>
         </div>
     </c:if>
 </div>
-    <div><iframe style="display:none" id="iiframe" name="submitFrame"></iframe></div>
 <%@include file="../footer.jsp"%>
 <script type="text/javascript" src="/resources/js/notice.js"></script>
 </body>

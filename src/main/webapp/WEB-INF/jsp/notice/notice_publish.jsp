@@ -18,11 +18,11 @@
     <div class="content-div">
         <form id="notice_publish">
           <div class="content-title">
-            <h2>新闻标题</h2>
+            <h2>公告标题</h2>
           </div>
           <input type="text" name="title"/>
           <div class="content-title">
-            <h2>新闻内容</h2>
+            <h2>公告内容</h2>
           </div>
           <div class="content">
             <textarea name="content"></textarea>
