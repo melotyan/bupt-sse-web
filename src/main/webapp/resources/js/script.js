@@ -1,8 +1,10 @@
 $(document).ready(function(){
 	
 	"use strict";
-	
-	
+
+	var element = $(".content");
+	var temp = element.text().replace(/\n/g, '<br/>');
+	element.html(temp);
 	/* Global Variables */
 	
 	var window_w = $(window).width(); // Window Width
