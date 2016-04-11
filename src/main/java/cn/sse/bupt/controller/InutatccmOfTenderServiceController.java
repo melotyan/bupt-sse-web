@@ -75,8 +75,10 @@ public class InutatccmOfTenderServiceController extends BaseController {
     @RequestMapping("preEditTenderInfo/{id}")
     public ModelAndView preEditTenderInfo(@PathVariable Integer id) {
         InutatccmOfTenderModel inutatccmOfTenderModel = inutatccmOfTenderService.viewTenderDetail(id);
-        if (inutatccmOfTenderModel == null)
+        if (inutatccmOfTenderModel == null) {
             LOGGER.info("no such tender id:{} in preEdit", id);
+            return new ModelAndView("common/404");
+        }
         ModelAndView modelAndView = new ModelAndView("tender/edit");
         modelAndView.addObject("tender", inutatccmOfTenderModel);
         modelAndView.addObject("fileMap", gson.fromJson(inutatccmOfTenderModel.getFileUrl(), new TypeToken<Map<String, String>>(){}.getType()));
@@ -96,8 +98,12 @@ public class InutatccmOfTenderServiceController extends BaseController {
 
     @RequestMapping("viewTenderDetail/{id}")
     public ModelAndView viewTenderDetail(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView("tender/detail");
         InutatccmOfTenderModel inutatccmOfTenderModel = inutatccmOfTenderService.viewTenderDetail(id);
+        if (inutatccmOfTenderModel == null) {
+            LOGGER.info("tender:{} is not exists", id);
+            return new ModelAndView("common/404");
+        }
+        ModelAndView modelAndView = new ModelAndView("tender/detail");
         modelAndView.addObject("tender", inutatccmOfTenderModel);
         modelAndView.addObject("fileMap", gson.fromJson(inutatccmOfTenderModel.getFileUrl(), new TypeToken<Map<String, String>>(){}.getType()));
         return modelAndView;

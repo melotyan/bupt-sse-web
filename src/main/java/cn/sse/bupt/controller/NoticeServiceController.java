@@ -62,6 +62,8 @@ public class NoticeServiceController extends BaseController {
     @RequestMapping("viewNoticeDetail/{id}")
     public ModelAndView viewNotice(@PathVariable Integer id) {
         NoticeModel noticeModel = noticeService.findNoticeById(id);
+        if (noticeModel == null)
+            return new ModelAndView("common/404");
         ModelAndView mav = new ModelAndView("notice/detail", "noticeModel", noticeModel);
         mav.addObject("fileMap", gson.fromJson(noticeModel.getFileUrls(), new TypeToken<Map<String, String>>(){}.getType()));
         LOGGER.info("view notice detail success, notice id:{}", id);
@@ -110,7 +112,7 @@ public class NoticeServiceController extends BaseController {
     public ModelAndView preUpdateNotice(@PathVariable Integer id) {
         NoticeModel noticeModel = noticeService.findNoticeById(id);
         if (noticeModel == null)
-            return new ModelAndView("notice/notice_publish");
+            return new ModelAndView("common/404");
         ModelAndView mav = new ModelAndView("notice/edit", "notice", noticeModel);
         Map<String, String> map = gson.fromJson(noticeModel.getFileUrls(), new TypeToken<Map<String, String>>(){}.getType());
         mav.addObject("fileMap", map);
