@@ -9,13 +9,15 @@
 <html>
 <head>
     <title>意见详情</title>
+    <link rel="stylesheet" href="/resources/css/content.css" type="text/css"/>
 </head>
 <body class="sticky-header-on tablet-sticky-header">
   <%@include file="../header.jsp" %>
-  <div>
-  标题：${suggestion.title}
-  <p/>
-  内容: ${suggestion.content}
+  <div class="content-div">
+    <div class="content-title"><h2>建议标题</h2></div>
+    <p>${suggestion.title}</p>
+    <div class="content-title"><h2>建议内容</h2></div>
+    <div class="content">${suggestion.content}</div>
   </div>
   <%@include file="../footer.jsp"%>
 </body>

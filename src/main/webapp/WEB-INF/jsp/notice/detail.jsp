@@ -27,7 +27,7 @@
     <p>${noticeModel.title}</p>
     <div class="content-title"><h2>公告内容</h2></div>
     <div class="content">
-        <span>${noticeModel.content}</span>
+        ${noticeModel.content}
     </div>
     <c:if test="${fileMap.keySet() != null}">
         <div class="content-title"><h2>附件</h2></div>
