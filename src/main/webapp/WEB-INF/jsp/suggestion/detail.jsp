@@ -17,7 +17,7 @@
     <div class="content-title"><h2>建议标题</h2></div>
     <p>${suggestion.title}</p>
     <div class="content-title"><h2>建议内容</h2></div>
-    <div class="content">${suggestion.content}</div>
+    <div class="content" id="detail-text">${suggestion.content}</div>
   </div>
   <%@include file="../footer.jsp"%>
 </body>

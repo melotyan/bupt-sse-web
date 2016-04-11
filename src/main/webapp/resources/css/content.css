@@ -71,6 +71,9 @@
 .list-detail:hover {
     background-color: lightskyblue;
 }
+.list-detail span {
+    float: right;
+}
 .content-div {
     width: 1000px;
     margin: 0 auto;
@@ -79,6 +82,7 @@
 }
 .content-title {
     text-align: center;
+    border-radius: 10px;
     font-size: 20px;
     height: 45px;
     padding: 0;

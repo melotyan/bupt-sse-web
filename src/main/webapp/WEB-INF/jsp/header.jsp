@@ -115,7 +115,7 @@
           <li>
             <span>办事指南</span>
             <ul>
-              <li><a href="features-typography.html">竞标申请流程</a></li>
+              <li><a href="/tenderGuide">竞标申请流程</a></li>
               <li><a href="features-shortcodes.html">意见反馈流程</a></li>
               <li><a href="features-shortcodes.html">投诉举报流程</a></li>
             </ul>
@@ -125,18 +125,19 @@
               <li><a href="/suggestionService/listSuggestions/1">群众的心声</a></li>
               <li><a href="blog-v1.html">给领导写信</a></li>
               <li><a href="blog-v2.html">举报违法违纪行为</a></li>
-              <li><a href="blog-fullwidth.html">提出政府工作建议</a></li>
-              <li><span>提出政府工作建议</span>
-                <ul>
-                  <li><a href="blog-single-sidebar.html">With sidebar</a></li>
-                  <li><a href="blog-single-fullwidth.html">Full width</a></li>
-                </ul>
+              <li><a href="/suggestionService/preMakeSuggestion">提出建议</a></li>
+              <%--<li><span>提出政府工作建议</span>--%>
+                <%--<ul>--%>
+                  <%--<li><a href="blog-single-sidebar.html">With sidebar</a></li>--%>
+                  <%--<li><a href="blog-single-fullwidth.html">Full width</a></li>--%>
+                <%--</ul>--%>
             </ul>
           <li>
             <span>个人中心</span>
             <ul>
-              <li><a href="/userService/getPersonalInfo">个人信息</a></li>
+              <li><a href="/userService/getPersonalInfo">我的信息</a></li>
               <li><a href="/userService/preChangePassword">修改密码</a></li>
+              <li><a href="">我的信箱</a></li>
             </ul>
           <%--<li class="donate-button ">--%>
             <%--<a href="#">Donate Today</a>--%>

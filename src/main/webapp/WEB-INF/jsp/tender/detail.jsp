@@ -25,7 +25,7 @@
   </div>
   <p>${tender.title}</p>
   <div class="content-title"><h2>招标项目具体内容</h2></div>
-  <div class="content">
+  <div class="content" id="detail-text">
     ${tender.content}
   </div>
   <c:if test="${fileMap.keySet() != null}">

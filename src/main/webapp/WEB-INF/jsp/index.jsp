@@ -3,11 +3,11 @@
 <head>
  <title>主页</title>
  <link href="/resources/css/style.css" rel="stylesheet" type="text/css"/>
+ <link href="/resources/css/content.css" rel="stylesheet" type="text/css"/>
 </head>
 <body class="sticky-header-on tablet-sticky-header">
  <%@include file="header.jsp"%>
-
- <div class="index-float">
+ <div class="content-div">
   <p/>
   <a href="/userService/preLogin">登陆页面</a>
   <p/>
@@ -21,8 +21,6 @@
   <p/>
   <a href="/noticeService/prePublishNotice">发布公告</a>
  </div>
-
-
  <%@include file="footer.jsp"%>
 </body>
 </html>

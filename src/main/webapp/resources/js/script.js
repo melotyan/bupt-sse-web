@@ -2,7 +2,7 @@ $(document).ready(function(){
 	
 	"use strict";
 
-	var element = $(".content");
+	var element = $("#detail-text");
 	var temp = element.text().replace(/\n/g, '<br/>');
 	element.html(temp);
 	/* Global Variables */
