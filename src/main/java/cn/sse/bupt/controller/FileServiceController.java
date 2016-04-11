@@ -4,6 +4,7 @@ import cn.sse.bupt.enums.FileClass;
 import cn.sse.bupt.model.FileModel;
 import cn.sse.bupt.model.ResultModel;
 import cn.sse.bupt.service.FileService;
+import cn.sse.bupt.util.RequestUtil;
 import com.google.gson.Gson;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -14,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,7 +33,7 @@ import java.util.Map;
 @RequestMapping("fileService")
 public class FileServiceController {
     private final static Logger LOGGER = LoggerFactory.getLogger(FileServiceController.class);
-    private final  String FILE_PATH = "/resources/file/";
+    private final String FILE_PATH = "/resources/file/";
     private Gson gson = new Gson();
 
     @Autowired
@@ -45,6 +48,7 @@ public class FileServiceController {
     public String uploadFiles(@RequestParam("files") MultipartFile[] files,
                              @RequestParam(value = "type", defaultValue = "0") int type) {
         Map<String, String> fileMap = new HashMap<String, String>();
+        String savePath = RequestUtil.getRequest().getSession().getServletContext().getRealPath(FILE_PATH);
         for (MultipartFile file : files) {
             if (file.isEmpty()) {
                 LOGGER.info("file is Empty");
@@ -53,20 +57,22 @@ public class FileServiceController {
             String filename = file.getOriginalFilename();
             String extensionName = filename.substring(filename.lastIndexOf("."));
             String saveName = System.currentTimeMillis()  + extensionName;
-            File localFile = new File(FILE_PATH, saveName);
-            if (!localFile.exists())
+            File localFile = new File(savePath, saveName);
+            if (!localFile.exists()) {
+                LOGGER.info("make a new director");
                 localFile.mkdirs();
+            }
             try {
                 file.transferTo(localFile);
             } catch (IOException e) {
-                LOGGER.error(e.toString());
+                LOGGER.error("filer upload error:{}", e.toString());
             }
-            fileMap.put(FILE_PATH + localFile.getName(), filename);
-            LOGGER.info("upload file success, filename:{}, file path:{}", filename, FILE_PATH + localFile.getName());
+            fileMap.put(FILE_PATH + saveName, filename);
+            LOGGER.info("upload file success, filename:{}, file path:{}", filename, FILE_PATH + saveName);
             FileModel fileModel = new FileModel();
             fileModel.setTitle(filename);
             fileModel.setNid(type);
-            fileModel.setUrl(FILE_PATH + localFile.getName());
+            fileModel.setUrl(FILE_PATH + saveName);
             fileService.saveFile(fileModel);
         }
         String fileUrls = gson.toJson(fileMap);
