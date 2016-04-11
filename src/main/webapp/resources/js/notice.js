@@ -1,6 +1,7 @@
 /**
  * Created by hao.yan on 2016/1/7.
  */
+
 j = 1;
 $("#btn_add").click(function(){
     var div = $("<div></div>");
@@ -31,7 +32,7 @@ $("#btn-notice").click(function() {
             publish();
         },
         error: function(err) {
-            alert("文件上传失败");
+            alert("文件上传失败,请先登陆");
         }
     });
 
@@ -80,6 +81,8 @@ $("#btn-edit-notice").click(function(){
         }
     })
 })
+
+
 
 
 
