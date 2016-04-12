@@ -96,6 +96,7 @@
 .content-title span {
     float: right;
     line-height: 200%;
+    color: red;
 }
 .content {
     min-height: 400px;
@@ -108,7 +109,7 @@
 #change-info, #change-pw {
     margin: 0 200px 0 200px;
 }
-#btn-notice,  #btn-edit-notice{
+#btn-notice,  #btn-edit-notice, #btn-competitive{
     margin: 0 450px 0;
     font-weight: 900;
     font-size: 20px;
