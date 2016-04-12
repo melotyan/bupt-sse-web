@@ -61,7 +61,6 @@
             <span>招商引资</span>
             <ul>
               <li><a href="/inutatccmOfTenderService/listTenderInfo/1">招标信息</a></li>
-              <li><a href="event-post-v1.html">竞标</a></li>
               <c:if test="${not empty sessionScope.user && sessionScope.user.userType != 3}">
                 <li><a href="/inutatccmOfTenderService/preCreateTenderInfo">发布招标信息</a></li>
               </c:if>
@@ -138,6 +137,7 @@
               <li><a href="/userService/getPersonalInfo">我的信息</a></li>
               <li><a href="/userService/preChangePassword">修改密码</a></li>
               <li><a href="">我的信箱</a></li>
+              <li><a href="/tenderService/listMyCompetitive">我竞标的项目</a></li>
             </ul>
           <%--<li class="donate-button ">--%>
             <%--<a href="#">Donate Today</a>--%>

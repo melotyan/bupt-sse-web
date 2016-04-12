@@ -15,4 +15,9 @@ public class HomeController {
     public ModelAndView home() {
         return new ModelAndView("index");
     }
+
+    @RequestMapping("tenderGuide")
+    public ModelAndView tenderGuide() {
+        return new ModelAndView("tender/tender-guide");
+    }
 }

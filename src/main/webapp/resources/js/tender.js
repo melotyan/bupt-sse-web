@@ -80,3 +80,35 @@ $("#btn-edit-notice").click(function(){
         }
     })
 })
+
+$("#btn-competitive").click(function() {
+    var formData = new FormData($("#upload-form")[0]);
+    $.ajax({
+        url: "/fileService/uploadFiles",
+        type: "POST",
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        cache: false,
+        data: formData,
+        success: function (strVal) {
+            $("#fileUrl").val(JSON.stringify(strVal));
+            competitive();
+        },
+        error: function (err) {
+            alert("文件上传失败");
+        }
+    })
+})
+
+function competitive() {
+    $.ajax({
+        url: "/tenderService/competitiveTender",
+        data: $("#competitive-form").serialize(),
+        type: "post",
+        success: function(data) {
+            alert(data.map.msg);
+        }
+    })
+}
+
