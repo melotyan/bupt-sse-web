@@ -31,7 +31,6 @@
     margin: 0 80px;
     background-color: #e2eaf2;
     border: none;
-
 }
 
 .register-table {
@@ -108,8 +107,19 @@
     height: 500px;
 }
 
-#change-info, #change-pw {
+#change-info, #change-pw{
+    padding: 5px 20px;
     margin: 0 200px 0 200px;
+    border: 0;
+    background-color: #e2eaf2;
+}
+#btn-register {
+    padding: 5px 20px;
+    margin: 0 100px;
+    border: 0;
+    background: #e2eaf2;;
+    border-top-color: #7cc5f8;
+    border-bottom-color: #579dd9;
 }
 #btn-notice,  #btn-edit-notice, #btn-competitive{
     margin: 0 450px 0;

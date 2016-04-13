@@ -10,11 +10,12 @@
 <head>
     <title>用户信息</title>
     <link rel="stylesheet" href="/resources/css/content.css" type="text/css"/>
+    <link href="/resources/img/favicon.gif" rel="shortcut icon">
 </head>
 <body class="sticky-header-on tablet-sticky-header">
 <%@include file="../header.jsp" %>
 <div class="login-div">
-    <form action="/userService/editPersonalInfo" method="post">
+    <form id="person-info-form">
         <table class="register-table">
             <tr>
                 <td>用户名：</td>
@@ -37,11 +38,12 @@
                 <td><input type="text" name="address" value="${sessionScope.user.address}"/></td>
             </tr>
             <tr>
-                <td colspan="2"><input id="change-info" type="submit" value="修改"/></td>
+                <td colspan="2"><input id="change-info" type="button" onclick="changeInfo()" value="修改"/></td>
             </tr>
         </table>
     </form>
 </div>
 <%@include file="../footer.jsp" %>
+<script src="/resources/js/user.js" type="text/javascript"></script>
 </body>
 </html>

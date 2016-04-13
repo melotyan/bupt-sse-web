@@ -21,4 +21,61 @@ function chgUrl(url) {
     return url;
 }
 
+function changeInfo() {
+    $.ajax({
+        url: "/userService/editPersonalInfo",
+        type: "post",
+        data: $("#person-info-form").serialize(),
+        success: function(data) {
+            alert(data.map.msg);
+        }
+    })
+}
+
+function changePW() {
+    $.ajax({
+        url: "/userService/changePassword",
+        type: "post",
+        data: $("#password-form").serialize(),
+        success: function(data) {
+            alert(data.map.msg);
+        }
+    })
+}
+
+function login() {
+    $.ajax({
+        url: "/userService/login",
+        type: "post",
+        data: $("#login-form").serialize(),
+        success: function(data) {
+            if (data.result == "FAILED")
+                alert(data.map.msg);
+        },
+        error: function(data) {
+            alert(data.map.msg);
+        }
+
+    })
+}
+
+function register() {
+    $("#password-form input:text").each(function (index, arr) {
+        alert("fjfj");
+        if ($(this).val() == '') {
+            alert("null");
+            $(this).focus();
+            $(this).val("不能为空");
+            return;
+        }
+    });
+    $.ajax({
+        url: "/userService/register",
+        type: "post",
+        data: $("#register-form").serialize(),
+        success: function(data) {
+            alert(data.map.msg);
+        }
+    });
+}
 

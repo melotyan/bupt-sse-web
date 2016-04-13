@@ -89,6 +89,8 @@ public class UserServiceController extends BaseController {
     public ResultModel register(HttpServletRequest request, @RequestParam(value="username", required = true) String username, @RequestParam(value="password", required = true) String password,
                                @RequestParam(value = "repassword", required = true) String repassword, @RequestParam(value="email", required=true) String email, @RequestParam(value = "captcha", required = true) String captcha) {
 
+        if (username.equals("") || password.equals("") || email.equals(""))
+            return ResultModel.failed("输入项不能为空");
         if (!captcha.equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY)))
             return ResultModel.failed("验证码错误");
         if (!password.equals(repassword))
@@ -150,7 +152,7 @@ public class UserServiceController extends BaseController {
         userModel.setAddress(address);
         userService.updateUserInfo(userModel);
         LOGGER.info("user {} personal info updated success", userModel.getUsername());
-        return ResultModel.success();
+        return ResultModel.success("修改成功");
     }
 
     @RequestMapping("logout")
@@ -168,7 +170,7 @@ public class UserServiceController extends BaseController {
 
     @RequestMapping(value = "changePassword", method = RequestMethod.POST)
     public ResultModel changePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("repassword") String repassword, @RequestParam("newPassword") String newPassword) {
-        if (!oldPassword.equals(repassword)) {
+        if (!newPassword.equals(repassword)) {
             return ResultModel.failed("两次密码不一致");
         }
         UserModel userModel = getLoginUser();
@@ -180,7 +182,7 @@ public class UserServiceController extends BaseController {
         userModel.setPassword(encode(newPassword, userModel.getUsername()));
         userService.updateUserInfo(userModel);
         LOGGER.info("user:{} success change password", userModel.getUsername());
-        return ResultModel.success();
+        return ResultModel.success("修改密码成功");
 
     }
 
