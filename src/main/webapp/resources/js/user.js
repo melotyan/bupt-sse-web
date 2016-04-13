@@ -6,9 +6,6 @@ $(".imgObj").click(function() {
     var $img = $(".imgObj");
     var url = chgUrl("/captcha.jpg");
     $img.attr("src", url);
-    //$.get(url, function() {
-    //    $img.attr("src", url);
-    //})
 })
 
 //时间戳
@@ -23,6 +20,5 @@ function chgUrl(url) {
     }
     return url;
 }
-
 
 

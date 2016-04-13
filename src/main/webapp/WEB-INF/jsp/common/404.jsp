@@ -50,7 +50,7 @@
     .text{
       font-family:"微软雅黑";
       padding-top:40px;
-      margin-left:57px;
+      /*margin-left:57px;*/
       font-size:22px;
     }
     .button {
@@ -88,7 +88,7 @@
   <div class="logo"></div>
   <div class="cloud">
     <div class="content">
-      <div class="text">喵~，这个页面跟程序猿私奔了~</div>
+      <div class="text">喵~，此页面不存在,请检查网址是否正确</div>
       <div class="buttonwrap">
         <a class="button guest" id="guest" title="" href="/"><b>去首页看看</b></a>
         <a class="button report" id="report" title="" href="egovernment_sse@126.com"><b>报告管理员</b></a>

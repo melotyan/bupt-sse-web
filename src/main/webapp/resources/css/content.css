@@ -68,9 +68,9 @@
 .list-detail:nth-child(odd) {
     background-color:#F2F6F9;
 }
-.list-detail:hover {
-    background-color: lightskyblue;
-}
+/*.list-detail:hover {*/
+    /*background-color: lightskyblue;*/
+/*}*/
 .list-detail span {
     float: right;
 }

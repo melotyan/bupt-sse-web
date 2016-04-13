@@ -18,16 +18,17 @@
     <c:if test="${type == 'tid'}">
       <div class="content-title"><h2>项目《${tender.title}》竞标列表</h2></div>
       <c:forEach items="${list}" var="item">
-        <div class="list-detail">竞标人: ${item.uid}  <span>竞标文件: ${item.key}</span></div>
+        <div class="list-detail">竞标人: ${item.title}  <span id="file-span">竞标文件: <a href="${item.fileUrl}" download="${fileMap.get(item.fileUrl)}">${fileMap.get(item.fileUrl)}</a></span></div>
       </c:forEach>
     </c:if>
     <c:if test="${type == 'uid'}">
       <div class="content-title"><h2>您参与竞标的项目列表</h2></div>
       <c:forEach items="${list}" var="item">
-        <a href="/inutatccmOfTenderService/viewTenderDetail/${item.id}"><div class="list-detail">${item.title}</div></a>
+        <a href="/inutatccmOfTenderService/viewTenderDetail/${item.tid}"><div class="list-detail">${item.title}</div></a>
       </c:forEach>
     </c:if>
   </div>
   <%@include file="../footer.jsp"%>
+  <script src="/resources/js/tender.js" type="text/javascript"></script>
 </body>
 </html>

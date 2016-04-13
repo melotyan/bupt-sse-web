@@ -18,7 +18,13 @@
 <div class="list-div">
     <div class="content-title"><h2>招标项目列表</h2></div>
     <c:forEach items="${list}" var="tender">
-      <a href="/inutatccmOfTenderService/viewTenderDetail/${tender.id}"><div class="list-detail">${tender.title}<span><fmt:formatDate value="${tender.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></span></div></a>
+
+  <div class="list-detail"><a href="/inutatccmOfTenderService/viewTenderDetail/${tender.id}">${tender.title}</a>
+    <span><fmt:formatDate value="${tender.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+        &nbsp;&nbsp;
+        <a href="/tenderService/listCompetitive/tid/${tender.id}">竞标情况</a>
+    </span>
+  </div>
   </c:forEach>
 </div>
 <%@include file="../footer.jsp"%>

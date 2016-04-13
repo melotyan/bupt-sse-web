@@ -29,7 +29,17 @@
           </div>
         </div>
         <div class="login-header">
-          <a class="link" href="/userService/preLogin">登陆</a>&nbsp&nbsp&nbsp<a class="link" href="/userService/preRegister">注册</a>
+          <c:if test="${sessionScope.user == null}">
+            <a class="link" href="/userService/preLogin">登陆</a>
+            &nbsp&nbsp&nbsp
+            <a class="link" href="/userService/preRegister">注册</a>
+          </c:if>
+          <c:if test="${sessionScope.user != null}">
+            <a class="link" href="#">用户名: ${sessionScope.user.username}</a>
+            &nbsp&nbsp&nbsp
+            <a class="link" href="/userService/logout">退出登陆</a>
+          </c:if>
+
         </div>
       </div>
     </div>

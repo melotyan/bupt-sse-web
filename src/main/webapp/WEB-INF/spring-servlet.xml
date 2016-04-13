@@ -84,6 +84,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/noticeService/**"/>
             <mvc:mapping path="/inutatccmOfTenderService/**"/>
+            <mvc:mapping path="/tenderService/listCompetitive/**"/>
             <bean class="cn.sse.bupt.controller.interceptor.BusinessInterceptor">
                 <property name="excludedUrl">
                     <list>

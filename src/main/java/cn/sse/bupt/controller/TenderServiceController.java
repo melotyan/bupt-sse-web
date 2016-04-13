@@ -7,13 +7,18 @@ import cn.sse.bupt.model.TenderModel;
 import cn.sse.bupt.model.UserModel;
 import cn.sse.bupt.service.InutatccmOfTenderService;
 import cn.sse.bupt.service.TenderService;
+import cn.sse.bupt.service.UserService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by melot on 2016/4/12.
@@ -23,10 +28,12 @@ import java.util.List;
 public class TenderServiceController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(TenderServiceController.class);
     private final int PAGE_SIZE = 50;
-
+    private Gson gson = new Gson();
     @Autowired
     private TenderService tenderService;
 
+    @Autowired
+    private UserService userService;
     @Autowired
     private InutatccmOfTenderService inutatccmOfTenderService;
 
@@ -79,6 +86,19 @@ public class TenderServiceController extends BaseController {
         modelAndView.addObject("list", list);
         modelAndView.addObject("type", "tid");
         modelAndView.addObject("tender", inutatccmOfTenderModel);
+
+        Map<String, String> fileMap = new HashMap<>();
+        if (list != null) { //这段代码有点冗余了，主要是为了弥补数据库设计缺陷
+            for (TenderModel tenderModel : list) {
+                Map<String, String> map = gson.fromJson(tenderModel.getFileUrl(), new TypeToken<Map<String, String>>() {}.getType());
+                for (String key : map.keySet()) { //map.size() always equals to 1
+                    fileMap.put(key, map.get(key));
+                    tenderModel.setFileUrl(key); //
+                    tenderModel.setTitle(userService.findUserById(tenderModel.getUid()).getUsername());//将用户名暂时存在title里，先这样凑和一下
+                }
+            }
+        }
+        modelAndView.addObject("fileMap", fileMap);
         return modelAndView;
     }
 
