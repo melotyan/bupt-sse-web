@@ -12,6 +12,7 @@
 <head>
     <title>招标项目列表</title>
     <link href="/resources/css/content.css" type="text/css" rel="stylesheet"/>
+    <link href="/resources/img/favicon.gif" rel="shortcut icon">
 </head>
 <body>
 <%@include file="../header.jsp"%>

@@ -10,6 +10,7 @@
 <head>
     <title>编辑招标信息</title>
     <link rel="stylesheet" href="/resources/css/content.css" type="text/css"/>
+  <link href="/resources/img/favicon.gif" rel="shortcut icon">
 </head>
 <body>
 <%@include file="../header.jsp"%>

@@ -12,6 +12,7 @@
 <head>
     <title>公告列表</title>
     <link href="/resources/css/content.css" rel="stylesheet" type="text/css"/>
+  <link href="/resources/img/favicon.gif" rel="shortcut icon">
 </head>
 <body class="sticky-header-on tablet-sticky-header">
 

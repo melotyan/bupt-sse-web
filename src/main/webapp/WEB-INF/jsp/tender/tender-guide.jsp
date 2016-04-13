@@ -10,6 +10,7 @@
 <head>
     <title>招投标申请流程</title>
     <link rel="stylesheet" type="text/css" href="/resources/css/content.css"/>
+  <link href="/resources/img/favicon.gif" rel="shortcut icon">
 </head>
 <body>
 <%@include file="../header.jsp"%>

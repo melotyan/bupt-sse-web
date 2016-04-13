@@ -10,6 +10,7 @@
 <head>
     <title>提出建议</title>
     <link href="/resources/css/content.css" rel="stylesheet" type="text/css"/>
+  <link href="/resources/img/favicon.gif" rel="shortcut icon">
 </head>
 <body>
 <%@include file="../header.jsp"%>

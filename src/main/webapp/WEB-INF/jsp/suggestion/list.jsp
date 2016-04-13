@@ -12,6 +12,7 @@
 <head>
     <title>建议列表</title>
     <link href="/resources/css/content.css" type="text/css" rel="stylesheet"/>
+  <link href="/resources/img/favicon.gif" rel="shortcut icon">
 </head>
 <body class="sticky-header-on tablet-sticky-header">
   <%@include file="../header.jsp"%>

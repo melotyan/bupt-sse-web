@@ -11,6 +11,7 @@
 <head>
     <title>公告详情</title>
     <link rel="stylesheet" href="/resources/css/content.css" type="text/css"/>
+    <link href="/resources/img/favicon.gif" rel="shortcut icon">
 </head>
 <body class="sticky-header-on tablet-sticky-header">
     <%@include file="../header.jsp"%>
