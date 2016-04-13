@@ -19,8 +19,8 @@
         <h2>公告标题</h2>
         <c:if test="${sessionScope.user != null && sessionScope.user.userType != 3}">
             <span>
-                <strong><a href="#" onclick="delNotice('/noticeService/deleteNotice/${noticeModel.id}')">删除</a></strong>
-                <strong><a href="/noticeService/preUpdateNotice/${noticeModel.id}">编辑</a></strong>
+                <a href="#" onclick="delNotice('/noticeService/deleteNotice/${noticeModel.id}')"><strong>删除</strong></a>
+                <a href="/noticeService/preUpdateNotice/${noticeModel.id}"><strong>编辑</strong></a>
             </span>
         </c:if>
     </div>

@@ -22,7 +22,14 @@
   <div class="list-detail"><a href="/inutatccmOfTenderService/viewTenderDetail/${tender.id}">${tender.title}</a>
     <span><fmt:formatDate value="${tender.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
         &nbsp;&nbsp;
-        <a href="/tenderService/listCompetitive/tid/${tender.id}">竞标情况</a>
+        <c:choose>
+        <c:when test="${sessionScope.user != null && sessionScope.user.userType != 3}">
+            <a href="/tenderService/listCompetitive/tid/${tender.id}">竞标情况</a>
+        </c:when>
+        <c:otherwise>
+            <a href="/tenderService/preCompetitiveTender/tid/${tender.id}">竞标</a>
+        </c:otherwise>
+        </c:choose>
     </span>
   </div>
   </c:forEach>

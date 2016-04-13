@@ -96,7 +96,9 @@
 .content-title span {
     float: right;
     line-height: 200%;
-    color: red;
+}
+.content-title span strong{
+    color: #00004f;
 }
 .content {
     min-height: 400px;

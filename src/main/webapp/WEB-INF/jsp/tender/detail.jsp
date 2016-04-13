@@ -18,14 +18,14 @@
     <h2>招标项目名称</h2>
     <c:if test="${sessionScope.user != null && sessionScope.user.userType != 3}">
         <span>
-            <strong><a href="/tenderService/listCompetitive/tid/${tender.id}">查看竞标情况</a></strong>
-            <strong><a href="#" onclick="delTender('/inutatccmOfTenderService/deleteTenderInfo/${tender.id}')">删除</a></strong>
-            <strong><a href="/inutatccmOfTenderService/preEditTenderInfo/${tender.id}">编辑</a></strong>
+            <a href="/tenderService/listCompetitive/tid/${tender.id}"><strong>查看竞标情况</strong></a>
+            <a href="#" onclick="delTender('/inutatccmOfTenderService/deleteTenderInfo/${tender.id}')"><strong>删除</strong></a>
+            <a href="/inutatccmOfTenderService/preEditTenderInfo/${tender.id}"><strong>编辑</strong></a>
         </span>
     </c:if>
       <c:if test="${sessionScope.user != null && sessionScope.user.userType == 3}">
-          <span id="title-span">
-              <strong><a href="/tenderService/preCompetitiveTender/tid/${tender.id}">竞 标 </a></strong>
+          <span>
+              <a href="/tenderService/preCompetitiveTender/tid/${tender.id}"><strong>竞 标 </strong></a>
           </span>
       </c:if>
   </div>
