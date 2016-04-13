@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resources;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +41,11 @@ public class SuggestionServiceController extends BaseController {
         suggestionService.makeSuggestion(suggestionModel);
         LOGGER.info("user {} make a suggestion success", uid);
         return ResultModel.success();
+    }
+
+    @RequestMapping("preMakeSuggestion")
+    public ModelAndView preMakeSuggestion() {
+        return new ModelAndView("suggestion/create");
     }
 
     @RequestMapping("listSuggestions/{page}")
