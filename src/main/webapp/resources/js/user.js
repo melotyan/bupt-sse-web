@@ -49,26 +49,15 @@ function login() {
         type: "post",
         data: $("#login-form").serialize(),
         success: function(data) {
-            if (data.result == "FAILED")
+            if (data.result == "SUCCESS")
+                location.href = data.map.redirect;
+            else
                 alert(data.map.msg);
-        },
-        error: function(data) {
-            alert(data.map.msg);
         }
-
     })
 }
 
 function register() {
-    $("#password-form input:text").each(function (index, arr) {
-        alert("fjfj");
-        if ($(this).val() == '') {
-            alert("null");
-            $(this).focus();
-            $(this).val("不能为空");
-            return;
-        }
-    });
     $.ajax({
         url: "/userService/register",
         type: "post",

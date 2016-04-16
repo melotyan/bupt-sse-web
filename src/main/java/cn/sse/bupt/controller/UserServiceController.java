@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by hao.yan on 2015/12/7.
@@ -49,27 +51,27 @@ public class UserServiceController extends BaseController {
     }
 
     @RequestMapping(value="login", method = RequestMethod.POST)
-    public ModelAndView login(HttpServletRequest request, HttpServletResponse response,
+    public ResultModel login(HttpServletRequest request, HttpServletResponse response,
                               @RequestParam("username") String username, @RequestParam("password") String password,
                               @RequestParam(value = "rememberMe", defaultValue = "0") int rememberMe, @RequestParam("captcha") String captcha) {
         LOGGER.info("{} try to login", username);
         UserModel userModel = userService.findUserByUsername(username);
         if (!captcha.equals(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY))) {
             LOGGER.info("captcha is wrong");
-            return new ModelAndView("user/login", "msg", "验证码错误");
+            return ResultModel.failed("验证码错误");
         }
         if (userModel == null) {
             LOGGER.info("account {} not exists", username);
-            return new ModelAndView("user/login", "msg", "用户名不存在");
+            return ResultModel.failed("用户名不存在");
         }
         if (userModel.getAccountStatus() != AccountStatusEnum.ACTIVITATED.getValue()) {
             LOGGER.warn("account {} is not activated", username);
-            return new ModelAndView("user/login", "msg", "当前账户未激活");
+            return ResultModel.failed("当前账户未激活");
         }
         String encodePassword = encode(password, username);
         if (!userModel.getPassword().equals(encodePassword)) {
             LOGGER.warn("account {} login with wrong password", username);
-            return new ModelAndView("user/login", "msg", "密码错误");
+            return ResultModel.failed("密码错误");
         }
 
         CookieUtil.writeLoginCookie(response, username, encodePassword, rememberMe == 0 ? DEFAULT_EXPIRE : LONG_EXPIRE);
@@ -79,10 +81,14 @@ public class UserServiceController extends BaseController {
         if (redirectURL != null) {
             LOGGER.info("user {} login success, remove last_url session, redirect to page:{}", username, redirectURL);
             session.removeAttribute(SessionConstants.LAST_URL);
-            return new ModelAndView(REDIRECT + redirectURL);
+            ResultModel resultModel = ResultModel.success();
+            resultModel.put("redirect", String.valueOf(redirectURL));
+            return resultModel;
         }
         LOGGER.info("user {} login success, redirect to index", username);
-        return new ModelAndView(REDIRECT + "/");
+        ResultModel resultModel = ResultModel.success();
+        resultModel.put("redirect", "/");
+        return resultModel;
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)

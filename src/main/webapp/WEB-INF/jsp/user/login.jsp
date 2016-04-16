@@ -17,7 +17,7 @@
 <body class="sticky-header-on tablet-sticky-header">
   <%@include file="../header.jsp"%>
   <div class="login-div">
-      <form action="/userService/login" method="post">
+      <form id="login-form">
       <table class="login-table">
           <tr>
             <td>用户名:</td>
@@ -33,7 +33,7 @@
               <img class="imgObj" alt="验证码" src="/captcha.jpg" /></td>
           </tr>
           <tr>
-            <td colspan="2"><input type="submit" value="登陆"/>
+            <td colspan="2"><input type="button" onclick="login()" value="登陆"/>
                 <a href="/userService/preRegister"><input type="button" value="注册" id="register-button"/></a>
             </td>
           </tr>
