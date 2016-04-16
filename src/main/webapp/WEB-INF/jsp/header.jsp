@@ -60,6 +60,15 @@
             <a href="/"><i class="icons icon-home"></i></a>
           <!-- Pages -->
           <li>
+            <span>政府新闻动态</span>
+            <ul>
+              <li><a href="/newsService/listNews/page/1">新闻动态</a></li>
+              <c:if test="${not empty sessionScope.user && sessionScope.user.userType != 3}">
+                <li><a href="/newsService/prePublishNews">发布新闻</a></li>
+              </c:if>
+            </ul>
+          <li>
+          <li>
             <span>通知公告</span>
               <ul>
                 <li><a href="/noticeService/listAllNotices/1">查看公告</a></li>

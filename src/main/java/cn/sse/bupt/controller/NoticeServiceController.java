@@ -31,7 +31,6 @@ import java.util.Map;
 @RequestMapping("noticeService")
 public class NoticeServiceController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(NoticeServiceController.class);
-    private final String FILE_PATH = "D:/file/";
     private final int PAGE_SIZE = 50;
     private Gson gson = new Gson();
 

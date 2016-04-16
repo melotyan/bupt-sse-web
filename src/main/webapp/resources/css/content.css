@@ -132,6 +132,12 @@
     text-shadow: 1px 1px 1px rgba(255,255,255, .22);
     border-radius: 20px;
 }
+.news-img {
+    width: 1000px;
+    height: 500px;
+    /*margin: 0 auto;*/
+    /*float: left;*/
+}
 /*#btn-edit-notice {*/
     /**/
 /*}*/

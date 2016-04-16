@@ -78,6 +78,8 @@
                     <value>/suggestionService/listSuggestions/**</value>
                     <value>/inutatccmOfTenderService/viewTenderDetail/**</value>
                     <value>/inutatccmOfTenderService/listTenderInfo/**</value>
+                    <value>/newsService/viewNewsDetail/**</value>
+                    <value>/newsService/listNews/**</value>
                 </list>
             </property>
         </bean>
@@ -85,6 +87,7 @@
             <mvc:mapping path="/noticeService/**"/>
             <mvc:mapping path="/inutatccmOfTenderService/**"/>
             <mvc:mapping path="/tenderService/listCompetitive/**"/>
+            <mvc:mapping path="/newsService/**"/>
             <bean class="cn.sse.bupt.controller.interceptor.BusinessInterceptor">
                 <property name="excludedUrl">
                     <list>
@@ -92,6 +95,8 @@
                         <value>/noticeService/viewNoticeDetail/**</value>
                         <value>/inutatccmOfTenderService/viewTenderDetail/**</value>
                         <value>/inutatccmOfTenderService/listTenderInfo/**</value>
+                        <value>/newsService/viewNewsDetail/**</value>
+                        <value>/newsService/listNews/**</value>
                     </list>
                 </property>
             </bean>
