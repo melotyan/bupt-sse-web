@@ -2,11 +2,16 @@
  * Created by hao.yan on 2016/1/4.
  */
 
+function changeCaptcha() {
+    var $img = $(".imgObj");
+    var url = chgUrl("/captcha.jpg");
+    $img.attr("src", url);
+}
 $(".imgObj").click(function() {
     var $img = $(".imgObj");
     var url = chgUrl("/captcha.jpg");
     $img.attr("src", url);
-})
+});
 
 //时间戳
 //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
@@ -51,8 +56,10 @@ function login() {
         success: function(data) {
             if (data.result == "SUCCESS")
                 location.href = data.map.redirect;
-            else
+            else {
                 alert(data.map.msg);
+                changeCaptcha();
+            }
         }
     })
 }
@@ -64,6 +71,7 @@ function register() {
         data: $("#register-form").serialize(),
         success: function(data) {
             alert(data.map.msg);
+            changeCaptcha();
         }
     });
 }

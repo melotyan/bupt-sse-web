@@ -10,7 +10,7 @@
 <div id="lower-footer">
   <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 animate-onscroll">
-      <p class="copyright">北太平庄街道办事处
+      <p class="copyright">北京海淀区办事处
       <br/><a href="http://www.buptsse.cn/" class="link">北京邮电大学软件学院著</a></p>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 animate-onscroll">

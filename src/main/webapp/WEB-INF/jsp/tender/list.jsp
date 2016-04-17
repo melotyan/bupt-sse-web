@@ -18,7 +18,7 @@
 <%@include file="../header.jsp"%>
 <div class="list-div">
     <div class="content-title"><h2>招标项目列表</h2></div>
-    <c:forEach items="${list}" var="tender">
+    <c:forEach items="${list}" var="tender" varStatus="status">
 
   <div class="list-detail"><a href="/inutatccmOfTenderService/viewTenderDetail/${tender.id}">${tender.title}</a>
     <span><fmt:formatDate value="${tender.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -33,6 +33,9 @@
         </c:choose>
     </span>
   </div>
+        <c:if test="${status.count % 5 == 0}">
+            <p>-------------------------------------------------------------------------------</p>
+        </c:if>
   </c:forEach>
 </div>
 <%@include file="../footer.jsp"%>

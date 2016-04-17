@@ -20,8 +20,11 @@
 
 <div class="list-div">
   <div class="content-title"><h2>政府新闻</h2></div>
-  <c:forEach items="${list}" var="notice">
+  <c:forEach items="${list}" var="notice" varStatus="status">
     <a href="/newsService/viewNewsDetail/id/${notice.id}" ><div class="list-detail">${notice.title}<span><fmt:formatDate value="${notice.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></span></div></a>
+    <c:if test="${status.count % 5 == 0}">
+      <p>-------------------------------------------------------------------------------</p>
+    </c:if>
   </c:forEach>
 </div>
 <%@include file="../footer.jsp"%>

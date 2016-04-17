@@ -30,6 +30,7 @@
   <div class="content" id="detail-text">
     ${newsModel.content}
   </div>
+  <p></p>
   <c:if test="${fileMap.keySet() != null}">
     <div class="content-file">
       <c:forEach items="${fileMap.keySet()}" var="key">
@@ -37,6 +38,7 @@
       </c:forEach>
     </div>
   </c:if>
+  <p></p>
 </div>
 <%@include file="../footer.jsp"%>
 <script type="text/javascript" src="/resources/js/news.js"></script>

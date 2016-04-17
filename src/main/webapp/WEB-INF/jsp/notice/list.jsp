@@ -20,8 +20,11 @@
 
   <div class="list-div">
     <div class="content-title"><h2>公告列表</h2></div>
-    <c:forEach items="${notices}" var="notice">
-      <a href="/noticeService/viewNoticeDetail/${notice.id}" ><div class="list-detail">${notice.title}<span><fmt:formatDate value="${notice.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></span></div></a>
+    <c:forEach items="${notices}" var="notice" varStatus="status">
+      <a href="/noticeService/viewNoticeDetail/${notice.id}" ><div class="list-detail">[公告]${notice.title}<span><fmt:formatDate value="${notice.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></span></div></a>
+      <c:if test="${status.count % 5 == 0}">
+        <p>-------------------------------------------------------------------------------</p>
+      </c:if>
     </c:forEach>
   </div>
   <%@include file="../footer.jsp"%>

@@ -18,9 +18,12 @@
   <%@include file="../header.jsp"%>
   <div class="list-div">
     <div class="content-title"><h2>建议列表</h2></div>
-    <c:forEach items="${list}" var="suggestion">
-    <a href="/suggestionService/viewSuggestion/${suggestion.id}"><div class="list-detail">${suggestion.title}<span><fmt:formatDate value="${suggestion.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></span></div></a>
-  </c:forEach>
+    <c:forEach items="${list}" var="suggestion" varStatus="status">
+      <a href="/suggestionService/viewSuggestion/${suggestion.id}"><div class="list-detail">${suggestion.title}<span><fmt:formatDate value="${suggestion.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></span></div></a>
+      <c:if test="${status.count % 5 == 0}">
+        <p>-------------------------------------------------------------------------------</p>
+      </c:if>
+    </c:forEach>
   </div>
   <%@include file="../footer.jsp"%>
 </body>

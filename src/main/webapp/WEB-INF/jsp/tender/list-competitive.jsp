@@ -23,8 +23,11 @@
     </c:if>
     <c:if test="${type == 'uid'}">
       <div class="content-title"><h2>您参与竞标的项目列表</h2></div>
-      <c:forEach items="${list}" var="item">
+      <c:forEach items="${list}" var="item" varStatus="status">
         <a href="/inutatccmOfTenderService/viewTenderDetail/${item.tid}"><div class="list-detail">${item.title}</div></a>
+        <c:if test="${status.count % 5 == 0}">
+          <p>-------------------------------------------------------------------------------</p>
+        </c:if>
       </c:forEach>
     </c:if>
   </div>

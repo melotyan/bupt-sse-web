@@ -24,7 +24,7 @@
             <a href="/"><img src="/resources/img/logo.png" alt="Logo"></a>
           </div>
           <div class="head-title">
-            北太平庄街道电子政务网
+            海淀区政府电子政务网
             <%--</blockquote>--%>
           </div>
         </div>
