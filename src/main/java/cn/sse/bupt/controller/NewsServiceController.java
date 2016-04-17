@@ -59,6 +59,8 @@ public class NewsServiceController extends BaseController {
                 LOGGER.info("first pic url is {}", key);
                 break;
             }
+        } else {
+            newsModel.setFirstPic("");
         }
         newsService.publishNews(newsModel);
         return ResultModel.success("发布成功");

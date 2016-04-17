@@ -35,6 +35,7 @@
     <div class="content-file">
       <c:forEach items="${fileMap.keySet()}" var="key">
         <img class="news-img" src="${key}"/>
+        <p></p>
       </c:forEach>
     </div>
   </c:if>
