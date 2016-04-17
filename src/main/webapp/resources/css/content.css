@@ -108,9 +108,10 @@
 .content-title span strong{
     color: #00004f;
 }
-.content-div p {
-    font-family: \5FAE\8F6F\96C5\9ED1 !important;
-    font-size: 16px;
+.content-title + p {
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    font-size: 25px;
+    text-align: center;
 }
 .content {
     min-height: 400px;
