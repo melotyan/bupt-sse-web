@@ -138,7 +138,7 @@
     border-top-color: #7cc5f8;
     border-bottom-color: #579dd9;
 }
-#btn-notice,  #btn-edit-notice, #btn-competitive{
+#btn-notice,  #btn-edit-notice, #btn-competitive, #btn_add{
     margin: 0 450px 0;
     font-weight: 900;
     font-size: 20px;
@@ -154,6 +154,11 @@
     margin: 0 200px;
     /*float: left;*/
 }
-/*#btn-edit-notice {*/
-    /**/
-/*}*/
+.file-upload-div {
+    width: 400px;
+    margin: 0 auto;
+}
+#file-type-selected {
+    color: black;
+    border: 1px solid black;
+}

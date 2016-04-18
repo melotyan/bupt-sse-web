@@ -87,41 +87,14 @@
           <li>
             <span>文件下载</span>
             <ul>
+              <li><a href="/fileService/listFiles/type/6">政府工作报告</a></li>
+              <li><a href="/fileService/listFiles/type/5">政策文件</a></li>
+              <li><a href="/fileService/listFiles/type/4">法规文件</a></li>
               <li>
-                <span>法规文件</span>
-                <ul>
-                  <li><a href="media-sortable-1column-sidebar.html">1 Column with right sidebar</a></li>
-                  <li><a href="media-sortable-2columns.html">2 Columns</a></li>
-                  <li><a href="media-sortable-3columns.html">3 Columns</a></li>
-                  <li><a href="media-sortable-3columns-sidebar.html">3 Columns with left sidebar</a></li>
-                  <li><a href="media-sortable-4columns.html">4 Columns</a></li>
-                </ul>
-              <li>
-                <span>招标文件</span>
-                <ul>
-                  <li><a href="media-grid-1column-sidebar.html">1 Column with right sidebar</a></li>
-                  <li><a href="media-grid-2columns.html">2 Columns</a></li>
-                  <li><a href="media-grid-3columns.html">3 Columns</a></li>
-                  <li><a href="media-grid-3columns-sidebar.html">3 Columns with left sidebar</a></li>
-                  <li><a href="media-grid-4columns.html">4 Columns</a></li>
-                </ul>
-              <li>
-                <span>政策文件</span>
-                <ul>
-                  <li><a href="media-classic-sortable-3columns.html">Sortable 3 Columns</a></li>
-                  <li><a href="media-classic-sortable-3columns-sidebar.html">Sortable 3 Columns with right sidebar</a></li>
-                  <li><a href="media-classic-sortable-4columns.html">Sortable 4 Columns</a></li>
-                  <li><a href="media-classic-3columns.html">3 Columns</a></li>
-                  <li><a href="media-classic-3columns-sidebar.html">3 Columns with left sidebar</a></li>
-                  <li><a href="media-classic-4columns.html">4 Columns</a></li>
-                </ul>
-              <li>
-                <span>上传文件</span>
-                <ul>
-                  <li><a href="portfolio-single-fullwidth.html">Fullwidth</a></li>
-                  <li><a href="portfolio-single-sidebar.html">With Sidebar</a></li>
-                  <li><a href="portfolio-single-extended.html">Extended Image Slideshow</a></li>
-                </ul>
+              <c:if test="${sessionScope.user != null && sessionScope.user.userType != 3}">
+                <a href="/fileService/preUploadFile"><span>上传文件</span></a>
+              </c:if>
+              </li>
             </ul>
           <li>
             <span>意见征集</span>
@@ -170,4 +143,3 @@
 
 <script type="text/javascript" src="/resources/js/jquery/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="/resources/js/jquery/modernizr.js"></script>
-<script type="text/javascript" src="/resources/js/script.js"></script>

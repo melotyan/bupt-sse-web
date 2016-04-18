@@ -35,6 +35,7 @@
     </form>
     <input type="button" id="btn_add" value="添加附件"/>
   </div>
+  <p/>
   <input type="button" id="btn-notice" value="发  布" >
 </div>
 <%@include file="../footer.jsp"%>

@@ -1,8 +1,7 @@
 package cn.sse.bupt.controller;
 
-import cn.sse.bupt.enums.FileClass;
+import cn.sse.bupt.enums.FileClassEnum;
 import cn.sse.bupt.model.FileModel;
-import cn.sse.bupt.model.ResultModel;
 import cn.sse.bupt.service.FileService;
 import cn.sse.bupt.util.RequestUtil;
 import com.google.gson.Gson;
@@ -15,14 +14,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -97,5 +95,16 @@ public class FileServiceController {
             LOGGER.error("{}", e);
         }
         return null;
+    }
+
+    @RequestMapping("listFiles/type/{type}")
+    public ModelAndView listFiles(@PathVariable Integer type) {
+        if (type != FileClassEnum.LOWS.getValue() && type != FileClassEnum.POLICY.getValue()
+                &&  type != FileClassEnum.REPORT.getValue())
+            return new ModelAndView("common/404");
+        List<FileModel> list = fileService.getFileByNid(type);
+        ModelAndView modelAndView = new ModelAndView("file/list", "list", list);
+        modelAndView.addObject("type", type);
+        return modelAndView;
     }
 }

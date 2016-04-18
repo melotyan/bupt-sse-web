@@ -17,7 +17,7 @@
     <div class="content-div">
       <div class="content-title"><h2>竞标项目名称</h2></div>
       <p/>
-      <h2>${title}</h2>
+      ${title}
       <p/>
       <div class="content-title"><h2>请上传您的竞标文件</h2></div>
       <%--<div class="content">--%>

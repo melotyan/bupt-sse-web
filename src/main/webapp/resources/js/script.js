@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+
 	"use strict";
 
 	var element = $("#detail-text");
