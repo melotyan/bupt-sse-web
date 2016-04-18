@@ -70,8 +70,14 @@ public class NewsServiceController extends BaseController {
     public ModelAndView listNews(@PathVariable Integer page) {
         if (page == null || page < 1)
             page = 1;
-        List<NewsModel> list =newsService.listNews(page, PAGE_SIZE);
+        List<NewsModel> list = newsService.listNews(page, PAGE_SIZE);
         return new ModelAndView("news/list", "list", list);
+    }
+
+    @RequestMapping("listNews/data")
+    public List<NewsModel> listNewsData() {
+        List<NewsModel> list = newsService.listNews(1, PAGE_SIZE);
+        return list;
     }
 
     @RequestMapping("viewNewsDetail/id/{id}")

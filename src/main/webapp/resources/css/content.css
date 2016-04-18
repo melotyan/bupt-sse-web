@@ -162,3 +162,22 @@
     color: black;
     border: 1px solid black;
 }
+.index-div {
+    width: 300px;
+    height: 300px;
+    margin: 0 15px;
+    border: 1px solid gray;
+    float: left;
+    border-radius: 30px;
+}
+.index-img-div {
+    width: 1000px;
+    height: 400px;
+    margin: 0 auto;
+    border: 1px solid gray;
+}
+.index-img {
+    width: 1000px;
+    height: 400px;
+    margin: 0 auto;
+}

@@ -81,6 +81,7 @@
                     <value>/inutatccmOfTenderService/listTenderInfo/**</value>
                     <value>/newsService/viewNewsDetail/**</value>
                     <value>/newsService/listNews/**</value>
+                    <value>/tenderGuide</value>
                 </list>
             </property>
         </bean>

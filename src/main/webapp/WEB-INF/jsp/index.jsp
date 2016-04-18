@@ -9,19 +9,18 @@
 <body class="sticky-header-on tablet-sticky-header">
  <%@include file="header.jsp"%>
  <div class="content-div">
-  <p/>
-  <a href="/userService/preLogin">登陆页面</a>
-  <p/>
-  <a href="/userService/preRegister">注册页面</a>
-  <p/>
-  <a href="/userService/preChangePassword">改密码</a>
-  <p/>
-  <a href="/userService/getPersonalInfo">查看个人信息</a>
-  <p/>
-  <a href="/userService/logout">登出</a>
-  <p/>
-  <a href="/noticeService/prePublishNotice">发布公告</a>
+  <div class="index-img-div">
+   <ul id="sItem">
+    <%--<li><img src="/resources/file/1460866787000.jpg"/></li>--%>
+    <%--<li><img src="/resources/file/1460876491977.jpg"/></li>--%>
+    <%--<li><img src="/resources/file/1460876492228.jpg"/></li>--%>
+   </ul>
+  </div>
+  <div class="index-div"></div>
+  <div class="index-div"></div>
+  <div class="index-div"></div>
  </div>
+ <script src="/resources/js/index.js" type="text/javascript"></script>
  <%@include file="footer.jsp"%>
 </body>
 </html>

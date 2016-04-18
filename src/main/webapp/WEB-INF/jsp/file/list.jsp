@@ -20,9 +20,9 @@
 
 <div class="list-div">
   <div class="content-title">
+    <c:if test="${type == 4}"><h2>法规文件</h2></c:if>
     <c:if test="${type == 5}"><h2>政策文件</h2></c:if>
     <c:if test="${type == 6}"><h2>政府工作报告</h2></c:if>
-    <c:if test="${tyep == 4}"><h2>法规文件</h2></c:if>
   </div>
   <c:forEach items="${list}" var="file" varStatus="status">
     <a href="${file.url}" download="${file.title}"><div class="list-detail">${file.title}</div></a>
