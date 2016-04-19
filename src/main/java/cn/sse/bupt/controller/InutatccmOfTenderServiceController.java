@@ -39,6 +39,11 @@ public class InutatccmOfTenderServiceController extends BaseController {
         return modelAndView;
     }
 
+    @RequestMapping("listTenderInfo/data")
+    public List<InutatccmOfTenderModel> listTenderInfoData() {
+        return inutatccmOfTenderService.listTenderInfos(1, 10);
+    }
+
     @RequestMapping("preCreateTenderInfo")
     public ModelAndView preCreateTenderInfo() {
         return new ModelAndView("tender/create");

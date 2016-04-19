@@ -78,6 +78,11 @@ public class NoticeServiceController extends BaseController {
         return new ModelAndView("notice/list", "notices", noticeModels);
     }
 
+    @RequestMapping("listAllNotices/data")
+    public List<NoticeModel>  listNoticesData() {
+        return noticeService.listNotice(1, 10);
+    }
+
     @RequestMapping("deleteNotice/{id}")
     public ResultModel deleteNotice(@PathVariable Integer id) {
         NoticeModel noticeModel = noticeService.findNoticeById(id);

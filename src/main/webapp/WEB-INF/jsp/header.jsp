@@ -97,7 +97,7 @@
               </li>
             </ul>
           <li>
-            <span>意见征集</span>
+            <span>民意征集</span>
             <ul>
               <li><a href="">参与投票</a></li>
               <li><a href="">发起投票</a></li>
@@ -111,7 +111,7 @@
               <li><a href="features-shortcodes.html">投诉举报流程</a></li>
             </ul>
           <li>
-            <span>意见反馈</span>
+            <span>建议反馈</span>
             <ul>
               <li><a href="/suggestionService/listSuggestions/1">群众的心声</a></li>
               <li><a href="blog-v1.html">给领导写信</a></li>

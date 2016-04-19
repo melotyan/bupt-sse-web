@@ -86,6 +86,7 @@
     width: 1000px;
     margin: 0 auto;
     min-height: 400px;
+    overflow: auto;
     background: url(/resources/img/body-background.jpg) repeat;
 }
 .content-title {
@@ -169,12 +170,21 @@
     border: 1px solid gray;
     float: left;
     border-radius: 30px;
+    overflow: hidden;
+}
+.index-div ul {
+    margin: 0;
+    padding: 0 15px;
+}
+.index-div ul li {
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
 }
 .index-img-div {
-    width: 1000px;
+    width: 900px;
     height: 400px;
     margin: 0 auto;
-    border: 1px solid gray;
 }
 .index-img {
     width: 1000px;

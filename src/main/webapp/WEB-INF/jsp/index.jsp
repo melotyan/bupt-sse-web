@@ -16,9 +16,18 @@
     <%--<li><img src="/resources/file/1460876492228.jpg"/></li>--%>
    </ul>
   </div>
-  <div class="index-div"></div>
-  <div class="index-div"></div>
-  <div class="index-div"></div>
+  <div class="index-div" id="news-div">
+    <ul>
+    </ul>
+  </div>
+  <div class="index-div" id="notices-div">
+    <ul>
+    </ul>
+  </div>
+  <div class="index-div" id="tender-div">
+   <ul>
+   </ul>
+  </div>
  </div>
  <script src="/resources/js/index.js" type="text/javascript"></script>
  <%@include file="footer.jsp"%>
