@@ -26,9 +26,9 @@ public class LoginInterceptor extends BaseInterceptor {
     public boolean doPreHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         UserModel userModel = (UserModel) request.getSession().getAttribute(SessionConstants.USER);
         if (userModel == null) {
-            LOGGER.debug("has not login, direct to login page");
+            LOGGER.info("has not login, direct to login page");
             Object lastUrl = request.getRequestURL();
-            LOGGER.debug("after login, redirect to {}", lastUrl);
+            LOGGER.info("after login, redirect to {}", lastUrl);
             request.getSession().setAttribute(SessionConstants.LAST_URL, lastUrl);
             response.sendRedirect(LOGIN_URL);
             return false;

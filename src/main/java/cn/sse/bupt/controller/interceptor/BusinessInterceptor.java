@@ -20,7 +20,7 @@ public class BusinessInterceptor extends BaseInterceptor {
     public boolean doPreHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         UserModel userModel = (UserModel) request.getSession().getAttribute(SessionConstants.USER);
         if (userModel == null || userModel.getUserType() == UserTypeEnum.CUSTOMER.getValue()) {
-            LOGGER.debug("user is null or user is customer");
+            LOGGER.info("user is null or user is customer");
             return false;
         }
         return true;

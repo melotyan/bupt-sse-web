@@ -16,6 +16,9 @@
 
 <%@include file="../header.jsp" %>
 <div class="login-div">
+    <p>
+    </p>
+    <div class="img-head">修改密码</div>
     <form id="password-form">
         <table class="register-table">
             <tr>

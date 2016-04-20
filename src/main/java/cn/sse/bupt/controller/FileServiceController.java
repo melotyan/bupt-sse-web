@@ -1,7 +1,9 @@
 package cn.sse.bupt.controller;
 
 import cn.sse.bupt.enums.FileClassEnum;
+import cn.sse.bupt.enums.UserTypeEnum;
 import cn.sse.bupt.model.FileModel;
+import cn.sse.bupt.model.UserModel;
 import cn.sse.bupt.service.FileService;
 import cn.sse.bupt.util.RequestUtil;
 import com.google.gson.Gson;
@@ -29,7 +31,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("fileService")
-public class FileServiceController {
+public class FileServiceController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(FileServiceController.class);
     private final String FILE_PATH = "/resources/file/";
     private Gson gson = new Gson();
@@ -45,6 +47,9 @@ public class FileServiceController {
     @RequestMapping(value = "uploadFiles", method = RequestMethod.POST)
     public String uploadFiles(@RequestParam("files") MultipartFile[] files,
                              @RequestParam(value = "type", defaultValue = "0") int type) {
+        UserModel userModel = getLoginUser();
+        if (userModel.getUserType() == UserTypeEnum.CUSTOMER.getValue() && type != 3)
+            return "";
         Map<String, String> fileMap = new HashMap<String, String>();
         String savePath = RequestUtil.getRequest().getSession().getServletContext().getRealPath(FILE_PATH);
         for (MultipartFile file : files) {

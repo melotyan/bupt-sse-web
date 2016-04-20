@@ -16,17 +16,17 @@
   </div>
   <p></p>
   <div class="index-div" id="news-div">
-   <div class="index-head">政府新闻</div>
+   <a href="/newsService/listNews/page/1"><div class="index-head">政府新闻</div></a>
     <ul>
     </ul>
   </div>
   <div class="index-div" id="notices-div">
-   <div class="index-head">通知公告</div>
+   <a href="/noticeService/listAllNotices/1"><div class="index-head">通知公告</div></a>
    <ul>
     </ul>
   </div>
   <div class="index-div" id="tender-div">
-   <div class="index-head">招标信息</div>
+   <a href="/inutatccmOfTenderService/listTenderInfo/1"><div class="index-head">招标信息</div></a>
    <ul>
    </ul>
   </div>

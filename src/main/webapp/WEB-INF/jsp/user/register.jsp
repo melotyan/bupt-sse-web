@@ -15,6 +15,8 @@
 <body class="sticky-header-on tablet-sticky-header">
   <%@include file="../header.jsp"%>
   <div class="login-div">
+    <p/>
+    <div class="img-head">注&nbsp;&nbsp;册</div>
   <form id="register-form">
     <table class="register-table">
       <tr>

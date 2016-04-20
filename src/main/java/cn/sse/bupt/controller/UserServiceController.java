@@ -117,7 +117,7 @@ public class UserServiceController extends BaseController {
 
         String sessionId = request.getRequestedSessionId();
         request.getSession().setAttribute(SessionConstants.ACTIVE_URL, userModel.getUsername() + sessionId);
-        String activeUrl = request.getRemoteHost() + "/userService/activeAccount/" + userModel.getUsername() + "/" + sessionId;
+        String activeUrl = "http://" + request.getServerName() + "/userService/activeAccount/" + userModel.getUsername() + "/" + sessionId;
         try {
             mailSenderUtil.sendEmail(email, activeUrl);
             userService.register(userModel);
