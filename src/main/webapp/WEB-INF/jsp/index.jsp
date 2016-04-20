@@ -10,21 +10,23 @@
  <%@include file="header.jsp"%>
  <div class="content-div">
   <div class="index-img-div">
+   <div class="img-head">热点新闻</div>
    <ul id="sItem">
-    <%--<li><img src="/resources/file/1460866787000.jpg"/></li>--%>
-    <%--<li><img src="/resources/file/1460876491977.jpg"/></li>--%>
-    <%--<li><img src="/resources/file/1460876492228.jpg"/></li>--%>
    </ul>
   </div>
+  <p></p>
   <div class="index-div" id="news-div">
+   <div class="index-head">政府新闻</div>
     <ul>
     </ul>
   </div>
   <div class="index-div" id="notices-div">
-    <ul>
+   <div class="index-head">通知公告</div>
+   <ul>
     </ul>
   </div>
   <div class="index-div" id="tender-div">
+   <div class="index-head">招标信息</div>
    <ul>
    </ul>
   </div>

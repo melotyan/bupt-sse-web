@@ -20,7 +20,7 @@
     <div class="content-title"><h2>招标项目列表</h2></div>
     <c:forEach items="${list}" var="tender" varStatus="status">
 
-  <div class="list-detail"><a href="/inutatccmOfTenderService/viewTenderDetail/${tender.id}">[招标]${tender.title}</a>
+  <div class="list-detail"><a id="tender-detail-a" href="/inutatccmOfTenderService/viewTenderDetail/${tender.id}">[招标]${tender.title}</a>
     <span><fmt:formatDate value="${tender.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
         &nbsp;&nbsp;
         <c:choose>
@@ -28,7 +28,7 @@
             <a href="/tenderService/listCompetitive/tid/${tender.id}">竞标情况</a>
         </c:when>
         <c:otherwise>
-            <a href="/tenderService/preCompetitiveTender/tid/${tender.id}">竞标</a>
+            <a id="tender-compe-a" href="/tenderService/preCompetitiveTender/tid/${tender.id}">竞标</a>
         </c:otherwise>
         </c:choose>
     </span>

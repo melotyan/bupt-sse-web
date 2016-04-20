@@ -71,7 +71,10 @@ function register() {
         data: $("#register-form").serialize(),
         success: function(data) {
             alert(data.map.msg);
-            changeCaptcha();
+            if (data.result == "SUCCESS")
+                location.href = "/userService/preLogin";
+            else
+                changeCaptcha();
         }
     });
 }

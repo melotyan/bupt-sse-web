@@ -3,10 +3,16 @@
  */
 $(document).ready(function() {
     getNews();
-    showNewsPic();
-
     getNotices();
     getTenderInfos();
+    //mouseHover();
+    function mouseHover() {
+        var link = $(".index-div ul li");
+        link.hover(function() {
+            link.html().hide();
+        })
+
+    }
 
     function showNewsPic() {
         $("#sItem li:not(:first)").css("display","none");
@@ -20,7 +26,7 @@ $(document).ready(function() {
                 $("#sItem li:visible").addClass("in");
                 $("#sItem li.in").next().fadeIn(500);
                 $("li.in").hide().removeClass("in")}
-        },3000); //每3秒钟切换一条，你可以根据需要更改
+        },3500); //每3秒钟切换一条，你可以根据需要更改
     }
 
     function getNews() {
@@ -28,22 +34,28 @@ $(document).ready(function() {
             url: "/newsService/listNews/data",
             type: "post",
             dataType: "text",
-            async: false,
             success: function(data) {
                 var dataObj = eval("("+data+")");
                 var count = 0;
+                var PIC_NUM = 4;
                 for (var i = 0; i < dataObj.length; i++) {
-                    if (count < 3 && dataObj[i].firstPic != "") {
+                    if (count < PIC_NUM && dataObj[i].firstPic != "") {
                         var img = $("<img>");
                         img.attr("src", dataObj[i].firstPic);
                         img.addClass("index-img");
+                        var span = $("<span>");
+                        span.html(dataObj[i].title);
+                        span.addClass("img-span");
                         var link = $("<a>");
                         link.attr("href", "/newsService/viewNewsDetail/id/" + dataObj[i].id);
                         link.append(img);
+                        link.append(span);
                         var li = $("<li>");
                         li.append(link);
                         $("#sItem").append(li);
                     }
+                    if (count == PIC_NUM)
+                        showNewsPic();
                     if (count < 10) {
                         var li = $("<li>");
                         var link = $("<a>");

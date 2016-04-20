@@ -28,7 +28,7 @@
         <td>密码：</td>
         <td>
           <input type="password" name="password"/>
-          <span style="color:red">*</span><span id="passMessage"></span>&nbsp;&nbsp;&nbsp;<span class="messinfo">6～16个字符（字母、数字、特殊符号）,区分大小写</span>
+          <span style="color:red">*</span><span id="passMessage"></span>&nbsp;&nbsp;&nbsp;<span class="messinfo">3～16个字符（字母、数字、特殊符号）,区分大小写</span>
         </td>
       </tr>
       <tr>
@@ -37,7 +37,9 @@
       </tr>
       <tr>
         <td>邮箱：</td>
-        <td><input type="text" name="email"/></td>
+        <td><input type="text" name="email"/>
+        <span style="color:red">*</span><span id="emailMessage"></span>&nbsp;&nbsp;&nbsp;<span class="messinfo">输入有效邮箱</span>
+        </td>
       </tr>
       <tr class="captcha-tr">
         <td>验证码: </td>
