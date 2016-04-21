@@ -106,9 +106,9 @@
           <li>
             <span>办事指南</span>
             <ul>
-              <li><a href="/tenderGuide">竞标申请流程</a></li>
-              <li><a href="features-shortcodes.html">意见反馈流程</a></li>
-              <li><a href="features-shortcodes.html">投诉举报流程</a></li>
+              <li><a href="/guide/tenderGuide">竞标申请流程</a></li>
+              <li><a href="/guide/suggestGuide">意见反馈流程</a></li>
+              <li><a href="/guide/complainGuide">投诉举报流程</a></li>
             </ul>
           <li>
             <span>建议反馈</span>

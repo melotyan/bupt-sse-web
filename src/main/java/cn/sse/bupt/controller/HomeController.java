@@ -16,8 +16,18 @@ public class HomeController {
         return new ModelAndView("index");
     }
 
-    @RequestMapping("tenderGuide")
+    @RequestMapping("guide/tenderGuide")
     public ModelAndView tenderGuide() {
         return new ModelAndView("tender/tender-guide");
+    }
+
+    @RequestMapping("guide/suggestGuide")
+    public ModelAndView suggestGuide() {
+        return new ModelAndView("suggestion/suggest-guide");
+    }
+
+    @RequestMapping("guide/complainGuide")
+    public ModelAndView complainGuide() {
+        return new ModelAndView("suggestion/complain-guide");
     }
 }
