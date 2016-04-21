@@ -17,18 +17,20 @@
 <div class="content-div">
   <div class="content-title">
     <h2>招标项目名称</h2>
-    <c:if test="${sessionScope.user != null && sessionScope.user.userType != 3}">
-        <span>
+      <c:choose>
+          <c:when test="${sessionScope.user != null && sessionScope.user.userType != 3}">
+              <span>
             <a href="/tenderService/listCompetitive/tid/${tender.id}"><strong>查看竞标情况</strong></a>
             <a href="#" onclick="delTender('/inutatccmOfTenderService/deleteTenderInfo/${tender.id}')"><strong>删除</strong></a>
             <a href="/inutatccmOfTenderService/preEditTenderInfo/${tender.id}"><strong>编辑</strong></a>
-        </span>
-    </c:if>
-      <c:if test="${sessionScope.user != null && sessionScope.user.userType == 3}">
-          <span>
+            </span>
+          </c:when>
+          <c:otherwise>
+              <span>
               <a href="/tenderService/preCompetitiveTender/tid/${tender.id}"><strong>竞 标 </strong></a>
           </span>
-      </c:if>
+          </c:otherwise>
+      </c:choose>
   </div>
   <p>${tender.title}</p>
   <div class="content-title"><h2>招标项目具体内容</h2></div>
