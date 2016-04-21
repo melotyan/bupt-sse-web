@@ -22,7 +22,7 @@
       <div class="content-title"><h2>请上传您的竞标文件</h2></div>
       <%--<div class="content">--%>
       <form id="upload-form" enctype="multipart/form-data">
-        <input type="hidden" name="type" value="1"/>
+        <input type="hidden" name="type" value="3"/>
         <input type="file" name="files"/>
       </form>
       <input type="button" id="btn-competitive" value="竞标"/>
