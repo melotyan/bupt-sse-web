@@ -114,8 +114,8 @@
             <span>建议反馈</span>
             <ul>
               <li><a href="/suggestionService/listSuggestions/1">群众的心声</a></li>
-              <li><a href="blog-v1.html">给领导写信</a></li>
-              <li><a href="blog-v2.html">举报违法违纪行为</a></li>
+              <li><a href="#">给领导写信</a></li>
+              <li><a href="#">举报违法违纪行为</a></li>
               <li><a href="/suggestionService/preMakeSuggestion">提出建议</a></li>
               <%--<li><span>提出政府工作建议</span>--%>
                 <%--<ul>--%>
@@ -128,7 +128,7 @@
             <ul>
               <li><a href="/userService/getPersonalInfo">我的信息</a></li>
               <li><a href="/userService/preChangePassword">修改密码</a></li>
-              <li><a href="">我的信箱</a></li>
+              <li><a href="#">我的信箱</a></li>
               <li><a href="/tenderService/listMyCompetitive">我竞标的项目</a></li>
             </ul>
           <%--<li class="donate-button ">--%>
