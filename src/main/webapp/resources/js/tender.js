@@ -96,7 +96,7 @@ $("#btn-competitive").click(function() {
             competitive();
         },
         error: function (err) {
-            alert("文件上传失败" + JSON.stringify(err));
+            alert("文件上传失败");
         }
     })
 })
