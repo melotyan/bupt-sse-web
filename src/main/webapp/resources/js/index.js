@@ -36,10 +36,11 @@ $(document).ready(function() {
             dataType: "text",
             success: function(data) {
                 var dataObj = eval("("+data+")");
+                var countImg = 0;
                 var count = 0;
                 var PIC_NUM = 4;
                 for (var i = 0; i < dataObj.length; i++) {
-                    if (count < PIC_NUM && dataObj[i].firstPic != "") {
+                    if (countImg < PIC_NUM && dataObj[i].firstPic != "") {
                         var img = $("<img>");
                         img.attr("src", dataObj[i].firstPic);
                         img.addClass("index-img");
@@ -53,8 +54,9 @@ $(document).ready(function() {
                         var li = $("<li>");
                         li.append(link);
                         $("#sItem").append(li);
+                        countImg++;
                     }
-                    if (count == PIC_NUM)
+                    if (countImg == PIC_NUM)
                         showNewsPic();
                     if (count < 10) {
                         var li = $("<li>");

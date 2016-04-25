@@ -111,12 +111,19 @@
               <li><a href="/guide/complainGuide">投诉举报流程</a></li>
             </ul>
           <li>
-            <span>建议反馈</span>
+            <span>投诉举报</span>
             <ul>
-              <li><a href="/suggestionService/listSuggestions/1">群众的心声</a></li>
+              <li><a href="/suggestionService/listSuggestions/type/1/1">群众的举报</a></li>
+              <li><a href="/suggestionService/preMakeSuggestion/type/1">举报违法违纪行为</a></li>
               <li><a href="#">给领导写信</a></li>
-              <li><a href="#">举报违法违纪行为</a></li>
-              <li><a href="/suggestionService/preMakeSuggestion">提出建议</a></li>
+            </ul>
+          <li>
+            <span>建议&求助</span>
+            <ul>
+              <li><a href="/suggestionService/listSuggestions/0/1">群众的建议</a></li>
+              <li><a href="/suggestionService/lsitSuggestions/type/2/1">群众遇到的困难</a></li>
+              <li><a href="/suggestionService/preMakeSuggestion/type/0">提出建议</a></li>
+              <li><a href="/suggestionService/preMakeSuggestion/type/1">寻求帮助</a></li>
               <%--<li><span>提出政府工作建议</span>--%>
                 <%--<ul>--%>
                   <%--<li><a href="blog-single-sidebar.html">With sidebar</a></li>--%>
