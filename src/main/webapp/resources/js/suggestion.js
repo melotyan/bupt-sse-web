@@ -16,3 +16,15 @@ $("#btn-notice").click(function () {
         }
     })
 })
+
+$("#btn-edit-notice").click(function () {
+    $.ajax({
+        url: "/suggestionService/editSuggestion",
+        type: "post",
+        data: $("#edit-suggestion-form").serialize(),
+        dataType: "json",
+        success: function (data) {
+            alert(data.map.msg);
+        }
+    })
+})

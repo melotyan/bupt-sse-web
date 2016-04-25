@@ -7,8 +7,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>提出建议</title>
+<head
+    <c:if test="${type == 0}">
+      <title>提出建议</title>
+    </c:if>
+    <c:if test="${type == 1}">
+      <title>投诉举报</title>
+    </c:if>
+    <c:if test="${type == 2}">
+      寻求帮助
+    </c:if>
     <link href="/resources/css/content.css" rel="stylesheet" type="text/css"/>
   <link href="/resources/img/favicon.gif" rel="shortcut icon">
 </head>
@@ -16,12 +24,13 @@
 <%@include file="../header.jsp"%>
 <div class="content-div">
   <form id="create-tender">
+    <input type="hidden" value="${type}" name="type"/>
     <div class="content-title">
-      <h2>建议名称</h2>
+      <h2>主题</h2>
     </div>
     <input class="title" type="text" name="title"/>
     <div class="content-title">
-      <h2>具体的建议</h2>
+      <h2>内容</h2>
     </div>
     <div class="content">
       <textarea class="content" name="content"></textarea>
