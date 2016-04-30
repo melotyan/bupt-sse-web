@@ -6,15 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-  <c:if test="${type == 0}">
+  <c:if test="${suggestion.type == 0}">
     <title>编辑建议内容</title>
   </c:if>
-  <c:if test="${type == 1}">
+  <c:if test="${suggestion.type == 1}">
     <title>编辑举报内容</title>
   </c:if>
-  <c:if test="${type == 2}">
+  <c:if test="${suggestion.type == 2}">
     <title>编辑求助内容</title>
   </c:if>
   <link href="/resources/css/content.css" rel="stylesheet" type="text/css"/>
@@ -26,10 +27,28 @@
   <form id="edit-suggestion-form">
     <input type="hidden" name="id" value="${suggestion.id}"/>
     <div class="content-title">
-      <h2>主题</h2>
+      <c:if test="${suggestion.type == 0}">
+        <h2>建议内容</h2>
+      </c:if>
+      <c:if test="${suggestion.type == 1}">
+        <h2>投诉举报内容</h2>
+      </c:if>
+      <c:if test="${suggestion.type == 2}">
+        <h2>求助内容</h2>
+      </c:if>
     </div>
     <input class="title" type="text" name="title" value="${suggestion.title}"/>
-    <div class="content-title"><h2>详情</h2></div>
+    <div class="content-title">
+      <c:if test="${suggestion.type == 0}">
+        <h2>建议内容</h2>
+      </c:if>
+      <c:if test="${suggestion.type == 1}">
+        <h2>投诉举报内容</h2>
+      </c:if>
+      <c:if test="${suggestion.type == 2}">
+        <h2>求助内容</h2>
+      </c:if>
+    </div>
     <div class="content">
       <textarea class="notice_content" name="content">${suggestion.content}</textarea>
     </div>
