@@ -217,3 +217,43 @@
     top: 550px;
     color: blue;
 }
+.mail-div {
+    width: 1200px;
+    margin: 20px auto;
+    min-height: 500px;
+}
+.mail-nav {
+    width: 10%;
+    height: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    border: 1px solid gray;
+}
+.mail-list {
+    width: 20%;
+    height: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    border: 1px solid gray;
+}
+.mail-content {
+    width: 70%;
+    height: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    border: 1px solid gray;
+
+}
+.mail-box {
+    background-color: lightskyblue;
+    margin: 1px 0;
+    font-weight: 700;
+    line-height: 20px;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+}
+.mail-box:hover {
+    background-color: dodgerblue;
+}

@@ -10,9 +10,7 @@ import cn.sse.bupt.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -30,11 +28,26 @@ public class MailboxServiceController extends BaseController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("home")
+    public ModelAndView mailHome() {
+        return new ModelAndView("mail/mail");
+    }
+
+    @RequestMapping("readMail/id{id}")
+    public MailboxModel readMail(@PathVariable Integer id) {
+        MailboxModel mailboxModel = mailboxService.readMail(id);
+        if (mailboxModel == null || mailboxModel.getUid() != getLoginUser().getId()) {
+            LOGGER.info("mailbox model is {}", mailboxModel);
+            return null;
+        }
+        return mailboxModel;
+    }
+
     @RequestMapping("viewInbox")
-    public ModelAndView viewInbox() {
+    public List<MailboxModel> viewInbox() {
         UserModel userModel = getLoginUser();
         List<MailboxModel> list = mailboxService.viewInbox(userModel.getUsername());
-        return new ModelAndView("mail/inbox", "list", list);
+        return list;
     }
 
     @RequestMapping("viewOutbox")
@@ -51,7 +64,7 @@ public class MailboxServiceController extends BaseController {
         return new ModelAndView("mail/drafts", "list", list);
     }
 
-    @RequestMapping("sendMail")
+    @RequestMapping(value = "sendMail", method = RequestMethod.POST)
     public ResultModel sendMail(@RequestParam("receiver") String receiver, @RequestParam("title") String title, @RequestParam("content") String content) {
         if (userService.findUserByUsername(receiver) == null) {
             LOGGER.info("user {} is not exists", receiver);
@@ -74,7 +87,7 @@ public class MailboxServiceController extends BaseController {
         return ResultModel.success("信件发送成功");
     }
 
-    @RequestMapping("saveDraft")
+    @RequestMapping(value = "saveDraft", method = RequestMethod.POST)
     public ResultModel saveDraft(@RequestParam("receiver") String receiver, @RequestParam("title") String title, @RequestParam("content") String content) {
         UserModel userModel = getLoginUser();
         MailboxModel mailboxModel = new MailboxModel();
@@ -89,11 +102,11 @@ public class MailboxServiceController extends BaseController {
         return ResultModel.success("信件已存入草稿箱");
     }
 
-    @RequestMapping("editDraft")
+    @RequestMapping(value = "editDraft", method = RequestMethod.POST)
     public ResultModel editDraft(@RequestParam("id") int id, @RequestParam("receiver") String receiver,
                                  @RequestParam("title") String title, @RequestParam("content") String content) {
         MailboxModel mailboxModel =mailboxService.readMail(id);
-        if (mailboxModel == null) {
+        if (mailboxModel == null || mailboxModel.getSenderStatus() != SenderStatusEnum.DRAFT.getValue()) {
             LOGGER.info("no such MailboxModel id:{}", id);
             return ResultModel.failed("此草稿已经不存在");
         }
@@ -112,10 +125,10 @@ public class MailboxServiceController extends BaseController {
         return ResultModel.success("草稿修改成功");
     }
 
-    @RequestMapping("sendDraft")
-    public ResultModel sendDraft(@RequestParam("id") int id) {
-        MailboxModel mailboxModel =mailboxService.readMail(id);
-        if (mailboxModel == null) {
+    @RequestMapping("sendDraft/id/{id}")
+    public ResultModel sendDraft(@PathVariable Integer id) {
+        MailboxModel mailboxModel = mailboxService.readMail(id);
+        if (mailboxModel == null || mailboxModel.getSenderStatus() != SenderStatusEnum.DRAFT.getValue()) {
             LOGGER.info("no such MailboxModel id:{}", id);
             return ResultModel.failed("此草稿已经不存在");
         }
@@ -124,6 +137,54 @@ public class MailboxServiceController extends BaseController {
         }
         mailboxService.sendDraft(id);
         return ResultModel.success("信件发送成功");
+    }
+
+    @RequestMapping("deleteSendedMail/id/{id}")
+    public ResultModel deleteSendedMail(@PathVariable Integer id) {
+        MailboxModel mailboxModel = mailboxService.readMail(id);
+        if (mailboxModel == null || mailboxModel.getSenderStatus() == SenderStatusEnum.DELETED.getValue()) {
+            LOGGER.info("no such mail id :{}", id);
+            return ResultModel.failed("此信件不存在");
+        }
+        if (mailboxModel.getUid() != getLoginUser().getId()) {
+            LOGGER.info("user {} has no permission to delete mail {}", getLoginUser().getUsername(), mailboxModel.getId());
+            return ResultModel.failed("对不起，您没有删除些邮件的权限");
+        }
+        mailboxService.deleteSendedMail(id);
+        return ResultModel.success("删除成功");
+    }
+
+    @RequestMapping("deleteReceivedMail/id/{id}")
+    public ResultModel deleteReceivedMail(@PathVariable Integer id) {
+        MailboxModel mailboxModel = mailboxService.readMail(id);
+        if (mailboxModel == null || mailboxModel.getReceiverStatus() == ReceiverStatusEnum.DELETED.getValue()) {
+            LOGGER.info("no such mail id :{}", id);
+            return ResultModel.failed("此信件不存在");
+        }
+        if (mailboxModel.getUid() != getLoginUser().getId()) {
+            LOGGER.info("user {} has no permission to delete mail {}", getLoginUser().getUsername(), mailboxModel.getId());
+            return ResultModel.failed("对不起，您没有删除此邮件的权限");
+        }
+        mailboxService.deleteReceivedMail(id);
+        return ResultModel.success("删除成功");
+    }
+
+    @RequestMapping("setMailReaded/id/{id}")
+    public ResultModel setMailReaded(@PathVariable Integer id) {
+        MailboxModel mailboxModel = mailboxService.readMail(id);
+        if (mailboxModel == null || mailboxModel.getReceiverStatus() == ReceiverStatusEnum.DELETED.getValue()) {
+            LOGGER.info("no such mail id :{}", id);
+            return ResultModel.failed("此信件不存在");
+        }
+        if (mailboxModel.getReceiverStatus() == ReceiverStatusEnum.READED.getValue())
+            return ResultModel.success();
+
+        if (mailboxModel.getUid() != getLoginUser().getId()) {
+            LOGGER.info("user {} has no permission to delete mail {}", getLoginUser().getUsername(), mailboxModel.getId());
+            return ResultModel.failed("对不起，您没有修改此邮件的权限");
+        }
+        mailboxService.setMailReaded(id);
+        return ResultModel.success();
     }
 
 
