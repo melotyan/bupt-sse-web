@@ -17,14 +17,18 @@
 <%@include file="../header.jsp"%>
 <div class="mail-div">
   <div class="mail-nav">
+    <div id="new-mail" class="mail-box" onclick="newMail()">新建邮件</div>
     <div id="inbox" class="mail-box" onclick="listInbox()">收件箱</div>
     <div id="outbox" class="mail-box">已发送</div>
     <div id="drafts" class="mail-box">草稿箱</div>
   </div>
   <div class="mail-list"></div>
-  <div class="mail-content"></div>
+  <div class="mail-content">
+  </div>
+  <div class="new-mail">
+  </div>
 </div>
-<%@include file="../footer.jsp"%>
 <script type="text/javascript" src="/resources/js/mail.js"></script>
+<%@include file="../footer.jsp"%>
 </body>
 </html>

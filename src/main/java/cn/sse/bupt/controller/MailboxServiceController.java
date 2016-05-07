@@ -33,7 +33,7 @@ public class MailboxServiceController extends BaseController {
         return new ModelAndView("mail/mail");
     }
 
-    @RequestMapping("readMail/id{id}")
+    @RequestMapping("readMail/id/{id}")
     public MailboxModel readMail(@PathVariable Integer id) {
         MailboxModel mailboxModel = mailboxService.readMail(id);
         if (mailboxModel == null || mailboxModel.getUid() != getLoginUser().getId()) {
