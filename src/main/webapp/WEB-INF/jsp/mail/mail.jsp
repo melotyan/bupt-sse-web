@@ -19,11 +19,13 @@
   <div class="mail-nav">
     <div id="new-mail" class="mail-box" onclick="newMail()">新建邮件</div>
     <div id="inbox" class="mail-box" onclick="listInbox()">收件箱</div>
-    <div id="outbox" class="mail-box">已发送</div>
-    <div id="drafts" class="mail-box">草稿箱</div>
+    <div id="outbox" class="mail-box" onclick="listOutbox()">已发送</div>
+    <div id="drafts" class="mail-box" onclick="listDrafts()">草稿箱</div>
   </div>
   <div class="mail-list"></div>
   <div class="mail-content">
+    <div class="m-title">信件标题:</div>
+    <div class="m-content">信件内容:</div>
   </div>
   <div class="new-mail">
   </div>

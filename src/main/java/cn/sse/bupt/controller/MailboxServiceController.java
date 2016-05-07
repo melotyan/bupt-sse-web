@@ -51,17 +51,17 @@ public class MailboxServiceController extends BaseController {
     }
 
     @RequestMapping("viewOutbox")
-    public ModelAndView viewOutbox() {
+    public List<MailboxModel> viewOutbox() {
         UserModel userModel = getLoginUser();
         List<MailboxModel> list = mailboxService.viewOutbox(userModel.getUsername());
-        return new ModelAndView("mail/outbox", "list", list);
+        return list;
     }
 
     @RequestMapping("viewDrafts")
-    public ModelAndView viewDrafts() {
+    public List<MailboxModel> viewDrafts() {
         UserModel userModel = getLoginUser();
         List<MailboxModel> list = mailboxService.viewDrafts(userModel.getUsername());
-        return new ModelAndView("mail/drafts", "list", list);
+        return list;
     }
 
     @RequestMapping(value = "sendMail", method = RequestMethod.POST)
