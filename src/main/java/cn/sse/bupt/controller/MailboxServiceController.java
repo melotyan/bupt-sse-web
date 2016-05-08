@@ -10,6 +10,7 @@ import cn.sse.bupt.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,35 +36,33 @@ public class MailboxServiceController extends BaseController {
     }
 
     @RequestMapping("readMail/id/{id}")
-    public MailboxModel readMail(@PathVariable Integer id) {
+    public ModelAndView readMail(@PathVariable Integer id) {
         MailboxModel mailboxModel = mailboxService.readMail(id);
         if (mailboxModel == null || mailboxModel.getUid() != getLoginUser().getId()) {
             LOGGER.info("mailbox model is {}", mailboxModel);
-            return null;
+            return new ModelAndView("coommon/404");
         }
-        return mailboxModel;
+        return new ModelAndView("mail/edit", "mail", mailboxModel);
     }
 
     @RequestMapping("viewInbox")
-    public List<MailboxModel> viewInbox() {
+    public ModelAndView viewInbox() {
         UserModel userModel = getLoginUser();
         List<MailboxModel> list = mailboxService.viewInbox(userModel.getUsername());
-        return list;
+        return new ModelAndView("mail/inbox", "list", list);
     }
 
     @RequestMapping("viewOutbox")
-    public List<MailboxModel> viewOutbox() {
+    public ModelAndView viewOutbox() {
         UserModel userModel = getLoginUser();
         List<MailboxModel> list = mailboxService.viewOutbox(userModel.getUsername());
-        return list;
-    }
+        return new ModelAndView("mail/outbox", "list", list);    }
 
     @RequestMapping("viewDrafts")
-    public List<MailboxModel> viewDrafts() {
+    public ModelAndView viewDrafts() {
         UserModel userModel = getLoginUser();
         List<MailboxModel> list = mailboxService.viewDrafts(userModel.getUsername());
-        return list;
-    }
+        return new ModelAndView("mail/drafts", "list", list);    }
 
     @RequestMapping(value = "sendMail", method = RequestMethod.POST)
     public ResultModel sendMail(@RequestParam("receiver") String receiver, @RequestParam("title") String title, @RequestParam("content") String content) {
