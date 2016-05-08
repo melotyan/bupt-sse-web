@@ -22,7 +22,9 @@
     <div id="outbox" class="mail-box" onclick="listOutbox()">已发送</div>
     <div id="drafts" class="mail-box" onclick="listDrafts()">草稿箱</div>
   </div>
-  <div class="mail-list"></div>
+  <div class="mail-list">
+
+  </div>
   <div class="mail-content">
     <div class="m-head">
       <div class="m-title"></div>
@@ -35,6 +37,7 @@
       </div>
     </div>
     <div class="content" id="m-content">
+      <div class=""
     </div>
   </div>
   <div class="new-mail">

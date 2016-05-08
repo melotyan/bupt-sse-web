@@ -8,6 +8,7 @@ $(document).ready(function () {
     listInbox();
 })
 
+
 function listInbox() {
     $(".mail-list").html("");
     $.ajax({
@@ -19,14 +20,17 @@ function listInbox() {
             for (var i = 0; i < dataObj.length; i++) {
                 var id = dataObj[i].id;
                 if (i == 0) {
-                    readMail(id);
+                    readMail(id, 0);
                 }
                 var div = $("<div>");
                 div.addClass("mail-box");
+                div.attr("id", "mail_" + id);
+                if (dataObj[i].receiverStatus == 1)
+                    div.addClass("mail-readed");
                 div.val(id);
                 div.html(dataObj[i].title);
                 div.click(function () {
-                    readMail($(this).val());
+                    readMail($(this).val(), 1);
                 });
                 $(".mail-list").append(div);
             }
@@ -37,7 +41,19 @@ function listInbox() {
     });
 }
 
-function readMail(id) {
+function readMail(id, setReaded) {
+    if (setReaded == 1) { //设为已读
+        $.ajax({
+            url: "/mailboxService/setMailReaded/id/" + id,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                if (data.result == "SUCCESS") {
+                    $("#mail_" + id).addClass("mail-readed");
+                }
+            }
+        })
+    }
     $.ajax({
         url: "/mailboxService/readMail/id/" + id,
         type: "get",
@@ -77,14 +93,14 @@ function listOutbox() {
             for (var i = 0; i < dataObj.length; i++) {
                 var id = dataObj[i].id;
                 if (i == 0) {
-                    readMail(id);
+                    readMail(id, 0);
                 }
                 var div = $("<div>");
                 div.addClass("mail-box");
                 div.val(id);
                 div.html(dataObj[i].title);
                 div.click(function () {
-                    readMail($(this).val());
+                    readMail($(this).val(), 0);
                 });
                 $(".mail-list").append(div);
             }
@@ -106,14 +122,14 @@ function listDrafts() {
             for (var i = 0; i < dataObj.length; i++) {
                 var id = dataObj[i].id;
                 if (i == 0) {
-                    readMail(id);
+                    readMail(id, 0);
                 }
                 var div = $("<div>");
                 div.addClass("mail-box");
                 div.val(id);
                 div.html(dataObj[i].title);
                 div.click(function () {
-                    readMail($(this).val());
+                    readMail($(this).val(), 0);
                 });
                 $(".mail-list").append(div);
             }

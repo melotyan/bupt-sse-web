@@ -250,10 +250,16 @@
 .mail-box {
     background-color: #F0F8F0;
     margin: 1px 0;
+    border: 1px lightgray solid;
     font-weight: 700;
-    line-height: 20px;
+    font-size: 15px;
+    line-height: 30px;
     font-family: \5FAE\8F6F\96C5\9ED1;
 }
+.mail-readed {
+    color:#999;
+}
+
 .mail-box:hover {
     background-color: dodgerblue;
 }
@@ -262,6 +268,7 @@
     width: 100%;
     padding: 0;
     margin: 0;
+    border: 1px solid lightgray;
 }
 #m-person-ul {
     margin: 10px;

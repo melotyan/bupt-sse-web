@@ -97,12 +97,12 @@
               </li>
             </ul>
           <li>
-            <span>民意征集</span>
+            <span>办事指南</span>
             <ul>
-              <li><a href="">参与投票</a></li>
-              <li><a href="">发起投票</a></li>
+              <li><a href="/guide/tenderGuide">竞标申请流程</a></li>
+              <li><a href="/guide/suggestGuide">意见反馈流程</a></li>
+              <li><a href="/guide/complainGuide">投诉举报流程</a></li>
             </ul>
-          </li>
           <li>
             <span>投诉举报</span>
             <ul>
@@ -117,34 +117,22 @@
               <li><a href="/suggestionService/listSuggestions/type/2/1">群众遇到的困难</a></li>
               <li><a href="/suggestionService/preMakeSuggestion/type/0">提出建议</a></li>
               <li><a href="/suggestionService/preMakeSuggestion/type/2">寻求帮助</a></li>
-              <%--<li><span>提出政府工作建议</span>--%>
-                <%--<ul>--%>
-                  <%--<li><a href="blog-single-sidebar.html">With sidebar</a></li>--%>
-                  <%--<li><a href="blog-single-fullwidth.html">Full width</a></li>--%>
-                <%--</ul>--%>
             </ul>
-
           <li>
             <span>个人中心</span>
             <ul>
               <li><a href="/userService/getPersonalInfo">我的信息</a></li>
               <li><a href="/userService/preChangePassword">修改密码</a></li>
               <li><a href="/tenderService/listMyCompetitive">我竞标的项目</a></li>
-              <li><a href="/mailboxService/home">个人信箱</a></li>
-                <%--<span>我的信箱</span>--%>
-                <%--<ul>--%>
-                  <%--<li><a href="#">收件箱</a></li>--%>
-                  <%--<li><a href="#">已发送邮件</a></li>--%>
-                  <%--<li><a href="#">草稿箱</a></li>--%>
-                <%--</ul>--%>
+              <li><a href="#">参与投票</a></li>
             </ul>
           <li>
-            <span>办事指南</span>
-            <ul>
-              <li><a href="/guide/tenderGuide">竞标申请流程</a></li>
-              <li><a href="/guide/suggestGuide">意见反馈流程</a></li>
-              <li><a href="/guide/complainGuide">投诉举报流程</a></li>
-            </ul>
+          <span>我的信箱</span>
+          <ul>
+            <li><a href="/mailboxService/viewInbox">收件箱</a></li>
+            <li><a href="/mailboxService/viewOutbox">已发送邮件</a></li>
+            <li><a href="/mailboxService/viewDrafts">草稿箱</a></li>
+          </ul>
         </ul>
       </div>
     </div>
