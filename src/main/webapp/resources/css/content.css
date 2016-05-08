@@ -248,7 +248,7 @@
 
 }
 .mail-box {
-    background-color: lightskyblue;
+    background-color: #F0F8F0;
     margin: 1px 0;
     font-weight: 700;
     line-height: 20px;
@@ -256,4 +256,41 @@
 }
 .mail-box:hover {
     background-color: dodgerblue;
+}
+.m-head {
+    background-color: #F0F8F0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+#m-person-ul {
+    margin: 10px;
+    padding: 0;
+    list-style: none;
+    color: #999;
+}
+#m-person-ul li {
+    line-height: 25px;
+    margin: 0;
+    padding: 0;
+    font-family: \5FAE\8F6F\96C5\9ED1 !important;
+}
+.m-title {
+    width: 100%;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.m-person-info {
+    width: 100%;
+}
+#m-content {
+    min-height: 0;
+    margin-left: 10px;
+    margin-top: 10px;
+    /*font-family: \5FAE\8F6F\96C5\9ED1 !important;*/
+    /*font-size: 16px;*/
+    /*line-height: 40px;*/
+    /*background: url(/resources/img/body-background.jpg) repeat;*/
 }

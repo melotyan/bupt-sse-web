@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -83,6 +84,7 @@ public class MailboxServiceController extends BaseController {
         mailboxModel.setReceiverStatus(ReceiverStatusEnum.NOT_READ.getValue());
         mailboxModel.setTitle(title);
         mailboxModel.setContent(content);
+        mailboxModel.setSendTime(new Date());
         mailboxService.sendMail(mailboxModel);
         return ResultModel.success("信件发送成功");
     }
@@ -98,6 +100,7 @@ public class MailboxServiceController extends BaseController {
         mailboxModel.setReceiverStatus(ReceiverStatusEnum.NOT_READ.getValue());
         mailboxModel.setTitle(title);
         mailboxModel.setContent(content);
+        mailboxModel.setSendTime(new Date());
         mailboxService.sendMail(mailboxModel);
         return ResultModel.success("信件已存入草稿箱");
     }

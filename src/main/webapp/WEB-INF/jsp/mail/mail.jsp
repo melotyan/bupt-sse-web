@@ -24,8 +24,18 @@
   </div>
   <div class="mail-list"></div>
   <div class="mail-content">
-    <div class="m-title">信件标题:</div>
-    <div class="m-content">信件内容:</div>
+    <div class="m-head">
+      <div class="m-title"></div>
+      <div class="m-person-info">
+        <ul id="m-person-ul">
+          <li id="sender-li"></li>
+          <li id="receiver-li"></li>
+          <li id="send-time"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="content" id="m-content">
+    </div>
   </div>
   <div class="new-mail">
   </div>
