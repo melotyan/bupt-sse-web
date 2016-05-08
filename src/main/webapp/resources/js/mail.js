@@ -20,11 +20,11 @@ function listInbox() {
                 }
                 var div = $("<div>");
                 div.addClass("mail-box");
+                div.val(id);
                 div.html(dataObj[i].title);
                 div.click(function () {
-                    readMail(id);
+                    readMail($(this).val());
                 });
-                var link = $("<a>");
                 $(".mail-list").append(div);
             }
         },
@@ -79,11 +79,11 @@ function listOutbox() {
                 }
                 var div = $("<div>");
                 div.addClass("mail-box");
+                div.val(id);
                 div.html(dataObj[i].title);
                 div.click(function () {
-                    readMail(id);
+                    readMail($(this).val());
                 });
-                var link = $("<a>");
                 $(".mail-list").append(div);
             }
         },
@@ -108,11 +108,11 @@ function listDrafts() {
                 }
                 var div = $("<div>");
                 div.addClass("mail-box");
+                div.val(id);
                 div.html(dataObj[i].title);
                 div.click(function () {
-                    readMail(id);
+                    readMail($(this).val());
                 });
-                var link = $("<a>");
                 $(".mail-list").append(div);
             }
         },
