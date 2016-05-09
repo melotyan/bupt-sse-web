@@ -10,7 +10,6 @@ import cn.sse.bupt.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,7 +41,32 @@ public class MailboxServiceController extends BaseController {
             LOGGER.info("mailbox model is {}", mailboxModel);
             return new ModelAndView("coommon/404");
         }
+        return new ModelAndView("mail/detail", "mail", mailboxModel);
+    }
+
+    @RequestMapping("preEditDraft/id/{id}")
+    public ModelAndView preEditDraft(@PathVariable Integer id) {
+        MailboxModel mailboxModel = mailboxService.readMail(id);
+        if (mailboxModel == null || mailboxModel.getUid() != getLoginUser().getId()) {
+            LOGGER.info("cannot find mail or mailUid not equal to loginUser id mailId:{}", id);
+            return new ModelAndView("common/404");
+        }
         return new ModelAndView("mail/edit", "mail", mailboxModel);
+
+    }
+    @RequestMapping("preResponseMail/id/{id}")
+    public ModelAndView preResponseMail(@PathVariable Integer id) {
+        MailboxModel mailboxModel = mailboxService.readMail(id);
+        if (mailboxModel == null || mailboxModel.getUid() != getLoginUser().getId()) {
+            LOGGER.info("no such mail id:{}", id);
+            return new ModelAndView("common/404");
+        }
+        return new ModelAndView("mail/create", "mail", mailboxModel);
+    }
+
+    @RequestMapping("preMakeMail")
+    public ModelAndView preMakeMail(@RequestParam(value = "receiver", defaultValue = "") String receiver) {
+        return new ModelAndView("mail/create", "receiver", receiver);
     }
 
     @RequestMapping("viewInbox")
@@ -89,7 +113,7 @@ public class MailboxServiceController extends BaseController {
     }
 
     @RequestMapping(value = "saveDraft", method = RequestMethod.POST)
-    public ResultModel saveDraft(@RequestParam("receiver") String receiver, @RequestParam("title") String title, @RequestParam("content") String content) {
+    public ResultModel saveDraft(@RequestParam(value="receiver", defaultValue = "") String receiver, @RequestParam(value = "title", defaultValue = "") String title, @RequestParam(value = "content", defaultValue = "") String content) {
         UserModel userModel = getLoginUser();
         MailboxModel mailboxModel = new MailboxModel();
         mailboxModel.setUid(userModel.getId());

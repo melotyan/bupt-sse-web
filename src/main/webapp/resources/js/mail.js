@@ -68,6 +68,32 @@ function readMail(id, setReaded) {
     })
 }
 
+function sendMail() {
+    $.ajax({
+        url: "/mailboxService/sendMail",
+        type: "post",
+        data: $("#mail-create-form").serialize(),
+        dataType: "json",
+        success: function (data) {
+            alert(data.map.msg);
+            if (data.result == "SUCCESS")
+                location.href = "/mailboxService/viewOutbox";
+        }
+    })
+}
+function saveDraft() {
+    $.ajax({
+        url: "/mailboxService/saveDraft",
+        type: "post",
+        data: $("#mail-create-form").serialize(),
+        dataType: "json",
+        success: function (data) {
+            alert(data.map.msg);
+            if (data.result == "SUCCESS")
+                location.href = "/mailboxService/viewDrafts";
+        }
+    })
+}
 function formatDate (strTime) {
     var date = new Date(strTime);
     return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate() + " " + date.getHours() +
