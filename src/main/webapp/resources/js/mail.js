@@ -94,6 +94,60 @@ function saveDraft() {
         }
     })
 }
+function saveDraft() {
+    $.ajax({
+        url: "mailboxService/"
+    })
+}
+function delMail(url, type) {
+    $.ajax({
+        url: url,
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            alert(data.map.msg);
+            if (data.result == "SUCCESS") {
+                if (type == 0) //回到收信箱
+                    location.href = "/mailboxService/viewInbox";
+                else if (type == 1) //回到发信箱
+                    location.href = "/mailboxService/viewOutbox";
+                else //回到草稿箱
+                    location.href = "/mailboxService/viewDrafts";
+            }
+        }
+    })
+}
+function editDraft(type) {
+    $.ajax({
+        url: "/mailboxService/editDraft",
+        type: "post",
+        data: $("#mail-edit-form").serialize(),
+        dataType: "json",
+        async: "false",
+        success: function (data) {
+            if (data.success == "FAILED")
+                alert(data.map.msg);
+            else {
+                if (type == 0) //此草稿不用发送
+                    alert(data.map.msg);
+            }
+        }
+    })
+}
+function sendDraft(id) {
+    editDraft(1);
+    $.ajax({
+        url: "/mailboxService/sendDraft/id/" + id,
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            alert(data.map.msg);
+            if (data.result == "SUCCESS")
+                location.href = "/mailboxService/viewOutbox";
+        }
+    })
+}
+
 function formatDate (strTime) {
     var date = new Date(strTime);
     return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate() + " " + date.getHours() +

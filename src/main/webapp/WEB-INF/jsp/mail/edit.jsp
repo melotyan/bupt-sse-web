@@ -15,27 +15,38 @@
 <body class="sticky-header-on tablet-sticky-header">
 <%@include file="../header.jsp"%>
 <div class="content-div">
-  <form id="eidt-notice-form">
-    <input type="hidden" name="id" value="${notice.id}"/>
-    <div class="content-title">
-      <h2>标题</h2>
+  <form id="mail-edit-form">
+  <div class="content-title">
+    <h2>信件编辑</h2>
+    <c:if test="${sessionScope.user != null && sessionScope.user.username eq mail.senderName}">
+            <span>
+                <a href="#" onclick="delMail('/mailboxService/deleteSendedMail/id/${mail.id}', 2)"><strong>删除此草稿</strong></a>
+                <a href="#" onclick="editDraft(0)"><strong>存草稿</strong></a>
+            </span>
+    </c:if>
+  </div>
+  <div class="m-head">
+    <div class="m-title"></div>
+    <div class="m-person-info">
+      <ul id="m-person-ul">
+        <li>标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题:&nbsp;&nbsp;&nbsp;<input type="text" name="title" value="${mail.title}"/></li>
+        <li id="receiver-li">
+          收&nbsp;件&nbsp;人:&nbsp;&nbsp;
+          <input type="text" name="receiver" value="${mail.senderName}"/>
+        </li>
+      </ul>
     </div>
-    <input class="title" type="text" name="title" value="${notice.title}"/>
-    <div class="content-title"><h2>内容</h2></div>
-    <div class="content">
-      <textarea class="notice_content" name="content">${notice.content}</textarea>
-    </div>
+  </div>
+  <div class="content">
+    <textarea class="m_content" name="content">
+      ${mail.content}
+    </textarea>
+  </div>
+    <input type="hidden" name="id" value="${mail.id}"/>
   </form>
-  <c:if test="${fileMap.keySet() != null}">
-    <div class="content-title"><h2>附件</h2></div>
-    <div class="content-file">
-      <c:forEach items="${fileMap.keySet()}" var="key">
-        <p><a href="${key}" download="${fileMap.get(key)}">${fileMap.get(key)}</a></p>
-      </c:forEach>
-  </c:if>
-  <input id="btn-edit-notice" type="button" value="修改">
+  <input id="btn-edit-notice" type="button" onclick="sendDraft(${mail.id})" value="发送"/>
 </div>
+<script src="/resources/js/mail.js" type="text/javascript"></script>
 <%@include file="../footer.jsp"%>
-<script src="/resources/js/notice.js" type="text/javascript"></script>
 </body>
 </html>
