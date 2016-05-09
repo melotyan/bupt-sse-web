@@ -132,6 +132,8 @@
             <li><a href="/mailboxService/viewInbox">收件箱</a></li>
             <li><a href="/mailboxService/viewOutbox">已发送邮件</a></li>
             <li><a href="/mailboxService/viewDrafts">草稿箱</a></li>
+            <li><a href="/mailboxService/preMakeMail">写信</a></li>
+            <li><a href="/mailboxService/preMakeMail?receiver=leader">给区长写信</a></li>
           </ul>
         </ul>
       </div>
