@@ -18,10 +18,15 @@
   <form id="mail-edit-form">
   <div class="content-title">
     <h2>信件编辑</h2>
-    <c:if test="${sessionScope.user != null && sessionScope.user.username eq mail.senderName}">
+    <c:if test="${sessionScope.user != null && sessionScope.user.id eq mail.uid}">
             <span>
+              <c:if test="${mail.senderStatus eq 1}"> <!--这已经是一个草稿了-->
                 <a href="#" onclick="delMail('/mailboxService/deleteSendedMail/id/${mail.id}', 2)"><strong>删除此草稿</strong></a>
                 <a href="#" onclick="editDraft(0)"><strong>存草稿</strong></a>
+              </c:if>
+              <c:if test="${mail.senderStatus eq 0}"><!--这是已经发送出去的,准备再次发一次-->
+                <a href="#" onclick="saveDraftEdit()"><strong>存草稿</strong></a>
+              </c:if>
             </span>
     </c:if>
   </div>
@@ -32,7 +37,7 @@
         <li>标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题:&nbsp;&nbsp;&nbsp;<input type="text" name="title" value="${mail.title}"/></li>
         <li id="receiver-li">
           收&nbsp;件&nbsp;人:&nbsp;&nbsp;
-          <input type="text" name="receiver" value="${mail.senderName}"/>
+          <input type="text" name="receiver" value="${mail.receiverName}"/>
         </li>
       </ul>
     </div>
@@ -44,7 +49,12 @@
   </div>
     <input type="hidden" name="id" value="${mail.id}"/>
   </form>
-  <input id="btn-edit-notice" type="button" onclick="sendDraft(${mail.id})" value="发送"/>
+  <c:if test="${mail.senderStatus eq 1}"> <!--这已经是一个草稿了-->
+    <input id="btn-edit-notice" type="button" onclick="sendDraft(${mail.id})" value="发送"/>
+  </c:if>
+  <c:if test="${mail.senderStatus eq 0}"><!--这是已经发送出去的,准备再次发一次-->
+  <input id="btn-edit-notice" type="button" onclick="sendMailEdit(${mail.id})" value="发送"/>
+</c:if>
 </div>
 <script src="/resources/js/mail.js" type="text/javascript"></script>
 <%@include file="../footer.jsp"%>

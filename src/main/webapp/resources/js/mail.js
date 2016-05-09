@@ -81,6 +81,19 @@ function sendMail() {
         }
     })
 }
+function sendMailEdit() {
+    $.ajax({
+        url: "/mailboxService/sendMail",
+        type: "post",
+        data: $("#mail-edit-form").serialize(),
+        dataType: "json",
+        success: function (data) {
+            alert(data.map.msg);
+            if (data.result == "SUCCESS")
+                location.href = "/mailboxService/viewOutbox";
+        }
+    })
+}
 function saveDraft() {
     $.ajax({
         url: "/mailboxService/saveDraft",
@@ -94,11 +107,20 @@ function saveDraft() {
         }
     })
 }
-function saveDraft() {
+function saveDraftEdit() {
     $.ajax({
-        url: "mailboxService/"
+        url: "/mailboxService/saveDraft",
+        type: "post",
+        data: $("#mail-edit-form").serialize(),
+        dataType: "json",
+        success: function (data) {
+            alert(data.map.msg);
+            if (data.result == "SUCCESS")
+                location.href = "/mailboxService/viewDrafts";
+        }
     })
 }
+
 function delMail(url, type) {
     $.ajax({
         url: url,
@@ -128,8 +150,10 @@ function editDraft(type) {
             if (data.success == "FAILED")
                 alert(data.map.msg);
             else {
-                if (type == 0) //此草稿不用发送
+                if (type == 0) {//此草稿不用发送
                     alert(data.map.msg);
+                    location.href = "/mailboxService/viewDrafts";
+                }
             }
         }
     })

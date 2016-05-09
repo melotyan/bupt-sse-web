@@ -213,5 +213,24 @@ public class MailboxServiceController extends BaseController {
         return ResultModel.success();
     }
 
+    @RequestMapping("deleteMail/id/{id}")
+    public ResultModel deleteMail(@PathVariable Integer id) {
+        MailboxModel mailboxModel = mailboxService.readMail(id);
+        UserModel userModel = getLoginUser();
+        if (mailboxModel == null) {
+            LOGGER.info("mail id :{} is not exists", id);
+            return ResultModel.failed("信件不存在");
+        }
+        if (mailboxModel.getUid() != userModel.getId()) {
+            LOGGER.info("user id:{} has no permission to delete mail {}", userModel.getId(), mailboxModel.getId());
+            return ResultModel.failed("没有删除权限");
+        }
+        if (userModel.getUsername().equals(mailboxModel.getReceiverName()))
+            deleteReceivedMail(id);
+        if (userModel.getUsername().equals(mailboxModel.getSenderName()))
+            deleteSendedMail(id);
+        return ResultModel.success("删除信件成功");
+    }
+
 
 }
