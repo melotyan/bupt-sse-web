@@ -108,7 +108,7 @@
             <ul>
               <li><a href="/suggestionService/listSuggestions/type/1/1">群众的举报</a></li>
               <li><a href="/suggestionService/preMakeSuggestion/type/1">举报违法违纪行为</a></li>
-              <li><a href="#">给领导写信</a></li>
+              <%--<li><a href="#">给领导写信</a></li>--%>
             </ul>
           <li>
             <span>建议&求助</span>
@@ -124,7 +124,7 @@
               <li><a href="/userService/getPersonalInfo">我的信息</a></li>
               <li><a href="/userService/preChangePassword">修改密码</a></li>
               <li><a href="/tenderService/listMyCompetitive">我竞标的项目</a></li>
-              <li><a href="#">参与投票</a></li>
+              <%--<li><a href="#">参与投票</a></li>--%>
             </ul>
           <li>
           <span>我的信箱</span>
