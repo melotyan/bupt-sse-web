@@ -20,7 +20,7 @@
 <div class="content-div">
   <div class="content-title">
     <h2>信件详情</h2>
-    <c:if test="${sessionScope.user != null && sessionScope.user.id eq mail.uid}">
+    <c:if test="${sessionScope.user != null}">
             <span>
               <c:if test="${sessionScope.user.username eq mail.receiverName}">
                 <a href="#" onclick="delMail('/mailboxService/deleteReceivedMail/id/${mail.id}', 0)"><strong>删除</strong></a>

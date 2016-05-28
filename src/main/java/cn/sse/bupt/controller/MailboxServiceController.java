@@ -141,14 +141,14 @@ public class MailboxServiceController extends BaseController {
             LOGGER.info("no such MailboxModel id:{}", id);
             return ResultModel.failed("此草稿已经不存在");
         }
-        if (userService.findUserByUsername(receiver) == null) {
-            LOGGER.info("user {} is not exists", receiver);
-            return ResultModel.failed("收件人不存在，请重新确认");
-        }
-        if (title == null || title.equals(""))
-            return ResultModel.failed("信件标题不能为空");
-        if (content == null || content.equals(""))
-            return ResultModel.failed("信件内容不能为空");
+//        if (userService.findUserByUsername(receiver) == null) {
+//            LOGGER.info("user {} is not exists", receiver);
+//            return ResultModel.failed("收件人不存在，请重新确认");
+//        }
+//        if (title == null || title.equals(""))
+//            return ResultModel.failed("信件标题不能为空");
+//        if (content == null || content.equals(""))
+//            return ResultModel.failed("信件内容不能为空");
         if (mailboxModel.getUid() != getLoginUser().getId()) {
             return ResultModel.failed("对不起,您没有修改权限");
         }
