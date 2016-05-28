@@ -37,9 +37,14 @@ public class MailboxServiceController extends BaseController {
     @RequestMapping("readMail/id/{id}")
     public ModelAndView readMail(@PathVariable Integer id) {
         MailboxModel mailboxModel = mailboxService.readMail(id);
-        if (mailboxModel == null || mailboxModel.getUid() != getLoginUser().getId()) {
-            LOGGER.info("mailbox model is {}", mailboxModel);
-            return new ModelAndView("coommon/404");
+        if (mailboxModel == null) {
+            LOGGER.info("mailbox model is null, id:{}", id);
+            return new ModelAndView("common/404");
+        }
+        String username = getLoginUser().getUsername();
+        if (!mailboxModel.getReceiverName().equals(username) && !mailboxModel.getSenderName().equals(username)) {
+            LOGGER.info("login user is {}", username);
+            return new ModelAndView("common/404");
         }
         return new ModelAndView("mail/detail", "mail", mailboxModel);
     }
@@ -57,7 +62,7 @@ public class MailboxServiceController extends BaseController {
     @RequestMapping("preResponseMail/id/{id}")
     public ModelAndView preResponseMail(@PathVariable Integer id) {
         MailboxModel mailboxModel = mailboxService.readMail(id);
-        if (mailboxModel == null || mailboxModel.getUid() != getLoginUser().getId()) {
+        if (mailboxModel == null || !mailboxModel.getReceiverName().equals(getLoginUser().getUsername())) {
             LOGGER.info("no such mail id:{}", id);
             return new ModelAndView("common/404");
         }
@@ -187,7 +192,7 @@ public class MailboxServiceController extends BaseController {
             LOGGER.info("no such mail id :{}", id);
             return ResultModel.failed("此信件不存在");
         }
-        if (mailboxModel.getUid() != getLoginUser().getId()) {
+        if (!mailboxModel.getReceiverName().equals(getLoginUser().getUsername())) {
             LOGGER.info("user {} has no permission to delete mail {}", getLoginUser().getUsername(), mailboxModel.getId());
             return ResultModel.failed("对不起，您没有删除此邮件的权限");
         }
@@ -205,32 +210,12 @@ public class MailboxServiceController extends BaseController {
         if (mailboxModel.getReceiverStatus() == ReceiverStatusEnum.READED.getValue())
             return ResultModel.success();
 
-        if (mailboxModel.getUid() != getLoginUser().getId()) {
+        if (!mailboxModel.getReceiverName().equals(getLoginUser().getUsername())) {
             LOGGER.info("user {} has no permission to delete mail {}", getLoginUser().getUsername(), mailboxModel.getId());
             return ResultModel.failed("对不起，您没有修改此邮件的权限");
         }
         mailboxService.setMailReaded(id);
         return ResultModel.success();
     }
-
-    @RequestMapping("deleteMail/id/{id}")
-    public ResultModel deleteMail(@PathVariable Integer id) {
-        MailboxModel mailboxModel = mailboxService.readMail(id);
-        UserModel userModel = getLoginUser();
-        if (mailboxModel == null) {
-            LOGGER.info("mail id :{} is not exists", id);
-            return ResultModel.failed("信件不存在");
-        }
-        if (mailboxModel.getUid() != userModel.getId()) {
-            LOGGER.info("user id:{} has no permission to delete mail {}", userModel.getId(), mailboxModel.getId());
-            return ResultModel.failed("没有删除权限");
-        }
-        if (userModel.getUsername().equals(mailboxModel.getReceiverName()))
-            deleteReceivedMail(id);
-        if (userModel.getUsername().equals(mailboxModel.getSenderName()))
-            deleteSendedMail(id);
-        return ResultModel.success("删除信件成功");
-    }
-
 
 }
