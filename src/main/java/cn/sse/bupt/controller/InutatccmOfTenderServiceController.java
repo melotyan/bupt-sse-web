@@ -51,7 +51,11 @@ public class InutatccmOfTenderServiceController extends BaseController {
 
     @RequestMapping(value = "createTenderInfo", method = RequestMethod.POST)
     public ResultModel makeTenderInfo(@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("fileUrl") String fileUrl) {
-        InutatccmOfTenderModel inutatccmOfTenderModel = new InutatccmOfTenderModel();
+        if (title.equals(""))
+            return ResultModel.failed("标题不能为空");
+        if (content.equals(""))
+            return ResultModel.failed("内容不能为空");
+		InutatccmOfTenderModel inutatccmOfTenderModel = new InutatccmOfTenderModel();
         inutatccmOfTenderModel.setUid(getLoginUser().getId());
         inutatccmOfTenderModel.setTitle(title);
         inutatccmOfTenderModel.setContent(content);
@@ -74,7 +78,7 @@ public class InutatccmOfTenderServiceController extends BaseController {
             return ResultModel.failed("没有删除权限");
         }
         inutatccmOfTenderService.deleteTenderInfo(id);
-        return ResultModel.success("删除成功");
+        return ResultModel.success("公告: " + inutatccmOfTenderModel.getTitle() + " 删除成功");
     }
 
     @RequestMapping("preEditTenderInfo/{id}")
@@ -97,8 +101,14 @@ public class InutatccmOfTenderServiceController extends BaseController {
             LOGGER.info("no such tender id:{} in edit method", id);
             return ResultModel.failed("不存在相应的招标信息");
         }
+		UserModel userModel = getLoginUser();
+		if (userModel.getUserType() != UserTypeEnum.EXAMINER.getValue() &&
+                userModel.getId() != inutatccmOfTenderModel.getUid()) {
+            LOGGER.info("user:{} can't not access to delete tender:{}", userModel.getId(), inutatccmOfTenderModel.getId());
+            return ResultModel.failed("没有修改权限");
+        }
         inutatccmOfTenderService.editTenderInfo(id, title, content, inutatccmOfTenderModel.getFileUrl());
-        return ResultModel.success("修改成功");
+        return ResultModel.success("招标信息:" + title + " 修改成功");
     }
 
     @RequestMapping("viewTenderDetail/{id}")

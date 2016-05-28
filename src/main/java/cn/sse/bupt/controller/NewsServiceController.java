@@ -107,7 +107,7 @@ public class NewsServiceController extends BaseController {
         }
         newsService.deleteNews(id);
         LOGGER.info("delete success");
-        return ResultModel.success("删除成功");
+        return ResultModel.success("新闻:" + newsModel.getTitle() + " 删除成功");
     }
 
     @RequestMapping("preUpdateNews/id/{id}")
@@ -137,7 +137,7 @@ public class NewsServiceController extends BaseController {
         newsModel.setContent(content);
         newsModel.setUpdateUid(userModel.getId());
         newsService.editNews(newsModel);
-        return ResultModel.success("编辑成功");
+        return ResultModel.success("新闻: " + title + " 编辑成功");
     }
 
 }

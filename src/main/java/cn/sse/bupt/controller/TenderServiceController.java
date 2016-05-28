@@ -81,6 +81,12 @@ public class TenderServiceController extends BaseController {
             LOGGER.info("no such tender:{}", tid);
             return new ModelAndView("common/404");
         }
+		UserModel userModel = getLoginUser();
+		if (userModel.getUserType() != UserTypeEnum.EXAMINER.getValue() &&
+                userModel.getUserType() != UserTypeEnum.CLERK.getValue()) {
+            LOGGER.info("user:{} can't not access to list competitive info", userModel.getId());
+            return new ModelAndView("common/404");
+        }
         List<TenderModel> list = tenderService.listTenderByTid(tid);
         ModelAndView modelAndView = new ModelAndView("tender/list-competitive");
         modelAndView.addObject("list", list);

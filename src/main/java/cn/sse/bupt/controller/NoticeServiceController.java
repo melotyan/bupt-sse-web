@@ -44,7 +44,11 @@ public class NoticeServiceController extends BaseController {
 
     @RequestMapping("publishNotice")
     public ResultModel publishNotice(@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("files")String files) {
-        UserModel userModel = getLoginUser();
+        if (title.equals(""))
+            return ResultModel.failed("标题不能为空");
+        if (content.equals(""))
+            return ResultModel.failed("内容不能为空");
+		UserModel userModel = getLoginUser();
         NoticeModel noticeModel = new NoticeModel();
         noticeModel.setTitle(title);
         noticeModel.setContent(content);
@@ -95,7 +99,7 @@ public class NoticeServiceController extends BaseController {
         }
         noticeService.deleteNotice(id);
         LOGGER.info("success delete notice {}", id);
-        return ResultModel.success();
+        return ResultModel.success("公告: " + noticeModel.getTitle() + " 删除成功");
     }
 
     @RequestMapping("updateNotice")
@@ -109,7 +113,7 @@ public class NoticeServiceController extends BaseController {
             return ResultModel.failed("没有相关权限");
         }
         noticeService.updateNotice(id, userModel.getId(), title, content);
-        return ResultModel.success();
+        return ResultModel.success("公告: " + title + " 编辑成功");
     }
 
     @RequestMapping("preUpdateNotice/{id}")

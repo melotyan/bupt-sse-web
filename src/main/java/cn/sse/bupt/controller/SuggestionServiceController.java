@@ -30,7 +30,11 @@ public class SuggestionServiceController extends BaseController {
 
     @RequestMapping("makeSuggestion")
     public ResultModel makeSuggestion(@RequestParam(value = "title", defaultValue = "") String title, @RequestParam(value = "content", defaultValue = "") String content, @RequestParam(value = "type") int type) {
-        int uid = getLoginUser().getId();
+        if (title.equals(""))
+            return ResultModel.failed("标题不能为空");
+        if (content.equals(""))
+            return ResultModel.failed("内容不能为空");
+		int uid = getLoginUser().getId();
         SuggestionModel suggestionModel = new SuggestionModel();
         suggestionModel.setUid(uid);
         suggestionModel.setTitle(title);
@@ -84,7 +88,7 @@ public class SuggestionServiceController extends BaseController {
             return ResultModel.failed("没有删除权限");
         }
         suggestionService.deleteSuggestion(id);
-        return ResultModel.success();
+        return ResultModel.success("反馈:" + suggestionModel.getTitle() + " 删除成功");
     }
 
     @RequestMapping("preEditSuggestion/id/{id}")
@@ -109,6 +113,6 @@ public class SuggestionServiceController extends BaseController {
             return ResultModel.failed("没有编辑权限");
         }
         suggestionService.editSuggestion(id, title, content);
-        return ResultModel.success("编辑成功");
+        return ResultModel.success("反馈:" + title + " 编辑成功");
     }
 }
