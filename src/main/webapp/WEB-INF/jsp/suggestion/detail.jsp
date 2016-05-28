@@ -36,7 +36,7 @@
       </c:if>
       <c:if test="${sessionScope.user != null && sessionScope.user.id == suggestion.uid}">
             <span>
-                <a href="#" onclick="delNotice('/suggestionService/deleteSuggestion/${suggestion.id}')"><strong>删除</strong></a>
+                <a href="#" onclick="delSuggestion(${suggestion.id})"><strong>删除</strong></a>
                 <a href="/suggestionService/preEditSuggestion/id/${suggestion.id}"><strong>编辑</strong></a>
             </span>
       </c:if>
@@ -55,6 +55,7 @@
     </div>
     <div class="content" id="detail-text">${suggestion.content}</div>
   </div>
+  <script src="/resources/js/suggestion.js" type="text/javascript"></script>
   <%@include file="../footer.jsp"%>
 </body>
 </html>

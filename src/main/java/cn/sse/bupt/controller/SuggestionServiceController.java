@@ -43,7 +43,9 @@ public class SuggestionServiceController extends BaseController {
         suggestionModel.setCreateDate(new Date());
         suggestionService.makeSuggestion(suggestionModel);
         LOGGER.info("user {} make a suggestion success", uid);
-        return ResultModel.success();
+        ResultModel resultModel = ResultModel.success();
+        resultModel.put("type", type);
+        return resultModel;
     }
 
     @RequestMapping("preMakeSuggestion/type/{type}")
@@ -88,7 +90,9 @@ public class SuggestionServiceController extends BaseController {
             return ResultModel.failed("没有删除权限");
         }
         suggestionService.deleteSuggestion(id);
-        return ResultModel.success("反馈:" + suggestionModel.getTitle() + " 删除成功");
+        ResultModel resultModel = ResultModel.success("反馈:" + suggestionModel.getTitle() + " 删除成功");
+        resultModel.put("type", suggestionModel.getType());
+        return resultModel;
     }
 
     @RequestMapping("preEditSuggestion/id/{id}")

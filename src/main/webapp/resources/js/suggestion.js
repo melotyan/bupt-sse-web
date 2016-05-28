@@ -9,7 +9,7 @@ $("#btn-notice").click(function () {
         data: $('#create-tender').serialize(),
         success: function (json) {
             alert("发布成功");
-            location.href='/suggestionService/listSuggestions/1';
+            location.href='/suggestionService/listSuggestions/type/' + json.map.type + '/1';
         },
         err: function(err) {
             alert("发布失败");
@@ -28,3 +28,16 @@ $("#btn-edit-notice").click(function () {
         }
     })
 })
+
+function delSuggestion(id) {
+    $.ajax({
+        url: "/suggestionService/deleteSuggestion/" + id,
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            alert(data.map.msg);
+            location.href='/suggestionService/listSuggestions/type/' + data.map.type + '/1';
+        }
+    })
+
+}
