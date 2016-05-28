@@ -58,7 +58,7 @@ function delNotice(url) {
     $.get(url,
     function(data) {
         if (data.result == "SUCCESS") {
-            alert("删除成功");
+            alert(data.map.msg);
             location.href="/noticeService/listAllNotices/1";
         }else
             alert(data.map.msg);
@@ -73,7 +73,7 @@ $("#btn-edit-notice").click(function(){
         data: $("#eidt-notice-form").serialize(),
         success: function(data) {
             if (data.result == "SUCCESS") {
-                alert("修改成功");
+                alert(data.map.msg);
                 location.href="/noticeService/listAllNotices/1";
             } else {
                 alert(data.map.msg);

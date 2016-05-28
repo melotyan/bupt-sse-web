@@ -78,7 +78,7 @@ public class InutatccmOfTenderServiceController extends BaseController {
             return ResultModel.failed("没有删除权限");
         }
         inutatccmOfTenderService.deleteTenderInfo(id);
-        return ResultModel.success("公告: " + inutatccmOfTenderModel.getTitle() + " 删除成功");
+        return ResultModel.success("招标信息: " + inutatccmOfTenderModel.getTitle() + " 删除成功");
     }
 
     @RequestMapping("preEditTenderInfo/{id}")
