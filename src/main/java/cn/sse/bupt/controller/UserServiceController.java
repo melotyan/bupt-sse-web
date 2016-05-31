@@ -196,4 +196,15 @@ public class UserServiceController extends BaseController {
         return new Md5PasswordEncoder().encodePassword(password, salt);
     }
 
+    @RequestMapping("manageUser")
+    public ResultModel manageUser(@RequestParam("uid") int uid, @RequestParam("userType") int userType, @RequestParam("accountStatus") int accountStatus) {
+        if (getLoginUser().getUserType != UserTypeEnum.ADMIN.getValue()) {
+            LOGGER.info("only admin can manage user");
+            return ResultModel.failed("对不起,您没有修改用户的权限");
+        }
+        userService.manageUser(uid, userType, accountStatus);
+        return ResultModel.success("用户修改成功");
+    }
+
+
 }
