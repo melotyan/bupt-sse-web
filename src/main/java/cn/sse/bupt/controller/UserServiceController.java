@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -209,7 +210,7 @@ public class UserServiceController extends BaseController {
 
     @RequestMapping("manageUser")
     public ResultModel manageUser(@RequestParam("uid") int uid, @RequestParam("userType") int userType, @RequestParam("accountStatus") int accountStatus) {
-        if (getLoginUser().getUserType != UserTypeEnum.ADMIN.getValue()) {
+        if (getLoginUser().getUserType() != UserTypeEnum.ADMIN.getValue()) {
             LOGGER.info("only admin can manage user");
             return ResultModel.failed("对不起,您没有修改用户的权限");
         }
