@@ -20,25 +20,26 @@
 
 <div class="list-div">
     <div class="content-title"><h2>用户列表</h2></div>
+    <div class="userinfo-div-head"><span>用户名</span><span>用户类型</span><span>账户状态</span><span>操作</span></div>
     <c:forEach items="${list}" var="user" varStatus="status">
-        <div class="list-detail">
+        <div class="userinfo-div">
             <span>${user.username}</span>
             <span>
             <select class="user-selected">
                 <option value="3">普通用户</option>
                 <option value="2" <c:if test="${user.userType == 2}">selected</c:if>>政府职员</option>
                 <option value="1" <c:if test="${user.userType == 1}">selected</c:if>>政府领导</option>
-                <option value="0" <c:if test="${user.userType == 0}">selected</c:if>>系统管理员</option>
+                <option value="0" <c:if test="${user.userType == 0}">selected</c:if>>管理员</option>
             </select>
             </span>
             <span>
             <select class="user-selected">
-                <option value="3">普通用户</option>
-                <option value="2" <c:if test="${user.userType == 2}">selected</c:if>>政府职员</option>
-                <option value="1" <c:if test="${user.userType == 1}">selected</c:if>>政府领导</option>
-                <option value="0" <c:if test="${user.accountStatus == 0}">selected</c:if>>系统管理员</option>
+                <option value="2" <c:if test="${user.accountStatus == 2}">selected</c:if>>被封号</option>
+                <option value="1" <c:if test="${user.accountStatus == 1}">selected</c:if>>已激活</option>
+                <option value="0" <c:if test="${user.accountStatus == 0}">selected</c:if>>未激活</option>
             </select>
             </span>
+            <span>修改</span>
         </div>
         <c:if test="${status.count % 5 == 0}">
             <p>-------------------------------------------------------------------------------</p>
