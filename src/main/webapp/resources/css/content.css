@@ -300,9 +300,7 @@
 #m-content {
     border: 1px solid lightgray;
 }
-.user-selected {
-    display: inline;
-}
+
 .userinfo-div-head {
     display: block;
     margin: 15px auto;
@@ -315,7 +313,7 @@
     margin: 15px auto;
     overflow: hidden;
     /*height: 30px;*/
-    font-size: 20px;
+    font-size: 18px;
     font-family: \5FAE\8F6F\96C5\9ED1 !important;
 }
 .userinfo-div span, .userinfo-div-head span{
@@ -326,6 +324,7 @@
     margin: 0 auto;
 }
 .user-selected {
-    width: 60%;
+    width: 40%;
+    padding: 0;
 }
 

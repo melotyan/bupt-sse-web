@@ -25,7 +25,7 @@
         <div class="userinfo-div">
             <span>${user.username}</span>
             <span>
-            <select class="user-selected">
+            <select class="user-selected" id="userType${status.count}">
                 <option value="3">普通用户</option>
                 <option value="2" <c:if test="${user.userType == 2}">selected</c:if>>政府职员</option>
                 <option value="1" <c:if test="${user.userType == 1}">selected</c:if>>政府领导</option>
@@ -33,20 +33,20 @@
             </select>
             </span>
             <span>
-            <select class="user-selected">
+            <select class="user-selected" id="accountStatus${status.count}">
                 <option value="2" <c:if test="${user.accountStatus == 2}">selected</c:if>>被封号</option>
                 <option value="1" <c:if test="${user.accountStatus == 1}">selected</c:if>>已激活</option>
                 <option value="0" <c:if test="${user.accountStatus == 0}">selected</c:if>>未激活</option>
             </select>
             </span>
-            <span>修改</span>
+            <a href="#" onclick="managerUser(${user.id}, ${status.count})"><span>修改</span></a>
         </div>
         <c:if test="${status.count % 5 == 0}">
             <p>-------------------------------------------------------------------------------</p>
         </c:if>
     </c:forEach>
 </div>
+<script type="text/javascript" src="/resources/js/user.js"></script>
 <%@include file="../footer.jsp"%>
-<script type="text/javascript" src="/resources/js/notice.js"></script>
 </body>
 </html>

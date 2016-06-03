@@ -79,3 +79,15 @@ function register() {
     });
 }
 
+function managerUser(userid, count) {
+    $.ajax({
+        url: "/userService/manageUser",
+        type: "post",
+        data: {"uid":userid, "userType":$("#userType"+count).val(), "accountStatus":$("#accountStatus"+count).val()},
+        dataType: "json",
+        success: function(data) {
+            alert(data.map.msg);
+        }
+    })
+}
+
