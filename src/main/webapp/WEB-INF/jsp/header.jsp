@@ -130,9 +130,9 @@
               <%--<li><a href="#">参与投票</a></li>--%>
             </ul>
           <li>
-          <span>我的信箱</span>
+          <span>我的信箱<span class="mail-num"></span></span>
           <ul>
-            <li><a href="/mailboxService/viewInbox">收件箱</a></li>
+            <li><a href="/mailboxService/viewInbox">收件箱<span class="mail-num"></span></a></li>
             <li><a href="/mailboxService/viewOutbox">已发送邮件</a></li>
             <li><a href="/mailboxService/viewDrafts">草稿箱</a></li>
             <li><a href="/mailboxService/preMakeMail">写信</a></li>
@@ -143,7 +143,6 @@
     </div>
   </header>
 </div>
-
 
 <script type="text/javascript" src="/resources/js/jquery/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="/resources/js/jquery/modernizr.js"></script>

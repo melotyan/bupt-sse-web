@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -79,6 +80,14 @@ public class MailboxServiceController extends BaseController {
         UserModel userModel = getLoginUser();
         List<MailboxModel> list = mailboxService.viewInbox(userModel.getUsername());
         return new ModelAndView("mail/inbox", "list", list);
+    }
+
+    @RequestMapping("listUnreadedMails")
+    public List<MailboxModel> listUnreadedMails() {
+        UserModel userModel = getLoginUser();
+        if (userModel == null)
+            return new ArrayList<MailboxModel>();
+        return mailboxService.viewInbox(userModel.getUsername());
     }
 
     @RequestMapping("viewOutbox")

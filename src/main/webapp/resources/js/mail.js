@@ -2,44 +2,33 @@
  * Created by melot on 2016/5/2.
  */
 $(document).ready(function () {
+    //对邮件内容排一下版
     var element = $("#m-content");
     var temp = element.text().replace(/\n/g, '<br/>');
     element.html(temp);
-    listInbox();
+    //获取未读邮件的数量
+    listUnreadMails();
 })
 
 
-//function listInbox() {
-//    $(".mail-list").html("");
-//    $.ajax({
-//        url: "/mailboxService/viewInbox",
-//        type: "get",
-//        dataType: "text",
-//        success: function (data) {
-//            var dataObj = eval("(" + data + ")");
-//            for (var i = 0; i < dataObj.length; i++) {
-//                var id = dataObj[i].id;
-//                if (i == 0) {
-//                    readMail(id, 0);
-//                }
-//                var div = $("<div>");
-//                div.addClass("mail-box");
-//                div.attr("id", "mail_" + id);
-//                if (dataObj[i].receiverStatus == 1)
-//                    div.addClass("mail-readed");
-//                div.val(id);
-//                div.html(dataObj[i].title);
-//                div.click(function () {
-//                    readMail($(this).val(), 1);
-//                });
-//                $(".mail-list").append(div);
-//            }
-//        },
-//        error: function (data) {
-//            location.href = "/userService/preLogin";
-//        }
-//    });
-//}
+function listUnreadMails() {
+    $.ajax({
+        url: "/mailboxService/listUnreadedMails",
+        type: "get",
+        dataType: "text",
+        success: function (data) {
+            var dataObj = eval("(" + data + ")");
+            var count = 0;
+            for (var i = 0; i < dataObj.length; i++) {
+                if (dataObj[i].receiverStatus == 0)
+                    count++;
+            }
+            if (count != 0) {
+                $(".mail-num").html(" " + count)
+            }
+        }
+    });
+}
 
 function readMail(id) {
     $.ajax({
@@ -47,7 +36,12 @@ function readMail(id) {
         type: "get",
         dataType: "json",
         success: function (data) {
+            var num = Number($(".mail-num").val()) - 1;
             location.href = "/mailboxService/readMail/id/" + id;
+            if (num != 0)
+                $(".mail-num").html(" " + num)
+            else
+                $(".mail-num").html("");
         }
     })
 

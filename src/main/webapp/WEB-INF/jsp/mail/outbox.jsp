@@ -28,6 +28,5 @@
   </c:forEach>
 </div>
 <%@include file="../footer.jsp"%>
-<script type="text/javascript" src="/resources/js/notice.js"></script>
 </body>
 </html>

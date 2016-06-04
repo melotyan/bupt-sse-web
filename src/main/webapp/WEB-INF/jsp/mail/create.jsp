@@ -73,7 +73,6 @@
   <p/>
   <input type="button" id="btn-notice" onclick="sendMail()" value="发  送" >
 </div>
-<script type="text/javascript" src="/resources/js/mail.js"></script>
 <%@include file="../footer.jsp"%>
 </body>
 </html>

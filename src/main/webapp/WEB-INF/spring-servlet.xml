@@ -82,6 +82,7 @@
                     <value>/newsService/viewNewsDetail/**</value>
                     <value>/newsService/listNews/**</value>
                     <value>/guide/**</value>
+                    <value>/mailboxService/listUnreadedMails</value>
                 </list>
             </property>
         </bean>

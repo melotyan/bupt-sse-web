@@ -19,7 +19,7 @@
 <%@include file="../header.jsp"%>
 
 <div class="list-div">
-  <div class="content-title"><h2>收到的信件</h2></div>
+  <div class="content-title"><h2>收到的信件<span class="mail-num"></span></h2></div>
   <c:forEach items="${list}" var="mail" varStatus="status">
     <c:if test="${mail.receiverStatus == 0}">
       <a href = "javascript:void(0)" onclick="readMail(${mail.id})"><div class="list-detail">${mail.title}<span><fmt:formatDate value="${mail.sendTime}" pattern="yyyy-MM-dd HH:mm:ss" /></span></div></a>
@@ -33,6 +33,5 @@
   </c:forEach>
 </div>
 <%@include file="../footer.jsp"%>
-<script type="text/javascript" src="/resources/js/mail.js"></script>
 </body>
 </html>

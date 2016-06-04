@@ -45,7 +45,6 @@
   </div>
   <div class="content" id="m-content">${mail.content}</div>
 </div>
-<script type="text/javascript" src="/resources/js/mail.js"></script>
 <%@include file="../footer.jsp"%>
 </body>
 </html>

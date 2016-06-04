@@ -56,7 +56,6 @@
   <input id="btn-edit-notice" type="button" onclick="sendMailEdit(${mail.id})" value="发送"/>
 </c:if>
 </div>
-<script src="/resources/js/mail.js" type="text/javascript"></script>
 <%@include file="../footer.jsp"%>
 </body>
 </html>
