@@ -124,6 +124,9 @@
               <li><a href="/userService/getPersonalInfo">我的信息</a></li>
               <li><a href="/userService/preChangePassword">修改密码</a></li>
               <li><a href="/tenderService/listMyCompetitive">我竞标的项目</a></li>
+              <c:if test = "${sessionScope.user != null && sessionScope.user.userType == 0}">
+                <li><a href="/userService/listAllUsers">管理用户</a></li>
+              </c:if>
               <%--<li><a href="#">参与投票</a></li>--%>
             </ul>
           <li>

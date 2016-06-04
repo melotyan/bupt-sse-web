@@ -39,7 +39,7 @@
                 <option value="0" <c:if test="${user.accountStatus == 0}">selected</c:if>>未激活</option>
             </select>
             </span>
-            <a href="#" onclick="managerUser(${user.id}, ${status.count})"><span>修改</span></a>
+            <span><button id="manage-user-button" onclick="managerUser(${user.id}, ${status.count})">修 改</button></span>
         </div>
         <c:if test="${status.count % 5 == 0}">
             <p>-------------------------------------------------------------------------------</p>
