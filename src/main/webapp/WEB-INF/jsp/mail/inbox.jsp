@@ -21,7 +21,12 @@
 <div class="list-div">
   <div class="content-title"><h2>收到的信件</h2></div>
   <c:forEach items="${list}" var="mail" varStatus="status">
-    <a href="/mailboxService/readMail/id/${mail.id}" ><div class="list-detail">${mail.title}<span><fmt:formatDate value="${mail.sendTime}" pattern="yyyy-MM-dd HH:mm:ss" /></span></div></a>
+    <c:if test="${mail.receiverStatus == 0}">
+      <a href = "javascript:void(0)" onclick="readMail(${mail.id})"><div class="list-detail">${mail.title}<span><fmt:formatDate value="${mail.sendTime}" pattern="yyyy-MM-dd HH:mm:ss" /></span></div></a>
+    </c:if>
+    <c:if test="${mail.receiverStatus == 1}">
+      <a href="/mailboxService/readMail/id/${mail.id}" ><div class="list-detail" style="color:#999">${mail.title}<span><fmt:formatDate value="${mail.sendTime}" pattern="yyyy-MM-dd HH:mm:ss" /></span></div></a>
+    </c:if>
     <c:if test="${status.count % 5 == 0}">
       <p>-------------------------------------------------------------------------------</p>
     </c:if>
