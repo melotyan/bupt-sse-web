@@ -23,14 +23,14 @@
         <td>用户名：</td>
         <td>
           <input type="text" name="username"/>
-          <span style="color:red">*</span><span id="userMessage"></span>&nbsp;&nbsp;&nbsp;<span class="messinfo">3~18个字符，包括字母、数字、下划线</span>
+          <%--<span style="color:red">*</span><span id="userMessage"></span>&nbsp;&nbsp;&nbsp;<span class="messinfo">3~18个字符，包括字母、数字、下划线</span>--%>
         </td>
       </tr>
       <tr>
         <td>密码：</td>
         <td>
           <input type="password" name="password"/>
-          <span style="color:red">*</span><span id="passMessage"></span>&nbsp;&nbsp;&nbsp;<span class="messinfo">3～16个字符（字母、数字、特殊符号）,区分大小写</span>
+          <%--<span style="color:red">*</span><span id="passMessage"></span>&nbsp;&nbsp;&nbsp;<span class="messinfo">3～16个字符（字母、数字、特殊符号）,区分大小写</span>--%>
         </td>
       </tr>
       <tr>
@@ -40,7 +40,7 @@
       <tr>
         <td>邮箱：</td>
         <td><input type="text" name="email"/>
-        <span style="color:red">*</span><span id="emailMessage"></span>&nbsp;&nbsp;&nbsp;<span class="messinfo">输入有效邮箱</span>
+        <%--<span style="color:red">*</span><span id="emailMessage"></span>&nbsp;&nbsp;&nbsp;<span class="messinfo">输入有效邮箱</span>--%>
         </td>
       </tr>
       <tr class="captcha-tr">
