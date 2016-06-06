@@ -117,6 +117,8 @@ public class SuggestionServiceController extends BaseController {
             return ResultModel.failed("没有编辑权限");
         }
         suggestionService.editSuggestion(id, title, content);
-        return ResultModel.success("反馈:" + title + " 编辑成功");
+        ResultModel resultModel = ResultModel.success("反馈:" + title + " 编辑成功");
+        resultModel.put("type", suggestionModel.getType());
+        return resultModel;
     }
 }

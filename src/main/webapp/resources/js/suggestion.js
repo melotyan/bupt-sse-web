@@ -25,6 +25,7 @@ $("#btn-edit-notice").click(function () {
         dataType: "json",
         success: function (data) {
             alert(data.map.msg);
+            location.href='/suggestionService/listSuggestions/type/' + data.map.type + '/1';
         }
     })
 })

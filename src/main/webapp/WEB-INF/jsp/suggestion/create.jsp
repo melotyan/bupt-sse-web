@@ -16,7 +16,7 @@
       <title>投诉举报</title>
     </c:if>
     <c:if test="${type == 2}">
-      寻求帮助
+      <title>寻求帮助</title>
     </c:if>
     <link href="/resources/css/content.css" rel="stylesheet" type="text/css"/>
   <link href="/resources/img/favicon.gif" rel="shortcut icon">
