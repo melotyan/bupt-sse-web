@@ -20,12 +20,13 @@ $(document).ready(function() {
         var C=$("#sItem li:first");
         setInterval(function() {
             if(B.is(":visible")){
-                C.fadeIn(500).addClass("in");
+                C.show().addClass("in");
                 B.hide();
             }else{
                 $("#sItem li:visible").addClass("in");
-                $("#sItem li.in").next().fadeIn(500);
-                $("li.in").hide().removeClass("in")}
+                $("#sItem li.in").next().show();
+                $("li.in").hide().removeClass("in");
+            }
         },3500); //每3秒钟切换一条，你可以根据需要更改
     }
 
