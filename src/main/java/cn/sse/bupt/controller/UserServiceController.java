@@ -84,6 +84,7 @@ public class UserServiceController extends BaseController {
             session.removeAttribute(SessionConstants.LAST_URL);
             ResultModel resultModel = ResultModel.success();
             resultModel.put("redirect", String.valueOf(redirectURL));
+            session.removeAttribute(SessionConstants.LAST_URL);
             return resultModel;
         }
         LOGGER.info("user {} login success, redirect to index", username);
