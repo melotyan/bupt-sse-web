@@ -31,7 +31,7 @@ $("#btn-notice").click(function() {
             $("div[id^='div_']").remove();
         },
         error: function(data) {
-            alert("文件上传失败,请先登陆");
+            alert("文件过大");
         }
     })
 })
